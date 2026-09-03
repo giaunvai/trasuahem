@@ -86,6 +86,26 @@ Hệ thống hiểu chương trình diễn ra từ ngày 01 đến hết ngày 0
 
 ## Bật hoặc tắt campaign
 
+Để ép campaign hiển thị ngay, bỏ qua cửa sổ ngày tự động, dùng:
+
+```json
+"displayMode": "on"
+```
+
+Để chạy theo lịch bình thường:
+
+```json
+"displayMode": "auto"
+```
+
+Để ẩn campaign:
+
+```json
+"displayMode": "off"
+```
+
+`displayMode` điều khiển việc hiển thị theo từng campaign. Countdown vẫn tính theo ngày diễn ra; deal gom đơn không có countdown.
+
 Để tắt hẳn một campaign, sửa:
 
 ```json
@@ -151,6 +171,23 @@ Các ảnh đang được dùng gồm:
 - `Sinh_Nhat_Hem.webp`: poster sinh nhật.
 
 Giữ file gốc PNG/JPG nếu cần chỉnh sửa về sau, nhưng website nên tham chiếu bản WebP.
+
+### Kích thước ảnh khuyến nghị
+
+Kích thước bên dưới ghi theo thứ tự **rộng x cao** (width x height), đơn vị pixel. Nên giữ đúng tỷ lệ của từng nhóm để ảnh không bị méo hoặc crop.
+
+| Khu vực | File hoặc campaign | Kích thước nên dùng | Tỷ lệ |
+| --- | --- | ---: | ---: |
+| Banner đầu trang promotion | `GOM_DON_SIEU_TIEC.webp` | `1680 x 640` | 21:8 |
+| Poster deal gom đơn | `deal.json` / `DEAL_400K.webp` | `1134 x 1417` | 4:5 |
+| Poster Tết | `tet.json` / `popup_tet.webp` | `928 x 1152` | 4:5 |
+| Poster sinh nhật | `birthday.json` / `Sinh_Nhat_Hem.webp` | `1200 x 1697` | 7:10 |
+| Ảnh khai trương ngang | `khai-truong.json` / `original-0.jpg` | `2000 x 1125` | 16:9 |
+| Ảnh menu trang chủ | `site.json` / `menu.webp` | `1600 x 1120` | 10:7 |
+
+Poster Tết, sinh nhật và deal nên thiết kế theo chiều dọc. Không thêm viền trắng hoặc khoảng đệm lớn ở đầu/cuối ảnh; website đã tự căn ảnh theo khung card. Banner đầu trang nên thiết kế ngang, đặt tiêu đề và thông tin quan trọng trong vùng trung tâm để hiển thị tốt trên cả desktop và mobile.
+
+Ảnh campaign nên xuất WebP, chất lượng khoảng 80-85 và cố gắng dưới 400KB. Với ảnh có chữ nhỏ, ưu tiên giữ kích thước pixel như bảng trên thay vì giảm quá nhỏ làm chữ bị nhòe.
 
 ## Nội dung trang chủ
 
@@ -225,6 +262,8 @@ Trong `public/content/site.json`:
 
 Để trống nếu chưa sử dụng. Website ghi nhận lượt xem trang và click vào nút đặt món, app giao hàng và hotline.
 
+Cả trang chủ (`index.html`) và trang promotion (`promotion.html`) đều dùng module chung `src/analytics.js`. Vì vậy chỉ cần chỉnh ID và quy tắc theo dõi trong `site.json` một lần, không sửa riêng từng landing page.
+
 ### Cấu hình GA4
 
 1. Tạo hoặc mở thuộc tính GA4 của website.
@@ -244,8 +283,9 @@ Website tải thư viện GA4 và Meta Pixel khi trình duyệt rảnh để kh�
 Các event hiện có:
 
 - `landing_page_view`: user mở trang chủ, kèm URL và các tham số `utm_`.
-- `cta_click`: user click nút đặt món, nút app giao hàng, hotline hoặc liên kết khác.
+- `cta_click`: user click nút đặt món, nút app giao hàng, hotline hoặc liên kết khác trên trang chủ.
 - `promotion_directory_view`: user mở trang promotion.
+- `promotion_cta_click`: user click CTA trên trang promotion.
 
 ### Gắn UTM cho quảng cáo
 

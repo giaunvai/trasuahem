@@ -5,6 +5,7 @@ import menuLogo from './assets/logo.png'
 import hoursBackground from './assets/nen.webp'
 import menuImage from './assets/menu.webp'
 import { isCampaignPopupActive } from './countdown.js'
+import { initAnalytics, track, trackLinkClicks } from './analytics.js'
 
 // Ảnh popup chỉ tải khi có chiến dịch đang bật, không nhúng sẵn vào mọi lượt mở trang
 const popupAssetLoaders = import.meta.glob('./assets/popup_*.webp', { query: '?url', import: 'default' })
@@ -97,42 +98,6 @@ popupCloseButton?.addEventListener('click', closePromotionPopup)
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePromotionPopup() })
 if (promotionPopup) { document.body.classList.add('popup-open'); popupCloseButton?.focus() }
 
-const track = (name, parameters = {}) => {
-  window.dataLayer = window.dataLayer || []
-  window.dataLayer.push({ event: name, ...parameters })
-  window.gtag?.('event', name, parameters)
-  window.fbq?.('trackCustom', name, parameters)
-}
-const analyticsScripts = []
-const loadAnalytics = () => {
-  if (analytics.ga4MeasurementId) {
-    window.dataLayer = window.dataLayer || []
-    window.gtag = (...args) => window.dataLayer.push(args)
-    window.gtag('js', new Date())
-    window.gtag('config', analytics.ga4MeasurementId)
-    analyticsScripts.push(`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(analytics.ga4MeasurementId)}`)
-  }
-  if (analytics.metaPixelId) {
-    window.fbq = window.fbq || ((...args) => (window.fbq.queue = window.fbq.queue || []).push(args))
-    window.fbq.loaded = true
-    window.fbq.version = '2.0'
-    window.fbq('init', analytics.metaPixelId)
-    window.fbq('track', 'PageView')
-    analyticsScripts.push('https://connect.facebook.net/en_US/fbevents.js')
-  }
-}
-loadAnalytics()
-// Thư viện quảng cáo tải khi trình duyệt rảnh để không làm chậm hiển thị trang; sự kiện vẫn được ghi nhận đầy đủ
-const injectAnalyticsScripts = () => analyticsScripts.forEach((src) => {
-  const script = document.createElement('script')
-  script.async = true
-  script.src = src
-  document.head.append(script)
-})
-if (analyticsScripts.length) {
-  if ('requestIdleCallback' in window) window.requestIdleCallback(injectAnalyticsScripts, { timeout: 4000 })
-  else window.setTimeout(injectAnalyticsScripts, 2000)
-}
-const query = Object.fromEntries(new URLSearchParams(window.location.search))
-track('landing_page_view', { page_location: window.location.href, ...Object.fromEntries(Object.entries(query).filter(([key]) => key.startsWith('utm_'))) })
-document.addEventListener('click', (event) => { const link = event.target.closest('a'); if (!link) return; track('cta_click', { cta_text: link.textContent.trim(), cta_url: link.href }) })
+initAnalytics(analytics)
+track('landing_page_view', { page_location: window.location.href })
+trackLinkClicks('cta_click')

@@ -70,6 +70,7 @@ export const getCampaignState = (campaign, now = new Date()) => {
   const schedule = getCampaignSchedule(campaign, now)
   if (!schedule || campaign.active === false) return { state: 'inactive', schedule }
   if (now >= schedule.eventStart && now < schedule.eventEnd) return { state: 'live', schedule, target: schedule.eventEnd }
+  if (campaign.displayMode === 'on' && now < schedule.eventStart) return { state: 'notice', schedule, target: schedule.eventStart }
   if (now >= schedule.noticeStart && now < schedule.eventStart) return { state: 'notice', schedule, target: schedule.eventStart }
   if (now < schedule.noticeStart) return { state: 'upcoming', schedule, target: schedule.noticeStart }
   return { state: 'ended', schedule, target: campaign.eventDate ? null : getCampaignSchedule(campaign, new Date(now.getTime() + 370 * DAY_IN_MS)).noticeStart }
