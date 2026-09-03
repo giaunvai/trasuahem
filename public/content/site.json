@@ -65,9 +65,9 @@
   "popup": {
     "enabled": true,
     "campaigns": [
-      { "campaign": "birthday", "image": "/images/original-0.jpg", "link": "promotion.html?campaign=birthday", "alt": "Thông báo sinh nhật Hẻm dessert" },
-      { "campaign": "tet", "image": "popup-tet.png", "link": "promotion.html?campaign=tet", "alt": "Ưu đãi Tết từ Hẻm dessert" },
-      { "campaign": "khai-truong", "image": "/images/original-0.jpg", "link": "promotion.html?campaign=khai-truong", "alt": "Thông báo khai trương Hẻm dessert" }
+      { "campaign": "birthday", "image": "/images/original-0.jpg", "link": "promotion.html", "alt": "Thông báo sinh nhật Hẻm dessert" },
+      { "campaign": "tet", "image": "popup-tet.png", "link": "promotion.html", "alt": "Ưu đãi Tết từ Hẻm dessert" },
+      { "campaign": "khai-truong", "image": "/images/original-0.jpg", "link": "promotion.html", "alt": "Thông báo khai trương Hẻm dessert" }
     ]
   }
 }

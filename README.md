@@ -67,7 +67,7 @@ Trong phần `popup` của `public/content/site.json`:
 Website có một trang landing page chiến dịch dùng chung giao diện:
 
 - `/promotion.html`: trang danh mục, tự sắp xếp 3 campaign cố định theo thời gian gần nhất và đặt ưu đãi thường xuyên ở cuối.
-- Chọn nội dung bằng tham số, ví dụ `/promotion.html?campaign=tet` hoặc `/promotion.html?campaign=khai-truong`.
+- Mọi nút ưu đãi và popup đều dẫn tới `/promotion.html`; trang này tự tải danh mục và sắp xếp campaign.
 
 Nội dung nằm trong `public/content/birthday.json`, `public/content/tet.json`, `public/content/khai-truong.json` và `public/content/deal.json`.
 
@@ -83,7 +83,7 @@ Lịch campaign được tính tự động:
 - Sinh nhật dùng `recurringDate: "07-01"`, thông báo từ 21/6 đến hết 7/7 và ưu đãi từ 1/7 đến hết 3/7.
 - Khai trương dùng `eventDate: "YYYY-MM-DD"`; bạn chỉ cần thay ngày này, hệ thống tự tính thông báo trước 10 ngày và ưu đãi 3 ngày.
 - Tết dùng lịch âm tự động: popup bắt đầu từ ngày 28 tháng 11 âm lịch, ưu đãi từ mùng 1 đến hết mùng 3 Tết.
-- Ngoài thời gian ưu đãi, trang vẫn xem được nhưng hiển thị trạng thái và countdown tới đợt kế tiếp. Mục **Ưu đãi** trên navigation luôn dẫn tới trang campaign.
+- Ngoài thời gian ưu đãi, campaign được quản lý trong danh mục bằng trạng thái và countdown. Mục **Ưu đãi** trên navigation luôn dẫn tới trang promotion chung.
 
 Ví dụ chương trình khai trương:
 

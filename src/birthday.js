@@ -24,7 +24,7 @@ const safeUrl = (value, fallback = '#') => {
   return fallback
 }
 const fallback = { campaignType: 'birthday', campaignName: 'Sinh nhật Hẻm dessert', campaignYear: '01/07 hằng năm', recurringDate: '07-01', orderUrl: 'https://trasuahem.sapofnb.vn/', heroImage: '/images/original-0.jpg', heroImageAlt: 'Ưu đãi sinh nhật Hẻm dessert', badge: 'BIRTHDAY TREAT', title: 'Sinh nhật này,\nHẻm mời bạn một niềm vui', description: 'Mua 2 ly, tặng 1 ly cùng nhóm bạn.', offerValue: 'MUA 2 TẶNG 1', offerTitle: 'Một tháng đặc biệt, một phần quà thật riêng', offerDescription: 'Liên hệ Hẻm để biết điều kiện chương trình.', offerNote: '', steps: [], terms: [], locations: [] }
-const requestedCampaign = new URLSearchParams(window.location.search).get('campaign')
+const requestedCampaign = null
 const promotionFiles = ['birthday', 'tet', 'khai-truong', 'deal']
 const formatDate = (date) => date ? new Intl.DateTimeFormat('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }).format(date) : 'Đang cập nhật'
 const campaignTarget = (item, now = new Date()) => {
