@@ -62,11 +62,5 @@
     { "visible": true, "name": "Hẻm dessert MỸ THO", "oldAddress": "926 Trần Hưng Đạo, phường 5, TP. Mỹ Tho, Tiền Giang", "address": "926 Trần Hưng Đạo, phường Đạo Thạnh, tỉnh Đồng Tháp", "phone": "070.643.5968", "phoneLink": "0706435968" },
     { "visible": false, "name": "Hẻm dessert SÀI GÒN", "oldAddress": "56/75 Thích Quảng Đức, phường 5, quận Phú Nhuận, TP. Hồ Chí Minh", "address": "56/75 Thích Quảng Đức, phường Đức Nhuận, TP. Hồ Chí Minh", "phone": "0838.305.338", "phoneLink": "0838305338" }
   ],
-  "popup": {
-    "enabled": false,
-    "title": "Ưu đãi từ Hẻm",
-    "message": "Nội dung ưu đãi mới sẽ hiển thị tại đây.",
-    "buttonLabel": "Đặt món ngay",
-    "image": ""
-  }
+  "popup": { "enabled": false, "image": "/images/khuyen-mai.jpg", "link": "https://trasuahem.sapofnb.vn/", "alt": "Ưu đãi mới từ Hẻm dessert" }
 }

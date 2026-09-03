@@ -34,7 +34,7 @@ document.querySelector('#app').innerHTML = `
     <section id="lien-he" class="contact">${locations.filter((location) => location.visible !== false).map((location) => `<div><h2>${location.name}</h2><p>${location.oldAddress ? `🏠 ${location.oldAddress} (cũ)<br>` : ''}🏠 ${location.address} (mới)<br>📱 Hotline Zalo: <a href="tel:${location.phoneLink}">${location.phone}</a></p>${location.tagline ? `<h3>${location.tagline}</h3>` : ''}</div>`).join('')}</section>
   </main>
   <button class="back-top" type="button" aria-label="Lên đầu trang" title="Lên đầu trang">${icon(ArrowUp, 20)}</button>
-  ${popup.enabled ? `<aside class="promotion-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title"><button class="popup-close" type="button" aria-label="Đóng popup">×</button>${popup.image ? `<img src="${assetUrl(popup.image)}" alt="">` : ''}<div><h2 id="popup-title">${popup.title}</h2><p>${withBreaks(popup.message)}</p><a class="order-button yellow" href="${orderUrl}" target="_blank" rel="noreferrer">${popup.buttonLabel}</a></div></aside>` : ''}
+  ${popup.enabled && popup.image && popup.link ? `<aside class="promotion-popup" role="dialog" aria-modal="true" aria-label="Ưu đãi đang diễn ra"><div class="promotion-popup-card"><button class="popup-close" type="button" aria-label="Đóng ưu đãi">×</button><a class="promotion-link" href="${popup.link}" target="_blank" rel="noreferrer"><img src="${assetUrl(popup.image)}" alt="${popup.alt || 'Ưu đãi từ Hẻm dessert'}"></a></div></aside>` : ''}
 `
 
 const toggle = document.querySelector('.menu-toggle')
@@ -50,7 +50,12 @@ window.addEventListener('scroll', updateScrollControls, { passive: true })
 updateScrollControls()
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
 scrollCue.addEventListener('click', () => document.querySelector('#ve-chung-toi').scrollIntoView({ behavior: 'smooth' }))
-document.querySelector('.popup-close')?.addEventListener('click', (event) => event.currentTarget.closest('.promotion-popup').remove())
+const promotionPopup = document.querySelector('.promotion-popup')
+const closePromotionPopup = () => { promotionPopup?.remove(); document.body.classList.remove('popup-open') }
+promotionPopup?.addEventListener('click', (event) => { if (event.target === promotionPopup) closePromotionPopup() })
+promotionPopup?.querySelector('.popup-close')?.addEventListener('click', closePromotionPopup)
+document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePromotionPopup() })
+if (promotionPopup) document.body.classList.add('popup-open')
 
 const track = (name, parameters = {}) => {
   window.dataLayer = window.dataLayer || []

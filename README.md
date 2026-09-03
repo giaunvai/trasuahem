@@ -56,8 +56,9 @@ Các trường ảnh có thể đổi: `hero.image`, `member.qrImage`, `hours.im
 Trong phần `popup` của `public/content/site.json`:
 
 - Đổi `"enabled": false` thành `"enabled": true`.
-- Sửa `title`, `message`, `buttonLabel`.
-- Điền đường dẫn ảnh như `"image": "/images/khuyen-mai.jpg"`; để trống nếu không dùng ảnh.
+- Điền đường dẫn ảnh vào `image`.
+- Điền link cần mở vào `link`.
+- Đổi mô tả ảnh trong `alt`.
 
 Đổi `enabled` về `false` để tắt popup.
 
