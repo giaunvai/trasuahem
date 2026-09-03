@@ -51,8 +51,9 @@
     ]
   },
   "locations": [
-    { "name": "hẻm TÂN AN - LONG AN", "address": "10 Nguyễn Thông, phường 3, TP. Tân An, Long An", "phone": "088.626.1902", "phoneLink": "0886261902", "tagline": "Tiệm Trà Phường 3" },
-    { "name": "hẻm MỸ THO - TIỀN GIANG", "address": "926 Trần Hưng Đạo, phường 5, TP. Mỹ Tho, Tiền Giang", "phone": "070.643.5968", "phoneLink": "0706435968", "tagline": "Tiệm Trà Phường 5" }
+    { "visible": true, "name": "Hẻm dessert LONG AN", "oldAddress": "10 Nguyễn Thông, phường 3, TP. Tân An, Long An", "address": "10 Nguyễn Thông, phường Long An, tỉnh Tây Ninh", "phone": "088.626.1902", "phoneLink": "0886261902" },
+    { "visible": true, "name": "Hẻm dessert MỸ THO", "oldAddress": "926 Trần Hưng Đạo, phường 5, TP. Mỹ Tho, Tiền Giang", "address": "926 Trần Hưng Đạo, phường Đạo Thạnh, tỉnh Đồng Tháp", "phone": "070.643.5968", "phoneLink": "0706435968" },
+    { "visible": false, "name": "Hẻm dessert SÀI GÒN", "oldAddress": "56/75 Thích Quảng Đức, phường 5, quận Phú Nhuận, TP. Hồ Chí Minh", "address": "56/75 Thích Quảng Đức, phường Đức Nhuận, TP. Hồ Chí Minh", "phone": "0838.305.338", "phoneLink": "0838305338" }
   ],
   "popup": {
     "enabled": false,

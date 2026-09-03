@@ -15,6 +15,16 @@ Các phần thường chỉnh:
 - `foodApps.branches`: link VILL, ShopeeFood và GrabFood từng chi nhánh.
 - `locations`: địa chỉ, hotline, tên cửa hàng.
 
+## Thêm chi nhánh
+
+Trong `locations`, thêm một dòng mới trước dấu `]` cuối cùng. Dòng trước đó phải có dấu phẩy `,` ở cuối:
+
+```json
+{ "name": "hẻm BẾN LỨC - LONG AN", "address": "Địa chỉ chi nhánh", "phone": "0123.456.789", "phoneLink": "0123456789", "tagline": "Tiệm Trà Bến Lức" }
+```
+
+Website tự tạo khối mới và tự chia cột. Trên điện thoại, các chi nhánh luôn xếp dọc để dễ đọc. Thêm `"visible": false` vào một chi nhánh để tạm ẩn; đổi thành `true` để hiện lại.
+
 ## Thay ảnh
 
 1. Trên GitHub, mở thư mục `public/images`.
