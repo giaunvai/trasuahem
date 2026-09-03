@@ -15,6 +15,22 @@ Các phần thường chỉnh:
 - `foodApps.branches`: link VILL, ShopeeFood và GrabFood từng chi nhánh.
 - `locations`: địa chỉ, hotline, tên cửa hàng.
 
+## Đo lường quảng cáo
+
+Trong `analytics` của `public/content/site.json`:
+
+- Dán mã Google Analytics 4 vào `ga4MeasurementId` (dạng `G-XXXXXXXXXX`).
+- Dán mã Meta Pixel vào `metaPixelId` nếu chạy quảng cáo Facebook/Instagram.
+- Để trống nếu chưa dùng; website sẽ không tải thêm dịch vụ đo lường.
+
+Website tự ghi nhận lượt xem landing page và click vào nút đặt món, app giao hàng, hotline. Khi chạy quảng cáo, thêm các tham số vào cuối đường dẫn:
+
+```text
+?utm_source=facebook&utm_medium=paid&utm_campaign=khuyen-mai-thang-9
+```
+
+Dùng tên chiến dịch thống nhất để so sánh hiệu quả giữa Facebook, Google và các kênh khác.
+
 ## Thêm chi nhánh
 
 Trong `locations`, thêm một dòng mới trước dấu `]` cuối cùng. Dòng trước đó phải có dấu phẩy `,` ở cuối:
@@ -44,6 +60,32 @@ Trong phần `popup` của `public/content/site.json`:
 - Điền đường dẫn ảnh như `"image": "/images/khuyen-mai.jpg"`; để trống nếu không dùng ảnh.
 
 Đổi `enabled` về `false` để tắt popup.
+
+## Chiến dịch định kỳ
+
+Website có một trang landing page chiến dịch dùng chung giao diện:
+
+- `/promotion.html`: trang campaign chính.
+- Chọn nội dung bằng tham số, ví dụ `/promotion.html?campaign=tet` hoặc `/promotion.html?campaign=khai-truong`.
+
+Nội dung nằm trong `public/content/campaign.json`, `public/content/tet.json` và `public/content/khai-truong.json`.
+
+- Campaign lặp hằng năm: dùng `recurringDate` dạng `MM-DD`, ví dụ `07-01`.
+- Campaign có thời gian cụ thể như Noel, 2/9 hoặc 30/4: dùng `endDate` dạng `YYYY-MM-DD`.
+- Đổi `campaignType`, `campaignName`, `campaignYear`, `title`, `offerValue`, `offerDescription`, `steps` và `terms` theo từng chương trình.
+- Giữ nguyên tên các URL; link quảng cáo có thể dùng ổn định cho từng nhóm campaign.
+
+Ví dụ chương trình khai trương:
+
+```json
+{
+	"campaignType": "grand-opening",
+	"campaignName": "Khai trương Hẻm dessert",
+	"campaignYear": "Tháng 10/2026",
+	"endDate": "2026-10-31",
+	"offerValue": "MUA 2 TẶNG 1"
+}
+```
 
 ## Chạy website trên máy
 

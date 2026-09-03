@@ -1,0 +1,40 @@
+{
+  "active": true,
+  "theme": "tet",
+  "campaignType": "tet",
+  "campaignName": "Ưu đãi Tết Hẻm dessert",
+  "campaignYear": "Tết 2027",
+  "endDate": "2027-02-28",
+  "orderUrl": "https://trasuahem.sapofnb.vn/",
+  "heroImage": "/images/original-0.jpg",
+  "heroImageAlt": "Trà sữa Hẻm dessert cho chương trình ưu đãi Tết",
+  "badge": "LÌ XÌ ĐẦU NĂM",
+  "title": "Tết ghé Hẻm,\nnhận lộc mang về",
+  "description": "Hóa đơn từ 60.000đ nhận ngay bao lì xì. Rủ gia đình, bạn bè cùng thưởng trà ngày đầu năm.",
+  "offerValue": "HÓA ĐƠN TỪ 60.000Đ",
+  "offerTitle": "Một ly trà, một lời chúc may mắn",
+  "offerDescription": "Bao lì xì số lượng có hạn, áp dụng trong thời gian chương trình.",
+  "offerNote": "Vui lòng liên hệ Hẻm để xác nhận điều kiện và số lượng quà còn lại.",
+  "productImages": [
+    { "file": "P1230962.JPG", "name": "Trà trái cây", "alt": "Ly trà trái cây Hẻm dessert" },
+    { "file": "P1230758.JPG", "name": "Trà màu xanh", "alt": "Ly trà màu xanh Hẻm dessert" },
+    { "file": "tra_sua_hem_noPhone.png", "name": "Trà sữa Hẻm", "alt": "Trà sữa Hẻm dessert với topping" },
+    { "file": "Tra_Sua_Kem_Muoi.png", "name": "Trà sữa Hẻm kem muối", "alt": "Trà sữa Hẻm kem muối" }
+  ],
+  "steps": [
+    { "number": "01", "title": "Đặt món từ 60.000đ", "description": "Chọn món yêu thích cho một người hoặc cả gia đình." },
+    { "number": "02", "title": "Xác nhận nhận lì xì", "description": "Nhắn Hẻm hoặc ghi chú đơn hàng để được kiểm tra quà." },
+    { "number": "03", "title": "Nhận lộc đầu năm", "description": "Bao lì xì được trao cùng đơn hàng theo điều kiện chương trình." }
+  ],
+  "terms": [
+    "Áp dụng cho hóa đơn từ 60.000đ trong thời gian chương trình.",
+    "Mỗi đơn hàng nhận tối đa một bao lì xì.",
+    "Quà tặng có số lượng giới hạn và có thể kết thúc sớm.",
+    "Không áp dụng đồng thời với chương trình khác nếu không có thông báo riêng.",
+    "Vui lòng xác nhận quà trước khi đặt món."
+  ],
+  "locations": [
+    { "name": "Hẻm Tân An", "phone": "088.626.1902", "phoneLink": "0886261902" },
+    { "name": "Hẻm Mỹ Tho", "phone": "070.643.5968", "phoneLink": "0706435968" }
+  ]
+}

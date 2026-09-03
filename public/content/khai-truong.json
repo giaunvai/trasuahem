@@ -1,0 +1,40 @@
+{
+  "active": true,
+  "theme": "khai-truong",
+  "campaignType": "khai-truong",
+  "campaignName": "Ưu đãi khai trương Hẻm dessert",
+  "campaignYear": "Thời gian có hạn",
+  "endDate": "2026-12-31",
+  "orderUrl": "https://trasuahem.sapofnb.vn/",
+  "heroImage": "/images/original-0.jpg",
+  "heroImageAlt": "Trà sữa Hẻm dessert cho chương trình ưu đãi khai trương",
+  "badge": "MỪNG KHAI TRƯƠNG",
+  "title": "Khai trương rộn ràng,\nmua 2 tặng 1",
+  "description": "Rủ thêm một người bạn, chọn hai ly yêu thích và nhận thêm một ly theo điều kiện chương trình.",
+  "offerValue": "MUA 2 TẶNG 1",
+  "offerTitle": "Càng đông càng vui, quà càng đầy",
+  "offerDescription": "Ưu đãi dành cho những ngày đầu Hẻm gặp bạn tại khu vực khai trương.",
+  "offerNote": "Áp dụng theo danh sách món, chi nhánh và thời gian Hẻm công bố.",
+  "productImages": [
+    { "file": "P1210326.JPG", "name": "Trà trái cây", "alt": "Ly trà trái cây Hẻm dessert" },
+    { "file": "P1220686.JPG", "name": "Trà topping trái cây", "alt": "Ly trà topping trái cây Hẻm dessert" },
+    { "file": "P1240308.JPG", "name": "Trà trái cây", "alt": "Ly trà trái cây Hẻm dessert" },
+    { "file": "tra_sua_hem_noPhone.png", "name": "Trà sữa Hẻm", "alt": "Trà sữa Hẻm dessert với topping" }
+  ],
+  "steps": [
+    { "number": "01", "title": "Chọn hai ly", "description": "Chọn hai món trong danh sách áp dụng của chương trình." },
+    { "number": "02", "title": "Kiểm tra ưu đãi", "description": "Liên hệ đúng chi nhánh để xác nhận món tặng." },
+    { "number": "03", "title": "Nhận thêm một ly", "description": "Hoàn tất đơn hàng và nhận quà khai trương cùng Hẻm." }
+  ],
+  "terms": [
+    "Mỗi đơn mua hai ly được tặng một ly đủ điều kiện.",
+    "Món tặng có thể có giá trị tối đa theo quy định chương trình.",
+    "Áp dụng tại chi nhánh và thời gian được thông báo.",
+    "Không áp dụng đồng thời với chương trình khác nếu không có thông báo riêng.",
+    "Vui lòng xác nhận điều kiện trước khi đặt món."
+  ],
+  "locations": [
+    { "name": "Hẻm Tân An", "phone": "088.626.1902", "phoneLink": "0886261902" },
+    { "name": "Hẻm Mỹ Tho", "phone": "070.643.5968", "phoneLink": "0706435968" }
+  ]
+}

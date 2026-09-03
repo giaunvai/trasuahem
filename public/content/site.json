@@ -1,5 +1,6 @@
 {
   "orderUrl": "https://trasuahem.sapofnb.vn/",
+  "analytics": { "ga4MeasurementId": "", "metaPixelId": "" },
   "hero": {
     "title": "Một Gu Trà Đậm\nMột Vị Trà Riêng",
     "description": "Trải nghiệm một gu trà rất riêng mang phong cách Hẻm dessert",
@@ -38,7 +39,13 @@
     "image": "/images/original-6-menu.jpg",
     "imageAlt": "Menu trà sữa và trà tươi Hẻm dessert",
     "intro": "Với tiêu chí: \"MỘT LY CŨNG GIAO.\"\nMIỄN PHÍ GIAO HÀNG khu vực Tân An cho đơn hàng giá trị trên 400,000đ\nMIỄN PHÍ GIAO HÀNG cho đơn hàng trên 200,000đ và khoảng cách giao hàng dưới 2km",
-    "policy": "Quán sẽ trực tiếp giao hàng trong phạm vi bán kính dưới 1.5km.\n- Đơn từ 55,000đ, dưới 0.5km. MIỄN PHÍ GIAO HÀNG\n- Đơn từ 105,000đ, từ 0.5km đến dưới 1km. MIỄN PHÍ GIAO HÀNG\n- Đơn từ 155,000đ, từ 1km đến dưới 1.5km. MIỄN PHÍ GIAO HÀNG\nPhí ship đồng giá 10,000đ nếu không thỏa các điều kiện trên.\nNgoài 1.5km do đối tác giao hàng phụ trách và thu phí tương ứng.",
+    "policy": "Quán trực tiếp giao trong bán kính dưới 1.5km. Ngoài phạm vi này, đối tác giao hàng phụ trách và thu phí theo ứng dụng.",
+    "deliveryTiers": [
+      "Đơn từ 55,000đ, dưới 0.5km: miễn phí giao hàng",
+      "Đơn từ 105,000đ, từ 0.5km đến dưới 1km: miễn phí giao hàng",
+      "Đơn từ 155,000đ, từ 1km đến dưới 1.5km: miễn phí giao hàng",
+      "Không đủ điều kiện: phí ship đồng giá 10,000đ"
+    ],
     "buttonLabel": "Đặt món ngay"
   },
   "foodApps": {
