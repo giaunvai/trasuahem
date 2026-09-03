@@ -1,0 +1,64 @@
+{
+  "orderUrl": "https://trasuahem.sapofnb.vn/",
+  "hero": {
+    "title": "Một Gu Trà Đậm\nMột Vị Trà Riêng",
+    "description": "Trải nghiệm một gu trà rất riêng mang phong cách Hẻm dessert",
+    "image": "/images/original-0.jpg",
+    "orderLabel": "Đặt đơn ngay",
+    "appLabel": "Đặt food app"
+  },
+  "member": {
+    "title": "Đăng ký thành viên",
+    "description": "Quét mã QR, quan tâm Zalo OA của Hẻm dessert.\nBấm đăng ký thành viên để nhận nhiều ưu đãi\ncùng với những thông tin hấp dẫn.",
+    "qrImage": "/images/original-2.jpg"
+  },
+  "about": {
+    "eyebrow": "Hẻm dessert là gì?",
+    "title": "Tại sao tên là\nHẻm dessert?",
+    "paragraphs": [
+      "Khởi nghiệp một cách thận trọng với gu trà đậm ít ngọt, Hẻm là một cái tên đầy ngẫu hứng từ người sáng lập khi nghiên cứu vị trà sữa trong một căn bếp nhỏ của ngôi nhà trong hẻm ở Tân An, Long An.",
+      "Với ý nghĩa đơn giản là một thức uống giải khát, tráng miệng và từ đó cái tên Hẻm dessert ra đời."
+    ],
+    "buttonLabel": "Đặt món ngay"
+  },
+  "hours": {
+    "title": "Giờ Làm Việc",
+    "description": "Hẻm mở cửa và giao hàng theo thời gian cố định, ngoài khung giờ giao hàng trên, khách có thể đặt trên các app giao hàng: VILL, ShopeeFOOD",
+    "image": "/images/original-1.png",
+    "buttonLabel": "Đặt món",
+    "items": [
+      { "label": "Mở cửa", "time": "08:30" },
+      { "label": "Đóng cửa", "time": "22:00" },
+      { "label": "Bắt đầu giao hàng", "time": "09:00" },
+      { "label": "Ngưng giao hàng", "time": "21:00" }
+    ]
+  },
+  "menu": {
+    "title": "MENU",
+    "image": "/images/original-6-menu.jpg",
+    "imageAlt": "Menu trà sữa và trà tươi Hẻm dessert",
+    "intro": "Với tiêu chí: \"MỘT LY CŨNG GIAO.\"\nMIỄN PHÍ GIAO HÀNG khu vực Tân An cho đơn hàng giá trị trên 400,000đ\nMIỄN PHÍ GIAO HÀNG cho đơn hàng trên 200,000đ và khoảng cách giao hàng dưới 2km",
+    "policy": "Quán sẽ trực tiếp giao hàng trong phạm vi bán kính dưới 1.5km.\n- Đơn từ 55,000đ, dưới 0.5km. MIỄN PHÍ GIAO HÀNG\n- Đơn từ 105,000đ, từ 0.5km đến dưới 1km. MIỄN PHÍ GIAO HÀNG\n- Đơn từ 155,000đ, từ 1km đến dưới 1.5km. MIỄN PHÍ GIAO HÀNG\nPhí ship đồng giá 10,000đ nếu không thỏa các điều kiện trên.\nNgoài 1.5km do đối tác giao hàng phụ trách và thu phí tương ứng.",
+    "buttonLabel": "Đặt món ngay"
+  },
+  "foodApps": {
+    "eyebrow": "Đặt app giao hàng",
+    "title": "Giao Hàng Food App",
+    "description": "Hãy lựa chọn một đơn vị giao hàng mà bạn yêu thích với nhiều ưu đãi tốt nhất!\nVà đừng quên đánh giá 5* nếu bạn thấy hài lòng với dịch vụ của Hẻm nhé!\nTrong quá trình phục vụ, nếu có vấn đề gì sai sót hoặc không vừa ý, bạn đừng vội đánh giá 1* nha. Hãy liên hệ với số hotline để Hẻm hỗ trợ bạn tốt nhất nhé!\nHẻm cảm ơn bạn nhiều!",
+    "branches": [
+      { "name": "Hẻm Tân An", "vill": "https://onelink.vill.vn/GeuA1nMaKNzCAK8j8", "shopee": "https://shopeefood.vn/long-an/hem-dessert-nguyen-thong", "grab": "https://food.grab.com/vn/en/restaurant/online-delivery/5-C7A3HBLWG4AXJE" },
+      { "name": "Hẻm Mỹ Tho", "vill": "https://onelink.vill.vn/JHKLWFxs1bAsZURa9", "shopee": "https://shopeefood.vn/tien-giang/hem-dessert-926-tran-hung-dao", "grab": "https://food.grab.com/vn/en/restaurant/online-delivery/5-C7ETAXUAVKV3VE" }
+    ]
+  },
+  "locations": [
+    { "name": "hẻm TÂN AN - LONG AN", "address": "10 Nguyễn Thông, phường 3, TP. Tân An, Long An", "phone": "088.626.1902", "phoneLink": "0886261902", "tagline": "Tiệm Trà Phường 3" },
+    { "name": "hẻm MỸ THO - TIỀN GIANG", "address": "926 Trần Hưng Đạo, phường 5, TP. Mỹ Tho, Tiền Giang", "phone": "070.643.5968", "phoneLink": "0706435968", "tagline": "Tiệm Trà Phường 5" }
+  ],
+  "popup": {
+    "enabled": false,
+    "title": "Ưu đãi từ Hẻm",
+    "message": "Nội dung ưu đãi mới sẽ hiển thị tại đây.",
+    "buttonLabel": "Đặt món ngay",
+    "image": ""
+  }
+}
