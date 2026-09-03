@@ -165,6 +165,47 @@ Chỉnh `public/content/site.json` cho các phần:
 - `locations`: địa chỉ, số điện thoại và trạng thái hiển thị chi nhánh.
 - `popup`: danh sách popup campaign của trang chủ.
 
+### Cách chỉnh từng khu vực
+
+Mỗi lần chỉnh, chỉ thay phần giá trị nằm sau dấu `:`; giữ nguyên dấu ngoặc, dấu phẩy và tên trường.
+
+Trang đầu:
+
+```json
+"hero": {
+  "title": "Một Gu Trà Đậm\nMột Vị Trà Riêng",
+  "description": "Trải nghiệm một gu trà rất riêng mang phong cách Hẻm dessert",
+  "image": "/images/ten-anh.jpg",
+  "orderLabel": "Đặt đơn ngay",
+  "appLabel": "Đặt food app"
+}
+```
+
+- `hero.title`: tiêu đề lớn. Dùng `\n` nếu thật sự muốn xuống dòng.
+- `hero.description`: câu giới thiệu ngắn.
+- `hero.image`: ảnh nền từ `public/images`.
+- `orderLabel` và `appLabel`: chữ trên hai nút đầu trang.
+
+Giới thiệu Hẻm:
+
+- `member.title`, `member.description`, `member.qrImage`: khu vực đăng ký thành viên và QR.
+- `about.eyebrow`, `about.title`, `about.paragraphs`, `about.buttonLabel`: phần câu chuyện thương hiệu.
+
+Giờ, menu và giao hàng:
+
+- `hours.items`: mỗi dòng gồm `label` và `time`, dùng định dạng `HH:MM`.
+- `menu.intro`: thông điệp menu và chính sách miễn phí giao hàng.
+- `menu.policy`: phạm vi giao hàng và phí phát sinh.
+- `menu.deliveryTiers`: các mốc miễn phí giao hàng; thêm hoặc xóa từng dòng trong mảng này.
+- `menu.image`: tên ảnh menu trong `src/assets`.
+
+App và liên hệ:
+
+- `foodApps.branches`: cập nhật link VILL, ShopeeFood và GrabFood theo từng chi nhánh.
+- `locations`: cập nhật tên, địa chỉ, số điện thoại. Dùng `visible: false` để ẩn tạm một chi nhánh.
+
+Sau khi sửa JSON, chạy `npm run check` để phát hiện lỗi dấu phẩy, JSON hoặc đường dẫn ảnh trước khi đưa lên GitHub.
+
 Để ẩn một chi nhánh, dùng:
 
 ```json
@@ -183,6 +224,47 @@ Trong `public/content/site.json`:
 ```
 
 Để trống nếu chưa sử dụng. Website ghi nhận lượt xem trang và click vào nút đặt món, app giao hàng và hotline.
+
+### Cấu hình GA4
+
+1. Tạo hoặc mở thuộc tính GA4 của website.
+2. Lấy Measurement ID có dạng `G-XXXXXXXXXX`.
+3. Dán ID vào `analytics.ga4MeasurementId`.
+4. Chạy `npm run check`, sau đó push website.
+5. Trong GA4 mở **Reports > Realtime** để kiểm tra lượt truy cập.
+
+### Cấu hình Meta Pixel
+
+1. Mở Events Manager của Meta và lấy Pixel ID.
+2. Dán ID vào `analytics.metaPixelId`.
+3. Dùng Meta Pixel Helper hoặc Events Manager để kiểm tra event sau khi website cập nhật.
+
+Website tải thư viện GA4 và Meta Pixel khi trình duyệt rảnh để không làm chậm trang. Các event cơ bản vẫn được đưa vào `dataLayer` ngay khi xảy ra.
+
+Các event hiện có:
+
+- `landing_page_view`: user mở trang chủ, kèm URL và các tham số `utm_`.
+- `cta_click`: user click nút đặt món, nút app giao hàng, hotline hoặc liên kết khác.
+- `promotion_directory_view`: user mở trang promotion.
+
+### Gắn UTM cho quảng cáo
+
+Dùng một URL promotion chung, chỉ thay giá trị UTM theo campaign và kênh:
+
+```text
+https://www.trasuahem.com/promotion.html?utm_source=facebook&utm_medium=paid_social&utm_campaign=tet_2027&utm_content=video_01
+```
+
+Quy ước đề xuất:
+
+- `utm_source`: `facebook`, `google`, `zalo`.
+- `utm_medium`: `paid_social`, `cpc`, `broadcast`.
+- `utm_campaign`: tên campaign, ví dụ `tet_2027`, `birthday_2027`, `deal_400k`.
+- `utm_content`: mã mẫu quảng cáo, video hoặc ảnh, ví dụ `video_01`.
+
+Không dùng dấu cách hoặc tên khác nhau cho cùng một campaign. Nhờ vậy có thể so sánh nguồn traffic, mẫu quảng cáo và số click đặt món trong GA4.
+
+Lưu ý: hệ thống hiện đo click tới trang đặt món và các link liên hệ. Để đo chính xác **đơn đã hoàn tất**, cần thêm tracking hoặc quyền tích hợp từ nền tảng đặt món Sapo.
 
 Link quảng cáo có thể thêm UTM:
 
