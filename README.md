@@ -66,15 +66,24 @@ Trong phần `popup` của `public/content/site.json`:
 
 Website có một trang landing page chiến dịch dùng chung giao diện:
 
-- `/promotion.html`: trang campaign chính.
+- `/promotion.html`: trang danh mục, tự sắp xếp 3 campaign cố định theo thời gian gần nhất và đặt ưu đãi thường xuyên ở cuối.
 - Chọn nội dung bằng tham số, ví dụ `/promotion.html?campaign=tet` hoặc `/promotion.html?campaign=khai-truong`.
 
-Nội dung nằm trong `public/content/campaign.json`, `public/content/tet.json` và `public/content/khai-truong.json`.
+Nội dung nằm trong `public/content/birthday.json`, `public/content/tet.json`, `public/content/khai-truong.json` và `public/content/deal.json`.
 
 - Campaign lặp hằng năm: dùng `recurringDate` dạng `MM-DD`, ví dụ `07-01`.
 - Campaign có thời gian cụ thể như Noel, 2/9 hoặc 30/4: dùng `endDate` dạng `YYYY-MM-DD`.
+- Campaign khai trương chỉ hiện trong danh mục khi có `eventDate`; hệ thống tự đưa campaign lên khu vực thông báo trước 10 ngày.
+- Campaign deal dùng `"promotionKind": "recurring"` và luôn được đặt ở cuối danh mục.
 - Đổi `campaignType`, `campaignName`, `campaignYear`, `title`, `offerValue`, `offerDescription`, `steps` và `terms` theo từng chương trình.
 - Giữ nguyên tên các URL; link quảng cáo có thể dùng ổn định cho từng nhóm campaign.
+
+Lịch campaign được tính tự động:
+
+- Sinh nhật dùng `recurringDate: "07-01"`, thông báo từ 21/6 đến hết 7/7 và ưu đãi từ 1/7 đến hết 3/7.
+- Khai trương dùng `eventDate: "YYYY-MM-DD"`; bạn chỉ cần thay ngày này, hệ thống tự tính thông báo trước 10 ngày và ưu đãi 3 ngày.
+- Tết dùng lịch âm tự động: popup bắt đầu từ ngày 28 tháng 11 âm lịch, ưu đãi từ mùng 1 đến hết mùng 3 Tết.
+- Ngoài thời gian ưu đãi, trang vẫn xem được nhưng hiển thị trạng thái và countdown tới đợt kế tiếp. Mục **Ưu đãi** trên navigation luôn dẫn tới trang campaign.
 
 Ví dụ chương trình khai trương:
 
@@ -100,5 +109,7 @@ Mở địa chỉ hiện trong Terminal, thường là `http://localhost:5173`.
 ## Kiểm tra trước khi đưa lên GitHub
 
 ```powershell
-npm run build
+npm run check
 ```
+
+Lệnh này kiểm tra cú pháp các file nội dung, asset campaign bị thiếu và build production.

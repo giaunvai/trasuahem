@@ -3,6 +3,12 @@ import { resolve } from 'node:path'
 
 export default defineConfig({
   base: '/',
+  server: {
+    // Giảm tải cho trình theo dõi file: bỏ qua các thư mục không cần HMR
+    watch: {
+      ignored: ['**/dist/**', '**/public/images/**', '**/*.rar', '**/#BACKUP/**'],
+    },
+  },
   build: {
     rollupOptions: {
       input: {

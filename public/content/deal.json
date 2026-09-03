@@ -1,0 +1,52 @@
+{
+  "active": true,
+  "promotionKind": "recurring",
+  "theme": "thuong-hieu",
+  "campaignType": "recurring",
+  "campaignName": "Gom đơn nhận quà",
+  "posterImage": "DEAL_400K.webp",
+  "campaignYear": "Quà dành cho nhóm bạn",
+  "orderUrl": "https://trasuahem.sapofnb.vn/",
+  "heroImage": "DEAL_400K.webp",
+  "heroImageAlt": "Poster chương trình gom đơn từ 400.000đ nhận quà khủng của Hẻm dessert",
+  "badge": "GOM ĐƠN NHẬN QUÀ",
+  "title": "Gom đơn to, nhận quà khủng",
+  "description": "Có team mê trà sữa? Gom đơn cùng đồng nghiệp, bạn bè hoặc cả lớp để nhận thêm ly trà tươi mát lạnh từ Hẻm.",
+  "offerValue": "TỪ 400.000Đ",
+  "offerTitle": "Tiệc trà tại gia, team đông càng hời",
+  "offerDescription": "Đơn từ 400.000đ được tặng 02 ly trà tươi mát lạnh, trị giá 56.000đ. Đơn từ 800.000đ được tặng 05 ly trà tươi, rất hợp cho team cày dự án hoặc những buổi liên hoan lớp.",
+  "offerNote": "Ly tặng áp dụng cho các món trà tươi trị giá tối đa 28.000đ. Bạn có thể bù thêm phần chênh lệch để đổi sang món yêu thích khác.",
+  "summaryPoints": [
+    "400.000đ: tặng 02 ly trà tươi, trị giá 56.000đ.",
+    "800.000đ: tặng 05 ly trà tươi cho team đông.",
+    "Inbox Hẻm để chốt deal; khách thanh toán phí ship."
+  ],
+  "summaryGroups": [
+    { "title": "🔥 Deal hội dành riêng cho team đông", "items": ["Gom đơn từ 400K: tặng ngay 02 ly trà tươi mát lạnh, trị giá đến 56.000đ.", "Gom đơn từ 800K: tặng 05 ly trà tươi, phù hợp cho team cày dự án hoặc liên hoan lớp."] },
+    { "title": "🎁 Quà tặng", "items": ["Ly tặng áp dụng cho món trà tươi trị giá tối đa 28.000đ.", "Có thể bù thêm chênh lệch nếu muốn đổi sang món yêu thích khác."] },
+    { "title": "🚀 Vì sao nên đặt đơn nhóm?", "items": ["Menu đa dạng từ trà sữa sốt cacao đến trà trái cây tươi mát.", "Giao nhanh trong bán kính 2km, món vẫn lạnh sâu khi đến tay.", "Chia tiền tiết kiệm hơn và có thêm ly miễn phí cho cả nhóm."] },
+    { "title": "📌 Lưu ý", "items": ["Áp dụng cho khách mua mang về và đơn giao hàng.", "Khách thanh toán phí ship cho shipper, khoảng 10K-30K tùy khu vực.", "Inbox Hẻm để lập team và chốt deal trước khi đặt."] }
+  ],
+  "productLabel": "TẠI SAO NÊN ĐẶT ĐƠN NHÓM?",
+  "productTitle": "Gom đơn cùng team,\nchia vui thật hời.",
+  "productDescription": "Menu đa dạng, giao hàng nhanh trong bán kính 2km và chia tiền thật hời. Hãy lập team gom đơn để không bỏ lỡ quà tặng.",
+  "productImages": [
+    { "file": "tra_sua_hem_noPhone.webp", "name": "Trà sữa Hẻm", "alt": "Trà sữa Hẻm dessert" },
+    { "file": "Tra_Sua_Kem_Muoi.webp", "name": "Trà sữa kem muối", "alt": "Trà sữa Hẻm kem muối" },
+    { "file": "DEAL_400K.webp", "name": "Poster gom đơn", "alt": "Poster chương trình gom đơn Hẻm dessert" }
+  ],
+  "steps": [
+    { "number": "01", "title": "Menu đa dạng", "description": "Từ trà sữa sốt cacao đậm đà đến trà trái cây tươi mát, ai trong team cũng chọn được món mình thích." },
+    { "number": "02", "title": "Giao hàng nhanh", "description": "Hẻm giao trong bán kính 2km, giữ món lạnh sâu để ly trà đến tay bạn vẫn thơm ngon." },
+    { "number": "03", "title": "Chia tiền thật hời", "description": "Gom đơn cùng team để đủ mốc quà, vừa tiết kiệm vừa có thêm ly miễn phí cho cả nhóm." }
+  ],
+  "terms": [
+    "Đơn từ 400.000đ được tặng 02 ly trà tươi, trị giá 56.000đ.",
+    "Đơn từ 800.000đ được tặng 05 ly trà tươi.",
+    "Ly tặng áp dụng cho các món trà tươi trị giá tối đa 28.000đ mỗi ly; có thể bù thêm chênh lệch để đổi món khác.",
+    "Áp dụng cho khách mua mang về và đơn giao hàng.",
+    "Khách hàng vui lòng thanh toán phí giao hàng cho shipper, khoảng 10.000đ-30.000đ tùy khu vực.",
+    "Vui lòng inbox Hẻm để gom đơn và xác nhận deal trước khi đặt."
+  ],
+  "locations": []
+}

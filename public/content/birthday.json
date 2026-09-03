@@ -5,6 +5,9 @@
   "campaignName": "Sinh nhật Hẻm dessert",
   "campaignYear": "01/07",
   "recurringDate": "07-01",
+  "noticeLeadDays": 15,
+  "noticeEndOffsetDays": 7,
+  "eventDurationDays": 3,
   "orderUrl": "https://trasuahem.sapofnb.vn/",
   "heroImage": "/images/original-0.jpg",
   "heroImageAlt": "Không gian trà và ấm trà Hẻm dessert cho chương trình ưu đãi",
@@ -15,11 +18,13 @@
   "offerTitle": "Gọi hội bạn, Hẻm tặng thêm một ly",
   "offerDescription": "Áp dụng cho các đơn đủ điều kiện trong thời gian chương trình.",
   "offerNote": "Sinh nhật cửa hàng: 01/07. Vui lòng xác nhận điều kiện trước khi đặt.",
+  "summaryPoints": [
+    "01-03/07: mua 2 ly, tặng 1 ly theo điều kiện chương trình.",
+    "Thông tin ưu đãi mở trước 15 ngày để bạn chuẩn bị cùng hội bạn.",
+    "Đặt món và xác nhận món tặng trước khi thanh toán."
+  ],
   "productImages": [
-    { "file": "tra_sua_hem_noPhone.png", "name": "Trà sữa Hẻm", "alt": "Trà sữa Hẻm dessert với topping" },
-    { "file": "Tra_Sua_Kem_Muoi.png", "name": "Trà sữa Hẻm kem muối", "alt": "Trà sữa Hẻm kem muối" },
-    { "file": "P1240308.JPG", "name": "Trà trái cây", "alt": "Ly trà trái cây Hẻm dessert" },
-    { "file": "P1240267.JPG", "name": "Trà vải", "alt": "Ly trà vải Hẻm dessert" }
+    { "file": "tra_sua_hem_noPhone.webp", "name": "Trà sữa Hẻm", "alt": "Trà sữa Hẻm dessert với topping" }
   ],
   "steps": [
     { "number": "01", "title": "Chọn 2 ly yêu thích", "description": "Chọn hai ly trong danh sách món áp dụng của chương trình." },

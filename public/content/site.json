@@ -25,7 +25,7 @@
   "hours": {
     "title": "Giờ Làm Việc",
     "description": "Hẻm mở cửa và giao hàng theo thời gian cố định, ngoài khung giờ giao hàng trên, khách có thể đặt trên các app giao hàng: VILL, ShopeeFOOD",
-    "image": "/images/original-1.png",
+    "image": "",
     "buttonLabel": "Đặt món",
     "items": [
       { "label": "Mở cửa", "time": "08:30" },
@@ -36,7 +36,7 @@
   },
   "menu": {
     "title": "MENU",
-    "image": "/images/original-6-menu.jpg",
+    "image": "menu.jpg",
     "imageAlt": "Menu trà sữa và trà tươi Hẻm dessert",
     "intro": "Với tiêu chí: \"MỘT LY CŨNG GIAO.\"\nMIỄN PHÍ GIAO HÀNG khu vực Tân An cho đơn hàng giá trị trên 400,000đ\nMIỄN PHÍ GIAO HÀNG cho đơn hàng trên 200,000đ và khoảng cách giao hàng dưới 2km",
     "policy": "Quán trực tiếp giao trong bán kính dưới 1.5km. Ngoài phạm vi này, đối tác giao hàng phụ trách và thu phí theo ứng dụng.",
@@ -62,5 +62,12 @@
     { "visible": true, "name": "Hẻm dessert MỸ THO", "oldAddress": "926 Trần Hưng Đạo, phường 5, TP. Mỹ Tho, Tiền Giang", "address": "926 Trần Hưng Đạo, phường Đạo Thạnh, tỉnh Đồng Tháp", "phone": "070.643.5968", "phoneLink": "0706435968" },
     { "visible": false, "name": "Hẻm dessert SÀI GÒN", "oldAddress": "56/75 Thích Quảng Đức, phường 5, quận Phú Nhuận, TP. Hồ Chí Minh", "address": "56/75 Thích Quảng Đức, phường Đức Nhuận, TP. Hồ Chí Minh", "phone": "0838.305.338", "phoneLink": "0838305338" }
   ],
-  "popup": { "enabled": false, "image": "/images/khuyen-mai.jpg", "link": "https://trasuahem.sapofnb.vn/", "alt": "Ưu đãi mới từ Hẻm dessert" }
+  "popup": {
+    "enabled": true,
+    "campaigns": [
+      { "campaign": "birthday", "image": "/images/original-0.jpg", "link": "promotion.html?campaign=birthday", "alt": "Thông báo sinh nhật Hẻm dessert" },
+      { "campaign": "tet", "image": "popup-tet.png", "link": "promotion.html?campaign=tet", "alt": "Ưu đãi Tết từ Hẻm dessert" },
+      { "campaign": "khai-truong", "image": "/images/original-0.jpg", "link": "promotion.html?campaign=khai-truong", "alt": "Thông báo khai trương Hẻm dessert" }
+    ]
+  }
 }
