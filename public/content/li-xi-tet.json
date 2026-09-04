@@ -1,0 +1,31 @@
+{
+  "active": true,
+  "title": "Lì xì Tết",
+  "eyebrow": "Hẻm dessert",
+  "description": "Quay một vòng, nhận lộc đầu năm từ Hẻm.",
+  "buttonLabel": "Quay lì xì",
+  "spinningLabel": "Đang quay...",
+  "cooldownSeconds": 60,
+  "resultTitle": "Lộc Tết tặng bạn",
+  "captureInstruction": "",
+  "resetLabel": "Đã chụp xong",
+  "totalPrizeCount": 1000,
+  "terms": [],
+  "prizes": [
+    { "id": "li-xi-5k-1", "poolId": "li-xi-5k", "label": "Lì xì 5K", "detail": "Nhận lì xì 5.000đ", "notice": "Lộc nhỏ đầu năm", "weight": 8.5714, "quantity": 600, "color": "#c94d59", "textColor": "#fff8ee" },
+    { "id": "li-xi-10k-1", "poolId": "li-xi-10k", "label": "Lì xì 10K", "detail": "Nhận lì xì 10.000đ", "notice": "Lộc đầu năm từ Hẻm", "weight": 6.25, "quantity": 250, "color": "#f9e3b5", "textColor": "#6d271f" },
+    { "id": "li-xi-5k-2", "poolId": "li-xi-5k", "label": "Lì xì 5K", "detail": "Nhận lì xì 5.000đ", "notice": "Lộc nhỏ đầu năm", "weight": 8.5714, "quantity": 600, "color": "#c94d59", "textColor": "#fff8ee" },
+    { "id": "li-xi-20k-1", "poolId": "li-xi-20k", "label": "Lì xì 20K", "detail": "Nhận lì xì 20.000đ", "notice": "Lộc vui đầu năm", "weight": 6, "quantity": 120, "color": "#6f9b87", "textColor": "#10251f" },
+    { "id": "li-xi-5k-3", "poolId": "li-xi-5k", "label": "Lì xì 5K", "detail": "Nhận lì xì 5.000đ", "notice": "Lộc nhỏ đầu năm", "weight": 8.5714, "quantity": 600, "color": "#c94d59", "textColor": "#fff8ee" },
+    { "id": "li-xi-10k-2", "poolId": "li-xi-10k", "label": "Lì xì 10K", "detail": "Nhận lì xì 10.000đ", "notice": "Lộc đầu năm từ Hẻm", "weight": 6.25, "quantity": 250, "color": "#f9e3b5", "textColor": "#6d271f" },
+    { "id": "li-xi-5k-4", "poolId": "li-xi-5k", "label": "Lì xì 5K", "detail": "Nhận lì xì 5.000đ", "notice": "Lộc nhỏ đầu năm", "weight": 8.5714, "quantity": 600, "color": "#c94d59", "textColor": "#fff8ee" },
+    { "id": "li-xi-50k", "poolId": "li-xi-50k", "label": "Lì xì 50K", "detail": "Nhận lì xì 50.000đ", "notice": "Lộc may mắn từ Hẻm", "weight": 2, "quantity": 20, "minSpin": 100, "color": "#ffd979", "textColor": "#172324" },
+    { "id": "li-xi-5k-5", "poolId": "li-xi-5k", "label": "Lì xì 5K", "detail": "Nhận lì xì 5.000đ", "notice": "Lộc nhỏ đầu năm", "weight": 8.5714, "quantity": 600, "color": "#c94d59", "textColor": "#fff8ee" },
+    { "id": "li-xi-10k-3", "poolId": "li-xi-10k", "label": "Lì xì 10K", "detail": "Nhận lì xì 10.000đ", "notice": "Lộc đầu năm từ Hẻm", "weight": 6.25, "quantity": 250, "color": "#f9e3b5", "textColor": "#6d271f" },
+    { "id": "li-xi-5k-6", "poolId": "li-xi-5k", "label": "Lì xì 5K", "detail": "Nhận lì xì 5.000đ", "notice": "Lộc nhỏ đầu năm", "weight": 8.5714, "quantity": 600, "color": "#c94d59", "textColor": "#fff8ee" },
+    { "id": "li-xi-20k-2", "poolId": "li-xi-20k", "label": "Lì xì 20K", "detail": "Nhận lì xì 20.000đ", "notice": "Lộc vui đầu năm", "weight": 6, "quantity": 120, "color": "#6f9b87", "textColor": "#10251f" },
+    { "id": "li-xi-10k-4", "poolId": "li-xi-10k", "label": "Lì xì 10K", "detail": "Nhận lì xì 10.000đ", "notice": "Lộc đầu năm từ Hẻm", "weight": 6.25, "quantity": 250, "color": "#f9e3b5", "textColor": "#6d271f" },
+    { "id": "li-xi-100k", "poolId": "li-xi-100k", "label": "Lì xì 100K", "detail": "Nhận lì xì 100.000đ", "notice": "Lộc đặc biệt đầu năm", "weight": 1, "quantity": 10, "minSpin": 500, "color": "#e98773", "textColor": "#fff8ee" },
+    { "id": "li-xi-5k-7", "poolId": "li-xi-5k", "label": "Lì xì 5K", "detail": "Nhận lì xì 5.000đ", "notice": "Lộc nhỏ đầu năm", "weight": 8.5716, "quantity": 600, "color": "#c94d59", "textColor": "#fff8ee" }
+  ]
+}

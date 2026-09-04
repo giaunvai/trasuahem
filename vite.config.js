@@ -14,6 +14,8 @@ export default defineConfig({
       input: {
         home: resolve(import.meta.dirname, 'index.html'),
         promotion: resolve(import.meta.dirname, 'promotion.html'),
+        luckyWheel: resolve(import.meta.dirname, 'lucky-wheel.html'),
+        liXiTet: resolve(import.meta.dirname, 'li-xi-tet.html'),
       },
     },
   },

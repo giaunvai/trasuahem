@@ -1,0 +1,28 @@
+{
+  "active": true,
+  "title": "Vòng quay may mắn",
+  "eyebrow": "Hẻm dessert",
+  "description": "Quay một vòng, nhận ngay niềm vui từ Hẻm.",
+  "buttonLabel": "Quay ngay",
+  "spinningLabel": "Đang quay...",
+  "resultTitle": "Ưu đãi tặng bạn",
+  "captureInstruction": "Nhân viên chụp lại kết quả nhé.",
+  "resetLabel": "Đã chụp xong",
+  "terms": [
+    "Mỗi lượt quay nhận một phần quà.",
+    "Nhân viên Hẻm chụp lại kết quả để lưu thông tin.",
+    "Ưu đãi cho đơn sau dành cho lần ghé Hẻm tiếp theo."
+  ],
+  "prizes": [
+    { "id": "topping", "label": "Tặng topping", "detail": "Nhận ngay 1 phần topping", "notice": "Thêm vui cho ly trà này", "weight": 30, "color": "#c94d59", "textColor": "#fff8ee" },
+    { "id": "ly-28k", "label": "Tặng ly 28K", "detail": "Nhận ngay 1 ly 28K", "notice": "Phần quà nhỏ từ Hẻm", "weight": 2, "color": "#f7d88a", "textColor": "#172324" },
+    { "id": "ly-33k", "label": "Tặng ly 33K", "detail": "Nhận ngay 1 ly 33K", "notice": "Phần quà nhỏ từ Hẻm", "weight": 1, "color": "#9f3f45", "textColor": "#fff8ee" },
+    { "id": "mua-5-tang-1", "label": "Mua 5 tặng 1", "detail": "Mua 5, tặng 1", "notice": "Áp dụng cho đơn hàng tiếp theo", "redemption": "next-order", "weight": 30, "color": "#8fb7a6", "textColor": "#10251f" },
+    { "id": "mua-3-tang-1", "label": "Mua 3 tặng 1", "detail": "Mua 3, tặng 1", "notice": "Áp dụng cho đơn hàng tiếp theo", "redemption": "next-order", "weight": 20, "color": "#f5cf66", "textColor": "#172324" },
+    { "id": "mua-2-tang-1", "label": "Mua 2, tặng 1", "detail": "Mua 2, tặng 1", "notice": "Áp dụng cho đơn hàng tiếp theo", "redemption": "next-order", "weight": 9.4, "color": "#6f9b87", "textColor": "#10251f" },
+    { "id": "giam-20-don-300", "label": "Giảm 20%", "detail": "Giảm 20% cho đơn từ 300K", "notice": "Áp dụng cho đơn hàng tiếp theo từ 300.000đ", "redemption": "next-order", "weight": 2, "color": "#ffd979", "textColor": "#172324" },
+    { "id": "mua-1-tang-1", "label": "Mua 1, tặng 1", "detail": "Mua 1, tặng 1", "notice": "Áp dụng cho đơn hàng tiếp theo", "redemption": "next-order", "weight": 5, "color": "#f9e3b5", "textColor": "#6d271f" },
+    { "id": "ly-bat-ky-50k", "label": "Tặng ly 50K", "detail": "Nhận ngay 1 ly 50K", "notice": "Phần quà hiếm từ Hẻm", "weight": 0.5, "color": "#d96b6f", "textColor": "#fff8ee" },
+    { "id": "mien-phi-100", "label": "Miễn phí 100%", "detail": "Miễn phí đơn này", "notice": "Phần quà hiếm từ Hẻm", "weight": 0.1, "color": "#e98773", "textColor": "#fff8ee" }
+  ]
+}

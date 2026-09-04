@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:wght@600;700;800&display=swap');
+body, body * { font-family: 'Roboto', sans-serif !important; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Times New Roman', serif !important; font-weight: 700 !important; }
 @media(max-width:760px){.promotion-directory-page .promotion-card-image{height:auto!important;min-height:0!important}.promotion-directory-page .promotion-card-image img{display:block;width:100%;height:auto!important;min-height:0!important;max-height:none;object-fit:contain!important;object-position:center}}
 @media(max-width:760px){.promotion-directory-page .promotion-card-poster .promotion-card-image{height:auto!important;min-height:0!important;padding:0;margin:0}.promotion-directory-page .promotion-card-poster .promotion-card-image img{display:block;width:100%;height:auto!important;min-height:0!important;max-height:none;object-fit:contain!important;object-position:center;margin:0}.promotion-directory-page .promotion-card-poster .promotion-card-body{height:auto!important;min-height:0!important}}
 @media(min-width:761px){.promotion-directory-page .promotion-card-poster{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr)!important}.promotion-directory-page .promotion-card-poster .promotion-card-image img{object-fit:contain!important}}

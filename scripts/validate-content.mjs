@@ -27,6 +27,30 @@ for (const file of files) {
     if (!Array.isArray(content.hours?.items)) errors.push(`${file}: hours.items must be an array`)
     if (!Array.isArray(content.foodApps?.branches)) errors.push(`${file}: foodApps.branches must be an array`)
     if (!Array.isArray(content.locations)) errors.push(`${file}: locations must be an array`)
+  } else if (file === 'lucky-wheel.json' || file === 'li-xi-tet.json') {
+    requireFields(content, ['title', 'description', 'captureInstruction', 'prizes', 'terms'], file)
+    if (file === 'li-xi-tet.json' && Number(content.totalPrizeCount) !== 1000) errors.push(`${file}: totalPrizeCount must be 1000`)
+    if (file === 'li-xi-tet.json' && Number(content.cooldownSeconds) < 60) errors.push(`${file}: cooldownSeconds must be at least 60`)
+    if (!Array.isArray(content.prizes) || content.prizes.length < 2) errors.push(`${file}: prizes must contain at least 2 items`)
+    if (!Array.isArray(content.terms)) errors.push(`${file}: terms must be an array`)
+    const prizeIds = new Set()
+    for (const prize of content.prizes || []) {
+      requireFields(prize, ['id', 'label', 'detail', 'notice', 'weight', 'color', 'textColor'], `${file}: prize`)
+      if (prize.redemption && prize.redemption !== 'next-order') errors.push(`${file}: prize ${prize.id || prize.label || ''} redemption must be next-order`)
+      if (prize.id) prizeIds.add(prize.id)
+      if (!(Number(prize.weight) > 0)) errors.push(`${file}: prize ${prize.id || prize.label || ''} weight must be greater than 0`)
+    }
+    if (prizeIds.size !== (content.prizes || []).length) errors.push(`${file}: prizes must use unique ids`)
+    const totalWeight = (content.prizes || []).reduce((sum, prize) => sum + Number(prize.weight || 0), 0)
+    if (Math.abs(totalWeight - 100) > 0.001) errors.push(`${file}: prize weights should total 100`)
+    if (file === 'li-xi-tet.json') {
+      const pools = new Map()
+      for (const prize of content.prizes || []) {
+        requireFields(prize, ['poolId', 'quantity'], `${file}: prize`)
+        if (prize.poolId && !pools.has(prize.poolId)) pools.set(prize.poolId, Number(prize.quantity))
+      }
+      if ([...pools.values()].reduce((sum, quantity) => sum + quantity, 0) !== content.totalPrizeCount) errors.push(`${file}: pool quantities must total totalPrizeCount`)
+    }
   } else {
     requireFields(content, ['campaignType', 'campaignName', 'orderUrl', 'heroImage', 'productImages', 'steps', 'terms', 'locations'], file)
     const productImages = content.productImages || []

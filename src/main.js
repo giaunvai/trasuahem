@@ -1,4 +1,5 @@
 import './style.css'
+import './fonts.js'
 import { ArrowUp, Gift, Menu, Mouse, X } from 'lucide'
 import hemLogo from './assets/branding/hem-logo.png'
 import menuLogo from './assets/branding/logo.png'

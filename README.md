@@ -30,6 +30,18 @@ Trang tự tải ba campaign mùa vụ và một campaign deal:
 - Popup trên trang chủ dẫn về `/promotion.html`, nên khách vẫn có thể xem ưu đãi khi popup bị tắt.
 - URL cũ có `?campaign=...` vẫn mở trang danh mục, không còn trang chi tiết riêng.
 
+## Trang lucky-wheel
+
+Trang vòng quay may mắn nằm tại:
+
+```text
+/lucky-wheel.html
+```
+
+Chỉnh giải thưởng và tỉ lệ trong `public/content/lucky-wheel.json`. Mỗi giải có `label`, `detail`, `notice`, `weight`, `color` và `textColor`. Tỉ lệ trúng được tính theo trọng số `weight`; ví dụ tổng weight là 100 thì giải có weight 10 tương đương khoảng 10%.
+
+Lưu ý: đây là vòng quay vui tại quầy. Nhân viên mở trang, đưa máy cho khách quay và chụp lại kết quả để xác nhận phần quà. Vòng quay không dùng mã quà; nhân viên đối chiếu ảnh chụp trước khi áp dụng ưu đãi.
+
 ## Lịch hiển thị campaign
 
 ### Khai trương

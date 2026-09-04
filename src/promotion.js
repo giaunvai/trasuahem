@@ -1,4 +1,5 @@
 import './birthday.css'
+import './fonts.js'
 import { ArrowRight, CalendarDays, Gift, MapPin, Phone } from 'lucide'
 import menuLogo from './assets/branding/logo.png'
 import { getCampaignSchedule, getCampaignState, mountCountdown } from './countdown.js'
