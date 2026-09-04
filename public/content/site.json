@@ -24,7 +24,7 @@
   },
   "hours": {
     "title": "Giờ Làm Việc",
-    "description": "Hẻm mở cửa và giao hàng theo thời gian cố định, ngoài khung giờ giao hàng trên, khách có thể đặt trên các app giao hàng: VILL, ShopeeFOOD",
+    "description": "Hẻm mở cửa và giao hàng theo thời gian cố định, ngoài khung giờ giao hàng trên, khách có thể đặt trên các app giao hàng: VILLFood, ShopeeFood, GrabFood",
     "image": "",
     "buttonLabel": "Đặt món",
     "items": [
