@@ -4,14 +4,14 @@
   "hero": {
     "title": "Một Gu Trà Đậm\nMột Vị Trà Riêng",
     "description": "Trải nghiệm một gu trà rất riêng mang phong cách Hẻm dessert",
-    "image": "/images/original-0.jpg",
+    "image": "/images/home/original-0.jpg",
     "orderLabel": "Đặt đơn ngay",
     "appLabel": "Đặt food app"
   },
   "member": {
     "title": "Đăng ký thành viên",
     "description": "Quét mã QR, quan tâm Zalo OA của Hẻm dessert.\nBấm đăng ký thành viên để nhận nhiều ưu đãi\ncùng với những thông tin hấp dẫn.",
-    "qrImage": "/images/original-2.jpg"
+    "qrImage": "/images/qr/original-2.jpg"
   },
   "about": {
     "eyebrow": "Hẻm dessert là gì?",
@@ -36,9 +36,9 @@
   },
   "menu": {
     "title": "MENU",
-    "image": "menu.jpg",
+    "image": "menu.webp",
     "imageAlt": "Menu trà sữa và trà tươi Hẻm dessert",
-    "intro": "Với tiêu chí: \"MỘT LY CŨNG GIAO.\"\nMIỄN PHÍ GIAO HÀNG khu vực Tân An cho đơn hàng giá trị trên 400,000đ\nMIỄN PHÍ GIAO HÀNG cho đơn hàng trên 200,000đ và khoảng cách giao hàng dưới 2km",
+    "intro": "Với tiêu chí: \"MỘT LY CŨNG GIAO.\"\nHẻm miễn phí giao hàng theo khoảng cách và giá trị đơn hàng bên dưới.",
     "policy": "Quán trực tiếp giao trong bán kính dưới 1.5km. Ngoài phạm vi này, đối tác giao hàng phụ trách và thu phí theo ứng dụng.",
     "deliveryTiers": [
       "Đơn từ 55,000đ, dưới 0.5km: miễn phí giao hàng",
@@ -65,9 +65,9 @@
   "popup": {
     "enabled": true,
     "campaigns": [
-      { "campaign": "birthday", "image": "/images/original-0.jpg", "link": "promotion.html", "alt": "Thông báo sinh nhật Hẻm dessert" },
+      { "campaign": "birthday", "image": "/images/home/original-0.jpg", "link": "promotion.html", "alt": "Thông báo sinh nhật Hẻm dessert" },
       { "campaign": "tet", "image": "popup-tet.png", "link": "promotion.html", "alt": "Ưu đãi Tết từ Hẻm dessert" },
-      { "campaign": "khai-truong", "image": "/images/original-0.jpg", "link": "promotion.html", "alt": "Thông báo khai trương Hẻm dessert" }
+      { "campaign": "khai-truong", "image": "/images/home/original-0.jpg", "link": "promotion.html", "alt": "Thông báo khai trương Hẻm dessert" }
     ]
   }
 }

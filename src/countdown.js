@@ -50,13 +50,14 @@ const getTetSchedule = (campaign, now) => {
   const eventMonth = campaign.eventLunarStartMonth || 1
   let lunarYear = now.getFullYear()
   let eventStart = lunarDateForYear(eventDay, eventMonth, lunarYear)
-  while (eventStart <= atStartOfDay(now)) {
+  let eventEnd = eventStart
+  while (eventEnd <= atStartOfDay(now)) {
     lunarYear += 1
     eventStart = lunarDateForYear(eventDay, eventMonth, lunarYear)
+    eventEnd = eventStart
   }
   const noticeStart = addDays(eventStart, -(campaign.noticeLeadDays || 35))
-  const eventEnd = lunarDateForYear(campaign.eventLunarEndDay || 3, campaign.eventLunarEndMonth || 1, lunarYear)
-  return { eventStart, eventEnd: addDays(eventEnd, 1), noticeStart, noticeEnd: addDays(eventEnd, 1) }
+  return { eventStart, eventEnd, noticeStart, noticeEnd: eventEnd }
 }
 
 export const getCampaignSchedule = (campaign = {}, now = new Date()) => campaign.campaignType === 'tet' ? getTetSchedule(campaign, now) : getSolarSchedule(campaign, now)
@@ -69,6 +70,7 @@ export const isCampaignPopupActive = (campaign, now = new Date()) => {
 export const getCampaignState = (campaign, now = new Date()) => {
   const schedule = getCampaignSchedule(campaign, now)
   if (!schedule || campaign.active === false) return { state: 'inactive', schedule }
+  if (campaign.campaignType === 'tet' && now >= schedule.noticeStart && now < schedule.eventStart) return { state: 'live', schedule, target: schedule.eventEnd }
   if (now >= schedule.eventStart && now < schedule.eventEnd) return { state: 'live', schedule, target: schedule.eventEnd }
   if (campaign.displayMode === 'on' && now < schedule.eventStart) return { state: 'notice', schedule, target: schedule.eventStart }
   if (now >= schedule.noticeStart && now < schedule.eventStart) return { state: 'notice', schedule, target: schedule.eventStart }

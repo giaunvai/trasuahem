@@ -8,16 +8,7 @@ const assetDir = join(root, 'src', 'assets')
 const reportPath = join(root, 'scripts', 'image-report.json')
 
 // width: chiều ngang tối đa (đủ nét cho màn hình retina), quality: chất lượng WebP
-const images = [
-  { file: 'P1220686.JPG', width: 1200, quality: 82 },
-  { file: 'P1230758.JPG', width: 1200, quality: 82 },
-  { file: 'P1240267.JPG', width: 1200, quality: 82 },
-  { file: 'P1240308.JPG', width: 1200, quality: 82 },
-  { file: 'tra_sua_hem_noPhone.png', width: 1200, quality: 82 },
-  { file: 'Tra_Sua_Kem_Muoi.png', width: 1200, quality: 82 },
-  { file: 'popup_tet.png', width: 1200, quality: 82 },
-  { file: 'menu.jpg', width: 1600, quality: 82 },
-]
+const images = []
 
 const report = []
 for (const { file, width, quality } of images) {

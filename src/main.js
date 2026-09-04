@@ -1,18 +1,22 @@
 import './style.css'
 import { ArrowUp, Gift, Menu, Mouse, X } from 'lucide'
-import hemLogo from './assets/hem-logo.png'
-import menuLogo from './assets/logo.png'
-import hoursBackground from './assets/nen.webp'
-import menuImage from './assets/menu.webp'
+import hemLogo from './assets/branding/hem-logo.png'
+import menuLogo from './assets/branding/logo.png'
+import zaloQr from './assets/Zalo_OA.jpg'
+import hoursBackground from './assets/backgrounds/nen.webp'
+import menuImage from './assets/menu/menu.webp'
+import { ASSET_PATHS } from './assetsConfig.js'
 import { isCampaignPopupActive } from './countdown.js'
 import { initAnalytics, track, trackLinkClicks } from './analytics.js'
+
+const menuDownloadUrl = ASSET_PATHS.menuDownload
 
 // Ảnh popup chỉ tải khi có chiến dịch đang bật, không nhúng sẵn vào mọi lượt mở trang
 const popupAssetLoaders = import.meta.glob('./assets/popup_*.webp', { query: '?url', import: 'default' })
 
 const baseUrl = import.meta.env.BASE_URL
 const assetUrl = (path) => path.startsWith('/') ? `${baseUrl}${path.slice(1)}` : path
-const fallbackContent = { orderUrl: 'https://trasuahem.sapofnb.vn/', hero: { title: 'Hẻm dessert', description: 'Trà đậm, ít ngọt.', image: '/images/original-0.jpg', orderLabel: 'Đặt món ngay', appLabel: 'Đặt food app' }, member: { title: 'Đăng ký thành viên', description: 'Quét mã QR để nhận ưu đãi.', qrImage: '/images/original-2.jpg' }, about: { eyebrow: 'Hẻm dessert', title: 'Một vị trà riêng', paragraphs: [], buttonLabel: 'Đặt món ngay' }, hours: { title: 'Giờ làm việc', description: 'Mở cửa mỗi ngày.', items: [] }, menu: { title: 'MENU', intro: 'Xem menu và đặt món.', policy: '', deliveryTiers: [], buttonLabel: 'Đặt món ngay', image: '/images/original-6-menu.jpg', imageAlt: 'Menu Hẻm dessert' }, foodApps: { eyebrow: 'Đặt app giao hàng', title: 'Giao hàng food app', description: '', branches: [] }, locations: [], popup: { enabled: false }, analytics: {} }
+const fallbackContent = { orderUrl: 'https://trasuahem.sapofnb.vn/', hero: { title: 'Hẻm dessert', description: 'Trà đậm, ít ngọt.', image: ASSET_PATHS.hero, orderLabel: 'Đặt món ngay', appLabel: 'Đặt food app' }, member: { title: 'Đăng ký thành viên', description: 'Quét mã QR để nhận ưu đãi.', qrImage: ASSET_PATHS.qr }, about: { eyebrow: 'Hẻm dessert', title: 'Một vị trà riêng', paragraphs: [], buttonLabel: 'Đặt món ngay' }, hours: { title: 'Giờ làm việc', description: 'Mở cửa mỗi ngày.', items: [] }, menu: { title: 'MENU', intro: 'Xem menu và đặt món.', policy: '', deliveryTiers: [], buttonLabel: 'Đặt món ngay', image: ASSET_PATHS.menuDownload, imageAlt: 'Menu Hẻm dessert' }, foodApps: { eyebrow: 'Đặt app giao hàng', title: 'Giao hàng food app', description: '', branches: [] }, locations: [], popup: { enabled: false }, analytics: {} }
 const content = await fetch(`${baseUrl}content/site.json`).then((response) => {
   if (!response.ok) throw new Error('Không thể tải nội dung website.')
   return response.json()
@@ -64,7 +68,7 @@ document.querySelector('#app').innerHTML = `
   </header>
   <nav id="mobile-navigation" class="mobile-nav" aria-label="Điều hướng trên điện thoại" hidden>${navItems.map(([label, target]) => `<a href="${target}">${label}</a>`).join('')}<a href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt món</a></nav>
   <main>
-    <section id="trang-chu" class="hero" style="background-image:linear-gradient(90deg,#0008,#fff1),url('${safeAsset(hero.image)}')"><div class="hero-content"><h1>${withBreaks(hero.title)}</h1><p>${text(hero.description)}</p><div class="hero-actions"><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a><a class="order-button coral" href="#food-app">${text(hero.appLabel)}</a></div><div class="member-box"><img src="${safeAsset(member.qrImage)}" alt="Mã QR Zalo Hẻm dessert"><div><b>${text(member.title)}</b><p>${withBreaks(member.description)}</p></div></div></div><button class="scroll-cue" type="button" aria-label="Cuộn xuống phần giới thiệu" title="Cuộn xuống">${icon(Mouse, 32)}</button></section>
+    <section id="trang-chu" class="hero" style="background-image:linear-gradient(90deg,#0008,#fff1),url('${safeAsset(hero.image)}')"><div class="hero-content"><h1>${withBreaks(hero.title)}</h1><p>${text(hero.description)}</p><div class="hero-actions"><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a><a class="order-button coral" href="#food-app">${text(hero.appLabel)}</a></div><div class="member-box"><img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert"><div><b>${text(member.title)}</b><p>${withBreaks(member.description)}</p></div></div></div><button class="scroll-cue" type="button" aria-label="Cuộn xuống phần giới thiệu" title="Cuộn xuống">${icon(Mouse, 32)}</button></section>
     <section id="ve-chung-toi" class="about panel"><div class="about-logo"><img src="${hemLogo}" alt="Hẻm dessert" loading="lazy" decoding="async"></div><div class="about-copy"><span class="accent-line"></span><p class="eyebrow">${text(about.eyebrow)}</p><h2>${withBreaks(about.title)}</h2>${(about.paragraphs || []).map((paragraph) => `<p>${text(paragraph)}</p>`).join('')}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(about.buttonLabel)}</a></div><div class="about-dots" aria-hidden="true"></div></section>
     <section id="gio-lam-viec" class="hours panel" style="background-image:linear-gradient(90deg,rgba(0,0,0,.44),rgba(0,0,0,.08)),url('${escapeHtml(hours.image ? assetUrl(hours.image) : hoursBackground)}')"><div class="hours-copy"><span class="accent-line"></span><h2>${text(hours.title)}</h2><p>${text(hours.description)}</p><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hours.buttonLabel)}</a></div><div class="time-card"><div class="time-group">${timeColumn((hours.items || []).slice(0, 2))}</div><div class="time-group">${timeColumn((hours.items || []).slice(2))}</div></div></section>
     <section id="menu" class="menu-section"><div class="menu-copy"><span class="accent-line"></span><h2>${text(menu.title)}</h2><p>${withBreaks(menu.intro)}</p>${menu.deliveryTiers?.length ? `<p>${withBreaks(menu.policy)}</p><ul class="delivery-tiers">${menu.deliveryTiers.map((tier) => `<li>${text(tier)}</li>`).join('')}</ul>` : `<p>${withBreaks(menu.policy)}</p>`}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(menu.buttonLabel)}</a></div><button class="menu-image-trigger" type="button" aria-label="Xem menu phóng to" title="Xem menu phóng to"><img class="menu-image" src="${menuImage}" alt="${text(menu.imageAlt)}" loading="lazy" decoding="async"></button></section>
@@ -73,8 +77,8 @@ document.querySelector('#app').innerHTML = `
   </main>
   <a class="promotion-cue" href="${baseUrl}promotion.html" aria-label="Xem các chương trình ưu đãi" title="Xem ưu đãi">${icon(Gift, 23)}</a>
   <button class="back-top" type="button" aria-label="Lên đầu trang" title="Lên đầu trang">${icon(ArrowUp, 20)}</button>
-  <aside class="menu-lightbox" role="dialog" aria-modal="true" aria-labelledby="menu-lightbox-title" hidden><div class="menu-lightbox-panel"><div class="menu-lightbox-actions"><h2 id="menu-lightbox-title">${text(menu.title)}</h2><a class="menu-download" href="${menuImage}" download="menu-hem-dessert.webp" aria-label="Tải menu về máy" title="Tải menu về máy">Tải menu</a><button class="menu-lightbox-close" type="button" aria-label="Đóng ảnh menu" title="Đóng">×</button></div><img src="${menuImage}" alt="${text(menu.imageAlt)}"></div></aside>
-  ${campaignPopup ? `<aside class="promotion-popup" role="dialog" aria-modal="true"><div class="promotion-popup-card"><button class="popup-close" type="button" aria-label="Đóng ưu đãi">×</button><a class="promotion-link" href="${safeUrl(activePopup.link)}" target="_blank" rel="noopener noreferrer"><img src="${configuredPopupImage}" alt="${text(activePopup.alt || 'Ưu đãi từ Hẻm dessert')}"></a></div></aside>` : ''}
+  <aside class="menu-lightbox" role="dialog" aria-modal="true" aria-labelledby="menu-lightbox-title" hidden><div class="menu-lightbox-panel"><div class="menu-lightbox-actions"><h2 id="menu-lightbox-title">${text(menu.title)}</h2><a class="menu-download" href="${menuDownloadUrl}" download="menu-hem-dessert.jpg" aria-label="Tải menu" title="Tải menu">Tải menu</a><button class="menu-lightbox-close" type="button" aria-label="Đóng ảnh menu" title="Đóng">×</button></div><img src="${menuImage}" alt="${text(menu.imageAlt)}"></div></aside>
+  ${campaignPopup ? `<aside class="promotion-popup" role="dialog" aria-modal="true" aria-label="Ưu đãi từ Hẻm dessert"><div class="promotion-popup-card"><button class="popup-close" type="button" aria-label="Đóng ưu đãi">×</button><a class="promotion-link" href="${safeUrl(activePopup.link)}" target="_blank" rel="noopener noreferrer"><img src="${configuredPopupImage}" alt="${text(activePopup.alt || 'Ưu đãi từ Hẻm dessert')}"></a></div></aside>` : ''}
 `
 
 const toggle = document.querySelector('.menu-toggle')
@@ -93,22 +97,45 @@ scrollCue.addEventListener('click', () => document.querySelector('#ve-chung-toi'
 const promotionPopup = document.querySelector('.promotion-popup')
 const popupCloseButton = promotionPopup?.querySelector('.popup-close')
 const popupPreviousFocus = document.activeElement
+const trapDialogFocus = (dialog, event) => {
+  if (event.key !== 'Tab') return
+  const focusable = [...dialog.querySelectorAll('a[href], button:not([disabled])')]
+  if (!focusable.length) return
+  const first = focusable[0]
+  const last = focusable[focusable.length - 1]
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus() }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
+}
 const closePromotionPopup = () => { promotionPopup?.remove(); document.body.classList.remove('popup-open'); popupPreviousFocus?.focus?.() }
 promotionPopup?.addEventListener('click', (event) => { if (event.target === promotionPopup) closePromotionPopup() })
 popupCloseButton?.addEventListener('click', closePromotionPopup)
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePromotionPopup() })
+promotionPopup?.addEventListener('keydown', (event) => trapDialogFocus(promotionPopup, event))
 if (promotionPopup) { document.body.classList.add('popup-open'); popupCloseButton?.focus() }
 
 const menuLightbox = document.querySelector('.menu-lightbox')
 const menuImageTrigger = document.querySelector('.menu-image-trigger')
 const menuLightboxClose = menuLightbox?.querySelector('.menu-lightbox-close')
+const menuDownloadButton = menuLightbox?.querySelector('.menu-download')
 const menuPreviousFocus = document.activeElement
 const closeMenuLightbox = () => { if (!menuLightbox) return; menuLightbox.hidden = true; document.body.classList.remove('menu-lightbox-open'); menuPreviousFocus?.focus?.() }
 const openMenuLightbox = () => { if (!menuLightbox) return; menuLightbox.hidden = false; document.body.classList.add('menu-lightbox-open'); menuLightboxClose?.focus() }
+const downloadMenuImage = (event) => {
+  if (event) event.preventDefault()
+  const link = document.createElement('a')
+  link.href = menuDownloadUrl
+  link.download = 'menu-hem-dessert.jpg'
+  link.rel = 'noopener'
+  document.body.append(link)
+  link.click()
+  link.remove()
+}
 menuImageTrigger?.addEventListener('click', openMenuLightbox)
+menuDownloadButton?.addEventListener('click', downloadMenuImage)
 menuLightboxClose?.addEventListener('click', closeMenuLightbox)
 menuLightbox?.addEventListener('click', (event) => { if (event.target === menuLightbox) closeMenuLightbox() })
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menuLightbox && !menuLightbox.hidden) closeMenuLightbox() })
+menuLightbox?.addEventListener('keydown', (event) => trapDialogFocus(menuLightbox, event))
 
 initAnalytics(analytics)
 track('landing_page_view', { page_location: window.location.href })

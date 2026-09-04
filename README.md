@@ -66,11 +66,11 @@ Trong `public/content/tet.json`, giữ:
 "noticeLeadDays": 35,
 "eventLunarStartDay": 1,
 "eventLunarStartMonth": 1,
-"eventLunarEndDay": 3,
+"eventLunarEndDay": 1,
 "eventLunarEndMonth": 1
 ```
 
-Thông tin Tết bắt đầu hiển thị và countdown từ 35 ngày trước mùng 1 Tết âm lịch. Campaign vẫn hiển thị thêm 7 ngày sau mùng 3 Tết để tạo cảm giác tiếc nuối, sau đó tự ẩn.
+Campaign Tết diễn ra trong 35 ngày trước mùng 1 Tết âm lịch. Countdown đếm đến đầu mùng 1; khi bước sang mùng 1, chương trình quà tặng kết thúc. Card vẫn hiển thị thêm 7 ngày để tạo cảm giác tiếc nuối rồi tự ẩn. Popup trang chủ hiển thị trong 35 ngày diễn ra chương trình và tắt từ mùng 1.
 
 ### Sinh nhật
 

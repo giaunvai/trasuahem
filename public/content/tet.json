@@ -10,7 +10,7 @@
   "eventLunarStartMonth": 1,
   "eventLunarStartDay": 1,
   "eventLunarEndMonth": 1,
-  "eventLunarEndDay": 3,
+  "eventLunarEndDay": 1,
   "noticeLeadDays": 35,
   "orderUrl": "https://trasuahem.sapofnb.vn/",
   "posterImage": "popup_tet.webp",
@@ -18,15 +18,15 @@
   "heroImageAlt": "Poster ưu đãi Tết Hẻm dessert",
   "badge": "LÌ XÌ ĐẦU NĂM",
   "title": "Tết ghé Hẻm,\nnhận lộc mang về",
-  "description": "Hóa đơn từ 60.000đ nhận ngay bao lì xì. Rủ gia đình, bạn bè cùng thưởng trà ngày đầu năm.",
+  "description": "Trong 35 ngày trước mùng 1 Tết, hóa đơn từ 60.000đ nhận ngay một xấp bao lì xì. Quà có số lượng giới hạn.",
   "offerValue": "HÓA ĐƠN TỪ 60.000Đ",
   "offerTitle": "Một ly trà, một lời chúc may mắn",
-  "offerDescription": "Bao lì xì số lượng có hạn, áp dụng trong thời gian chương trình.",
-  "offerNote": "Vui lòng liên hệ Hẻm để xác nhận điều kiện và số lượng quà còn lại.",
+  "offerDescription": "Chương trình diễn ra trong 35 ngày trước mùng 1 Tết. Bao lì xì có số lượng giới hạn.",
+  "offerNote": "Vui lòng liên hệ Hẻm để xác nhận điều kiện và số lượng quà còn lại trước khi đặt.",
   "summaryPoints": [
-    "Mùng 1-3 Tết: nhận bao lì xì cùng đơn đủ điều kiện.",
-    "Thông tin quà mở trước 35 ngày để bạn đặt trà đón Tết sớm.",
-    "Quà số lượng có hạn, vui lòng xác nhận trước khi đặt."
+    "Trong 35 ngày trước mùng 1 Tết: hóa đơn từ 60.000đ nhận một xấp bao lì xì.",
+    "Bước sang mùng 1 Tết, chương trình quà tặng kết thúc.",
+    "Quà có số lượng giới hạn, vui lòng xác nhận trước khi đặt."
   ],
   "productImages": [
     { "file": "Tra_Sua_Kem_Muoi.webp", "name": "Trà sữa Hẻm kem muối", "alt": "Trà sữa Hẻm kem muối" }
