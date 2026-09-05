@@ -365,7 +365,7 @@ a { color: inherit; }
   html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
   .wheel-page { height: auto; min-height: 100svh; grid-template-rows: 58px auto 34px; }
   .wheel-stage { min-height: 0; grid-template-columns: 1fr; padding: 8px 18px 18px; gap: 10px; align-content: start; }
-  .wheel-board { --wheel-size: min(82vw, 340px); height: auto; min-height: calc(var(--wheel-size) + 44px); overflow: visible; }
+  .wheel-board { --wheel-size: min(70vw, 420px); height: auto; min-height: calc(var(--wheel-size) + 44px); overflow: visible; }
   .wheel-board:before { width: calc(var(--wheel-size) + 12px); box-shadow: 0 12px 30px #7a202133, 0 0 0 3px #ffffff7a; }
   .wheel-pointer { top: 8px; border-left-width: 15px; border-right-width: 15px; border-top-width: 38px; }
   .wheel { border-width: 6px; }
@@ -390,7 +390,7 @@ a { color: inherit; }
 }
 
 @media (max-height: 760px) and (min-width: 901px) {
-  :root { --wheel-size: min(43vw, 470px); }
+  :root { --wheel-size: min(43vw, 50vh); }
   .wheel-page { grid-template-rows: 68px minmax(0, 1fr) 42px; }
   .wheel-stage { gap: 28px; }
   .wheel-copy h1 { font-size: clamp(48px, 5.4vw, 72px); }
