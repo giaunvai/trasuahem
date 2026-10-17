@@ -44,14 +44,6 @@ const safeAsset = (path) => {
   const value = String(path || '')
   return value.startsWith('/images/') ? escapeHtml(assetUrl(value)) : ''
 }
-const heroImageUrl = safeAsset(hero.image)
-if (heroImageUrl) {
-  const heroPreload = document.createElement('link')
-  heroPreload.rel = 'preload'
-  heroPreload.as = 'image'
-  heroPreload.href = heroImageUrl
-  document.head.append(heroPreload)
-}
 const popupAssetKey = activePopup?.image ? `./assets/popup_${String(activePopup.image).replace(/^popup-/i, '').replace(/\.[a-z0-9]+$/i, '')}.webp` : null
 const configuredPopupImage = popupAssetKey && popupAssetLoaders[popupAssetKey] ? await popupAssetLoaders[popupAssetKey]() : safeAsset(activePopup?.image)
 const icon = (item, size = 22) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${item.map(([tag, attributes]) => `<${tag} ${Object.entries(attributes).map(([key, value]) => `${key}="${value}"`).join(' ')} />`).join('')}</svg>`

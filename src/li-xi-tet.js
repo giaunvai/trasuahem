@@ -128,9 +128,17 @@ if (!config.active || prizes.length < 2) {
   historyButton.addEventListener('click', () => { renderHistory(); historyModal.hidden = false; historyCloseButton.focus() })
   historyCloseButton.addEventListener('click', () => { historyModal.hidden = true; historyButton.focus() })
   clearHistoryButton.addEventListener('click', () => { pinInput.value = ''; pinMessage.textContent = ''; pinModal.hidden = false; pinInput.focus() })
-  pinCancelButton.addEventListener('click', () => { pinModal.hidden = true; clearHistoryButton.focus() })
-  pinConfirmButton.addEventListener('click', () => {
-    if (pinInput.value !== '968976') { pinMessage.textContent = 'Mã PIN chưa đúng.'; pinInput.focus(); return }
+  const PIN_HASH = '9b832f04ef4539be9f240ecf63064344ad522833b43c9b2047af633f1b4f93a4'
+  const verifyPin = async (input) => {
+    try {
+      const buffer = await window.crypto.subtle.digest('SHA-256', new TextEncoder().encode(input.trim()))
+      return Array.from(new Uint8Array(buffer)).map((b) => b.toString(16).padStart(2, '0')).join('') === PIN_HASH
+    } catch { return false }
+  }
+  pinInput.addEventListener('keydown', (event) => { if (event.key === 'Enter') pinConfirmButton.click() })
+  pinConfirmButton.addEventListener('click', async () => {
+    const isCorrect = await verifyPin(pinInput.value)
+    if (!isCorrect) { pinMessage.textContent = 'Mã PIN chưa đúng.'; pinInput.focus(); return }
     localStorage.removeItem(HISTORY_KEY)
     localStorage.removeItem(NEXT_SPIN_KEY)
     pinModal.hidden = true
@@ -141,7 +149,8 @@ if (!config.active || prizes.length < 2) {
   })
   updateAvailability()
   historyButton.hidden = !readRecords().length
-  window.setInterval(updateAvailability, 1000)
+  const intervalId = window.setInterval(updateAvailability, 1000)
+  window.addEventListener('pagehide', () => window.clearInterval(intervalId))
 
   spinButton.addEventListener('click', () => {
     const name = nameInput.value.trim()
