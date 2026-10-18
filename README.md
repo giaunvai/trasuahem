@@ -290,14 +290,24 @@ Cả trang chủ (`index.html`) và trang promotion (`promotion.html`) đều d�
 2. Dán ID vào `analytics.metaPixelId`.
 3. Dùng Meta Pixel Helper hoặc Events Manager để kiểm tra event sau khi website cập nhật.
 
-Website tải thư viện GA4 và Meta Pixel khi trình duyệt rảnh để không làm chậm trang. Các event cơ bản vẫn được đưa vào `dataLayer` ngay khi xảy ra.
+### Cấu hình Microsoft Clarity (heatmap, miễn phí)
+
+1. Đăng nhập https://clarity.microsoft.com, tạo project cho `trasuahem.com`.
+2. Lấy Project ID (chuỗi chữ và số ngắn trong đoạn mã cài đặt).
+3. Dán vào `analytics.clarityProjectId` trong `site.json`.
+4. Sau 1–2 ngày, xem Heatmaps và Recordings để biết khách cuộn tới đâu, bấm vào đâu.
+
+Website tải thư viện GA4, Meta Pixel và Clarity khi trình duyệt rảnh để không làm chậm trang. Các event cơ bản vẫn được đưa vào `dataLayer` ngay khi xảy ra.
 
 Các event hiện có:
 
 - `landing_page_view`: user mở trang chủ, kèm URL và các tham số `utm_`.
-- `cta_click`: user click nút đặt món, nút app giao hàng, hotline hoặc liên kết khác trên trang chủ.
+- `cta_click`: user click link đặt món, app giao hàng, hotline hoặc trang khác. Có thêm `link_type` (`outbound`, `phone`, `internal`). Link cuộn trong trang như `#menu` không được tính.
+- `promotion_popup_view`: popup campaign trên trang chủ được hiển thị (sau 3 giây).
 - `promotion_directory_view`: user mở trang promotion.
 - `promotion_cta_click`: user click CTA trên trang promotion.
+
+Trang `lucky-wheel.html` và `li-xi-tet.html` chỉ dùng tại quầy nên đã đặt `noindex` và không nằm trong `sitemap.xml`.
 
 ### Gắn UTM cho quảng cáo
 

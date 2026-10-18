@@ -25,6 +25,11 @@ export const initAnalytics = (analytics = {}) => {
     window.fbq('track', 'PageView')
     scripts.push('https://connect.facebook.net/en_US/fbevents.js')
   }
+  // Microsoft Clarity: heatmap và session replay miễn phí, giúp thấy khách cuộn/bấm tới đâu
+  if (/^[a-z0-9]+$/i.test(analytics.clarityProjectId || '')) {
+    window.clarity = window.clarity || ((...args) => (window.clarity.q = window.clarity.q || []).push(args))
+    scripts.push(`https://www.clarity.ms/tag/${analytics.clarityProjectId}`)
+  }
   const loadScripts = () => scripts.forEach((src) => {
     if (document.querySelector(`script[src="${src}"]`)) return
     const script = document.createElement('script')
@@ -37,8 +42,18 @@ export const initAnalytics = (analytics = {}) => {
   else window.setTimeout(loadScripts, 2000)
 }
 
+const linkType = (url) => {
+  if (url.protocol === 'tel:') return 'phone'
+  if (url.origin !== window.location.origin) return 'outbound'
+  return 'internal'
+}
+
 export const trackLinkClicks = (eventName) => document.addEventListener('click', (event) => {
-  const link = event.target.closest('a')
+  const link = event.target.closest('a[href]')
   if (!link) return
-  track(eventName, { cta_text: link.textContent.trim(), cta_url: link.href })
+  // Anchor nội trang (#menu, #lien-he...) chỉ là điều hướng, không phải chuyển đổi
+  if (link.getAttribute('href').startsWith('#')) return
+  let url
+  try { url = new URL(link.href) } catch { return }
+  track(eventName, { cta_text: link.textContent.trim() || link.getAttribute('aria-label') || '', cta_url: link.href, link_type: linkType(url) })
 })

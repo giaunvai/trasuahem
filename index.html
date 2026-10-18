@@ -23,15 +23,43 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "CafeOrCoffeeShop",
-        "name": "Hẻm dessert",
-        "url": "https://www.trasuahem.com/",
-        "description": "Trà đậm, ít ngọt tại Tân An và Mỹ Tho.",
-        "servesCuisine": "Trà sữa, Trà trái cây",
-        "openingHours": "Mo-Su 08:30-22:00",
-        "branch": [
-          { "@type": "CafeOrCoffeeShop", "name": "Hẻm dessert Tân An", "telephone": "+84886261902", "address": { "@type": "PostalAddress", "streetAddress": "10 Nguyễn Thông, Phường 3", "addressLocality": "Tân An", "addressRegion": "Long An", "addressCountry": "VN" } },
-          { "@type": "CafeOrCoffeeShop", "name": "Hẻm dessert Mỹ Tho", "telephone": "+84706435968", "address": { "@type": "PostalAddress", "streetAddress": "926 Trần Hưng Đạo, Phường 5", "addressLocality": "Mỹ Tho", "addressRegion": "Tiền Giang", "addressCountry": "VN" } }
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://www.trasuahem.com/#organization",
+            "name": "Hẻm dessert",
+            "url": "https://www.trasuahem.com/",
+            "logo": "https://www.trasuahem.com/favicon.png",
+            "description": "Trà đậm, ít ngọt. Trà sữa, trà trái cây và bánh ngọt tại Long An và Mỹ Tho."
+          },
+          {
+            "@type": "CafeOrCoffeeShop",
+            "@id": "https://www.trasuahem.com/#tan-an",
+            "name": "Hẻm dessert Long An",
+            "parentOrganization": { "@id": "https://www.trasuahem.com/#organization" },
+            "url": "https://www.trasuahem.com/",
+            "image": "https://www.trasuahem.com/images/home/original-0.jpg",
+            "telephone": "+84886261902",
+            "servesCuisine": ["Trà sữa", "Trà trái cây", "Bánh ngọt"],
+            "hasMenu": "https://www.trasuahem.com/#menu",
+            "acceptsReservations": false,
+            "address": { "@type": "PostalAddress", "streetAddress": "10 Nguyễn Thông", "addressLocality": "Phường Long An", "addressRegion": "Tây Ninh", "addressCountry": "VN" },
+            "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "08:30", "closes": "22:00" }]
+          },
+          {
+            "@type": "CafeOrCoffeeShop",
+            "@id": "https://www.trasuahem.com/#my-tho",
+            "name": "Hẻm dessert Mỹ Tho",
+            "parentOrganization": { "@id": "https://www.trasuahem.com/#organization" },
+            "url": "https://www.trasuahem.com/",
+            "image": "https://www.trasuahem.com/images/home/original-0.jpg",
+            "telephone": "+84706435968",
+            "servesCuisine": ["Trà sữa", "Trà trái cây", "Bánh ngọt"],
+            "hasMenu": "https://www.trasuahem.com/#menu",
+            "acceptsReservations": false,
+            "address": { "@type": "PostalAddress", "streetAddress": "926 Trần Hưng Đạo", "addressLocality": "Phường Đạo Thạnh", "addressRegion": "Đồng Tháp", "addressCountry": "VN" },
+            "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "08:30", "closes": "22:00" }]
+          }
         ]
       }
     </script>

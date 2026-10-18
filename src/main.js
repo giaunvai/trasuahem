@@ -1,4 +1,5 @@
 import './style.css'
+import './interactive.css'
 import './fonts.js'
 import { ArrowUp, Gift, Menu, Mouse, X } from 'lucide'
 import hemLogo from './assets/branding/hem-logo.png'
@@ -9,6 +10,10 @@ import menuImage from './assets/menu/menu.webp'
 import { ASSET_PATHS } from './assetsConfig.js'
 import { isCampaignPopupActive } from './countdown.js'
 import { initAnalytics, track, trackLinkClicks } from './analytics.js'
+import { renderDigitalMenu } from './modules/digitalMenu.js'
+import { renderFreeshipCalculator } from './modules/freeshipCalculator.js'
+import { renderTeaQuiz } from './modules/teaQuiz.js'
+import { renderQuickActions } from './modules/quickActions.js'
 
 const menuDownloadUrl = ASSET_PATHS.menuDownload
 
@@ -22,13 +27,9 @@ const content = await fetch(`${baseUrl}content/site.json`).then((response) => {
   if (!response.ok) throw new Error('Không thể tải nội dung website.')
   return response.json()
 }).catch(() => fallbackContent)
-const { orderUrl, hero, member, about, hours, menu, foodApps, locations, popup, analytics = {} } = content
-const popupEntries = (popup.campaigns || [{ campaign: popup.campaign || 'tet', image: popup.image, link: popup.link, alt: popup.alt }]).filter((entry) => /^[a-z0-9-]+$/i.test(entry.campaign || ''))
-const popupCandidates = await Promise.all(popupEntries.map(async (entry) => {
-  const campaign = await fetch(`${baseUrl}content/${entry.campaign}.json`).then((response) => response.ok ? response.json() : null).catch(() => null)
-  return campaign ? { entry, popupActive: isCampaignPopupActive(campaign) } : null
-}))
-const activePopup = popupCandidates.find((candidate) => candidate?.popupActive)?.entry
+const { orderUrl, hero, member, about, hours, menu, foodApps, locations, popup = {}, analytics = {} } = content
+// Popup hiện sau khi trang đã hiển thị để không che nội dung chính ngay lúc khách vừa vào
+const POPUP_DELAY_MS = 3000
 const escapeHtml = (value = '') => String(value).replace(/[&<>"']/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character])
 const text = (value = '') => escapeHtml(value)
 const withBreaks = (value = '') => text(value).replaceAll('\n', '<br>')
@@ -44,13 +45,19 @@ const safeAsset = (path) => {
   const value = String(path || '')
   return value.startsWith('/images/') ? escapeHtml(assetUrl(value)) : ''
 }
-const popupAssetKey = activePopup?.image ? `./assets/popup_${String(activePopup.image).replace(/^popup-/i, '').replace(/\.[a-z0-9]+$/i, '')}.webp` : null
-const configuredPopupImage = popupAssetKey && popupAssetLoaders[popupAssetKey] ? await popupAssetLoaders[popupAssetKey]() : safeAsset(activePopup?.image)
 const icon = (item, size = 22) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${item.map(([tag, attributes]) => `<${tag} ${Object.entries(attributes).map(([key, value]) => `${key}="${value}"`).join(' ')} />`).join('')}</svg>`
-const navItems = [['Trang chủ', '#trang-chu'], ['Về chúng tôi', '#ve-chung-toi'], ['Giờ làm việc', '#gio-lam-viec'], ['Menu', '#menu'], ['Đặt app giao hàng', '#food-app'], ['Liên hệ', '#lien-he']]
+const navItems = [
+  ['Trang chủ', '#trang-chu'],
+  ['Menu số', '#menu'],
+  ['Tính freeship', '#tra-cuu-ship'],
+  ['Tìm gu trà', '#gu-tra-quiz'],
+  ['Về chúng tôi', '#ve-chung-toi'],
+  ['Giờ làm việc', '#gio-lam-viec'],
+  ['App giao hàng', '#food-app'],
+  ['Chi nhánh', '#lien-he'],
+]
 const timeColumn = (items = []) => items.map((item) => { const [hour, minute] = String(item.time || '').split(':'); return `<b>${text(item.label)}</b><strong>${text(hour)} <i>:</i> ${text(minute)}</strong>` }).join('')
 const orderLink = safeUrl(orderUrl)
-const campaignPopup = popup.enabled && activePopup?.image && activePopup?.link
 
 document.querySelector('#app').innerHTML = `
   <header class="site-header">
@@ -61,18 +68,61 @@ document.querySelector('#app').innerHTML = `
   </header>
   <nav id="mobile-navigation" class="mobile-nav" aria-label="Điều hướng trên điện thoại" hidden>${navItems.map(([label, target]) => `<a href="${target}">${label}</a>`).join('')}<a href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt món</a></nav>
   <main>
-    <section id="trang-chu" class="hero" style="background-image:linear-gradient(90deg,#0008,#fff1),url('${safeAsset(hero.image)}')"><div class="hero-content"><h1>${withBreaks(hero.title)}</h1><p>${text(hero.description)}</p><div class="hero-actions"><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a><a class="order-button coral" href="#food-app">${text(hero.appLabel)}</a></div><div class="member-box"><img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert"><div><b>${text(member.title)}</b><p>${withBreaks(member.description)}</p></div></div></div><button class="scroll-cue" type="button" aria-label="Cuộn xuống phần giới thiệu" title="Cuộn xuống">${icon(Mouse, 32)}</button></section>
+    <section id="trang-chu" class="hero" style="background-image:linear-gradient(90deg,#0008,#fff1),url('${safeAsset(hero.image)}')"><div class="hero-content"><h1>${withBreaks(hero.title)}</h1><p>${text(hero.description)}</p><div class="hero-actions"><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a><a class="order-button coral" href="#food-app">${text(hero.appLabel)}</a></div><div class="member-box"><img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert"><div><b>${text(member.title)}</b><p>${withBreaks(member.description)}</p></div></div></div><button class="scroll-cue" type="button" aria-label="Cuộn xuống phần menu" title="Cuộn xuống">${icon(Mouse, 32)}</button></section>
+    
+    <section id="menu" class="digital-menu-wrapper">
+      <div class="menu-intro-bar">
+        <h2>${text(menu.title || 'MENU HẺM DESSERT')}</h2>
+        <p>${withBreaks(menu.intro || 'Một gu trà đậm, một vị trà riêng. Khám phá các món trà sữa kem muối, trà tươi thanh mát và topping nấu mới mỗi ngày.')}</p>
+        <button type="button" class="menu-view-photo-btn menu-image-trigger" title="Xem ảnh menu chụp phóng to">
+          <span>🖼️</span> Xem bảng ảnh menu gốc
+        </button>
+      </div>
+      <div id="digital-menu-mount"></div>
+    </section>
+
+    <section id="tra-cuu-ship" class="freeship-section">
+      <div id="freeship-calc-mount"></div>
+    </section>
+
+    <section id="gu-tra-quiz" class="quiz-section">
+      <div id="tea-quiz-mount"></div>
+    </section>
+
     <section id="ve-chung-toi" class="about panel"><div class="about-logo"><img src="${hemLogo}" alt="Hẻm dessert" loading="lazy" decoding="async"></div><div class="about-copy"><span class="accent-line"></span><p class="eyebrow">${text(about.eyebrow)}</p><h2>${withBreaks(about.title)}</h2>${(about.paragraphs || []).map((paragraph) => `<p>${text(paragraph)}</p>`).join('')}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(about.buttonLabel)}</a></div><div class="about-dots" aria-hidden="true"></div></section>
     <section id="gio-lam-viec" class="hours panel" style="background-image:linear-gradient(90deg,rgba(0,0,0,.44),rgba(0,0,0,.08)),url('${escapeHtml(hours.image ? assetUrl(hours.image) : hoursBackground)}')"><div class="hours-copy"><span class="accent-line"></span><h2>${text(hours.title)}</h2><p>${text(hours.description)}</p><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hours.buttonLabel)}</a></div><div class="time-card"><div class="time-group">${timeColumn((hours.items || []).slice(0, 2))}</div><div class="time-group">${timeColumn((hours.items || []).slice(2))}</div></div></section>
-    <section id="menu" class="menu-section"><div class="menu-copy"><span class="accent-line"></span><h2>${text(menu.title)}</h2><p>${withBreaks(menu.intro)}</p>${menu.deliveryTiers?.length ? `<p>${withBreaks(menu.policy)}</p><ul class="delivery-tiers">${menu.deliveryTiers.map((tier) => `<li>${text(tier)}</li>`).join('')}</ul>` : `<p>${withBreaks(menu.policy)}</p>`}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(menu.buttonLabel)}</a></div><button class="menu-image-trigger" type="button" aria-label="Xem menu phóng to" title="Xem menu phóng to"><img class="menu-image" src="${menuImage}" alt="${text(menu.imageAlt)}" loading="lazy" decoding="async"></button></section>
     <section id="food-app" class="apps panel"><span class="accent-line"></span><p class="eyebrow">${text(foodApps.eyebrow)}</p><h2>${text(foodApps.title)}</h2><p>${withBreaks(foodApps.description)}</p><div class="app-grid">${(foodApps.branches || []).map((branch) => `<article><b>${text(branch.name)}</b><div><a class="vill" href="${safeUrl(branch.vill)}" target="_blank" rel="noopener noreferrer">VILL</a><a class="shopee" href="${safeUrl(branch.shopee)}" target="_blank" rel="noopener noreferrer">Shopee<br>Food</a><a class="grab" href="${safeUrl(branch.grab)}" target="_blank" rel="noopener noreferrer">Grab<br>Food</a></div></article>`).join('')}</div></section>
     <section id="lien-he" class="contact">${(locations || []).filter((location) => location.visible !== false).map((location) => `<div><h2>${text(location.name)}</h2><p>${location.oldAddress ? `🏠 ${text(location.oldAddress)} (cũ)<br>` : ''}🏠 ${text(location.address)} (mới)<br>📱 Hotline Zalo: <a href="${safeUrl(`tel:${location.phoneLink}`)}">${text(location.phone)}</a></p>${location.tagline ? `<h3>${text(location.tagline)}</h3>` : ''}</div>`).join('')}</section>
   </main>
+  <div id="quick-actions-mount"></div>
   <a class="promotion-cue" href="${baseUrl}promotion.html" aria-label="Xem các chương trình ưu đãi" title="Xem ưu đãi">${icon(Gift, 23)}</a>
   <button class="back-top" type="button" aria-label="Lên đầu trang" title="Lên đầu trang">${icon(ArrowUp, 20)}</button>
   <aside class="menu-lightbox" role="dialog" aria-modal="true" aria-labelledby="menu-lightbox-title" hidden><div class="menu-lightbox-panel"><div class="menu-lightbox-actions"><h2 id="menu-lightbox-title">${text(menu.title)}</h2><a class="menu-download" href="${menuDownloadUrl}" download="menu-hem-dessert.jpg" aria-label="Tải menu" title="Tải menu">Tải menu</a><button class="menu-lightbox-close" type="button" aria-label="Đóng ảnh menu" title="Đóng">×</button></div><img src="${menuImage}" alt="${text(menu.imageAlt)}"></div></aside>
-  ${campaignPopup ? `<aside class="promotion-popup" role="dialog" aria-modal="true" aria-label="Ưu đãi từ Hẻm dessert"><div class="promotion-popup-card"><button class="popup-close" type="button" aria-label="Đóng ưu đãi">×</button><a class="promotion-link" href="${safeUrl(activePopup.link)}" target="_blank" rel="noopener noreferrer"><img src="${configuredPopupImage}" alt="${text(activePopup.alt || 'Ưu đãi từ Hẻm dessert')}"></a></div></aside>` : ''}
 `
+
+const digitalMenuMount = document.querySelector('#digital-menu-mount')
+if (digitalMenuMount) {
+  renderDigitalMenu(digitalMenuMount, orderLink)
+}
+
+const freeshipMount = document.querySelector('#freeship-calc-mount')
+if (freeshipMount) {
+  renderFreeshipCalculator(freeshipMount, locations, orderLink)
+}
+
+const quizMount = document.querySelector('#tea-quiz-mount')
+if (quizMount) {
+  renderTeaQuiz(quizMount, orderLink)
+}
+
+const quickActionsMount = document.querySelector('#quick-actions-mount')
+if (quickActionsMount) {
+  renderQuickActions(quickActionsMount, {
+    orderUrl: orderLink,
+    promotionUrl: `${baseUrl}promotion.html`,
+    locations,
+  })
+}
 
 const toggle = document.querySelector('.menu-toggle')
 const mobileNav = document.querySelector('.mobile-nav')
@@ -86,10 +136,7 @@ const updateScrollControls = () => backTop.classList.toggle('is-visible', window
 window.addEventListener('scroll', updateScrollControls, { passive: true })
 updateScrollControls()
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
-scrollCue.addEventListener('click', () => document.querySelector('#ve-chung-toi').scrollIntoView({ behavior: 'smooth' }))
-const promotionPopup = document.querySelector('.promotion-popup')
-const popupCloseButton = promotionPopup?.querySelector('.popup-close')
-const popupPreviousFocus = document.activeElement
+scrollCue.addEventListener('click', () => document.querySelector('#menu').scrollIntoView({ behavior: 'smooth' }))
 const trapDialogFocus = (dialog, event) => {
   if (event.key !== 'Tab') return
   const focusable = [...dialog.querySelectorAll('a[href], button:not([disabled])')]
@@ -99,12 +146,45 @@ const trapDialogFocus = (dialog, event) => {
   if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus() }
   else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
 }
-const closePromotionPopup = () => { promotionPopup?.remove(); document.body.classList.remove('popup-open'); popupPreviousFocus?.focus?.() }
-promotionPopup?.addEventListener('click', (event) => { if (event.target === promotionPopup) closePromotionPopup() })
-popupCloseButton?.addEventListener('click', closePromotionPopup)
+let promotionPopup = null
+let popupPreviousFocus = null
+const closePromotionPopup = () => {
+  if (!promotionPopup) return
+  promotionPopup.remove()
+  promotionPopup = null
+  document.body.classList.remove('popup-open')
+  popupPreviousFocus?.focus?.()
+}
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') closePromotionPopup() })
-promotionPopup?.addEventListener('keydown', (event) => trapDialogFocus(promotionPopup, event))
-if (promotionPopup) { document.body.classList.add('popup-open'); popupCloseButton?.focus() }
+const findActivePopup = async () => {
+  if (!popup.enabled) return null
+  const popupEntries = (popup.campaigns || [{ campaign: popup.campaign || 'tet', image: popup.image, link: popup.link, alt: popup.alt }]).filter((entry) => /^[a-z0-9-]+$/i.test(entry.campaign || ''))
+  const candidates = await Promise.all(popupEntries.map(async (entry) => {
+    const campaign = await fetch(`${baseUrl}content/${entry.campaign}.json`).then((response) => response.ok ? response.json() : null).catch(() => null)
+    return campaign ? { entry, popupActive: isCampaignPopupActive(campaign) } : null
+  }))
+  return candidates.find((candidate) => candidate?.popupActive)?.entry || null
+}
+const showCampaignPopup = async () => {
+  const activePopup = await findActivePopup()
+  if (!activePopup?.image || !activePopup?.link) return
+  const popupAssetKey = `./assets/popup_${String(activePopup.image).replace(/^popup-/i, '').replace(/\.[a-z0-9]+$/i, '')}.webp`
+  const popupImage = popupAssetLoaders[popupAssetKey] ? await popupAssetLoaders[popupAssetKey]() : safeAsset(activePopup.image)
+  if (!popupImage) return
+  await new Promise((resolve) => window.setTimeout(resolve, POPUP_DELAY_MS))
+  // Không chen popup khi khách đang xem menu phóng to hoặc mở menu điều hướng
+  if (document.body.classList.contains('menu-lightbox-open') || !mobileNav.hidden) return
+  document.querySelector('#app').insertAdjacentHTML('beforeend', `<aside class="promotion-popup" role="dialog" aria-modal="true" aria-label="Ưu đãi từ Hẻm dessert"><div class="promotion-popup-card"><button class="popup-close" type="button" aria-label="Đóng ưu đãi">×</button><a class="promotion-link" href="${safeUrl(activePopup.link)}" target="_blank" rel="noopener noreferrer"><img src="${escapeHtml(popupImage)}" alt="${text(activePopup.alt || 'Ưu đãi từ Hẻm dessert')}"></a></div></aside>`)
+  promotionPopup = document.querySelector('.promotion-popup')
+  popupPreviousFocus = document.activeElement
+  const popupCloseButton = promotionPopup.querySelector('.popup-close')
+  promotionPopup.addEventListener('click', (event) => { if (event.target === promotionPopup) closePromotionPopup() })
+  popupCloseButton.addEventListener('click', closePromotionPopup)
+  promotionPopup.addEventListener('keydown', (event) => trapDialogFocus(promotionPopup, event))
+  document.body.classList.add('popup-open')
+  popupCloseButton.focus()
+  track('promotion_popup_view', { campaign: activePopup.campaign })
+}
 
 const menuLightbox = document.querySelector('.menu-lightbox')
 const menuImageTrigger = document.querySelector('.menu-image-trigger')
@@ -133,3 +213,4 @@ menuLightbox?.addEventListener('keydown', (event) => trapDialogFocus(menuLightbo
 initAnalytics(analytics)
 track('landing_page_view', { page_location: window.location.href })
 trackLinkClicks('cta_click')
+showCampaignPopup()
