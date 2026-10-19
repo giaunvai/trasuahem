@@ -50,7 +50,7 @@ const navItems = [
   ['Về chúng tôi', '#ve-chung-toi'],
   ['Giờ làm việc', '#gio-lam-viec'],
   ['App giao hàng', '#food-app'],
-  ['Tuyển dụng', `${baseUrl}tuyen-dung.html`],
+  ['Tuyển dụng', `${baseUrl}job.html`],
 ]
 const timeColumn = (items = []) => items.map((item) => { const [hour, minute] = String(item.time || '').split(':'); return `<b>${text(item.label)}</b><strong>${text(hour)} <i>:</i> ${text(minute)}</strong>` }).join('')
 const orderLink = safeUrl(orderUrl)

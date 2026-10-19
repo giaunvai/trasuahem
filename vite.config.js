@@ -16,7 +16,7 @@ export default defineConfig({
         promotion: resolve(import.meta.dirname, 'promotion.html'),
         luckyWheel: resolve(import.meta.dirname, 'lucky-wheel.html'),
         liXiTet: resolve(import.meta.dirname, 'li-xi-tet.html'),
-        recruitment: resolve(import.meta.dirname, 'tuyen-dung.html'),
+        job: resolve(import.meta.dirname, 'job.html'),
       },
     },
   },

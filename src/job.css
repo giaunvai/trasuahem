@@ -1,0 +1,363 @@
+/* ========================================================
+   JOB / RECRUITMENT PAGE STYLES - HẺM DESSERT
+   ======================================================== */
+
+.job-page {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background-color: #f6f8f8;
+  color: #1a2a2e;
+  margin: 0;
+  min-height: 100vh;
+}
+
+.job-main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 100px 20px 70px;
+}
+
+/* Hero Section */
+.job-hero {
+  text-align: center;
+  margin-bottom: 36px;
+  padding: 10px;
+}
+
+.job-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(247, 197, 29, 0.2);
+  color: #8c6900;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-radius: 30px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(247, 197, 29, 0.45);
+}
+
+.job-hero h1 {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: clamp(32px, 5.5vw, 46px);
+  font-weight: 900;
+  color: #0d1e22;
+  margin: 0 0 14px;
+  line-height: 1.22;
+}
+
+.job-hero p {
+  font-size: clamp(15px, 2vw, 17px);
+  color: #4a5c60;
+  max-width: 660px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Cards Stack */
+.job-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.job-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 36px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5ecee;
+}
+
+.job-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f2f5f6;
+}
+
+.job-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #fff8e1;
+  color: #b8860b;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.job-card-icon.coral {
+  background: #ffebe9;
+  color: #e04943;
+}
+
+.job-card-icon.teal {
+  background: #e6f4f6;
+  color: #196f7e;
+}
+
+.job-card-header h2 {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 900;
+  color: #102228;
+  margin: 0;
+}
+
+.job-card-header p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #63777a;
+}
+
+/* Salary Banner */
+.salary-banner {
+  background: linear-gradient(135deg, #fffbeb, #fff3cd);
+  border: 1px solid #ffeeba;
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin-bottom: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.salary-main {
+  font-size: 13px;
+  color: #725300;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.salary-main strong {
+  display: block;
+  font-size: clamp(30px, 4.5vw, 40px);
+  color: #0d1e22;
+  font-weight: 900;
+  line-height: 1.1;
+  margin-top: 4px;
+}
+
+.salary-main strong span {
+  font-size: 16px;
+  color: #555555;
+  font-weight: 700;
+}
+
+.salary-trial {
+  padding: 10px 18px;
+  background: #ffffff;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #444444;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.salary-trial b {
+  color: #e04943;
+  font-size: 16px;
+  font-weight: 900;
+}
+
+/* Shifts Grid */
+.shifts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.shift-pill {
+  background: #f8fafb;
+  border: 1px solid #e2e8ea;
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.shift-pill:hover {
+  border-color: #f7c51d;
+  background: #fffdf6;
+}
+
+.shift-name {
+  font-size: 12px;
+  font-weight: 900;
+  color: #7a8b8e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.shift-time {
+  font-size: 18px;
+  font-weight: 900;
+  color: #102228;
+}
+
+.shifts-note {
+  font-size: 14px;
+  font-style: italic;
+  color: #5d6e71;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Benefits list */
+.benefits-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.benefits-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  color: #27363a;
+  line-height: 1.55;
+}
+
+.benefits-list li svg {
+  color: #10b981;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Contact Callout Card */
+.contact-callout {
+  background: linear-gradient(135deg, #102228, #18333b);
+  border-radius: 20px;
+  padding: 34px 36px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  box-shadow: 0 16px 42px rgba(16, 34, 40, 0.25);
+}
+
+.contact-callout-header h2 {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 24px;
+  color: #f7c51d;
+  margin: 0 0 8px;
+  font-weight: 900;
+}
+
+.contact-callout-header p {
+  font-size: 15px;
+  color: #cfd9db;
+  margin: 0;
+  line-height: 1.55;
+}
+
+.contact-manager-box {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 16px 20px;
+  border-radius: 14px;
+}
+
+.contact-manager-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #dbe4e6;
+}
+
+.contact-manager-box .manager-name {
+  font-size: 20px;
+  font-weight: 900;
+  color: #f7c51d;
+  margin: 4px 0 2px;
+}
+
+.contact-buttons-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.btn-contact-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 22px;
+  background: #f7c51d;
+  color: #102228;
+  font-size: 15px;
+  font-weight: 900;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(247, 197, 29, 0.4);
+  transition: all 0.2s;
+}
+
+.btn-contact-call:hover {
+  background: #f5bc0a;
+  transform: translateY(-2px);
+}
+
+.btn-contact-zalo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 22px;
+  background: #0088ff;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900;
+  text-decoration: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 136, 255, 0.35);
+  transition: all 0.2s;
+}
+
+.btn-contact-zalo:hover {
+  background: #0077e6;
+  transform: translateY(-2px);
+}
+
+/* Responsive queries */
+@media (max-width: 760px) {
+  .job-main {
+    padding: 85px 16px 50px;
+  }
+
+  .job-card {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .shifts-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .contact-callout {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .contact-buttons-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
