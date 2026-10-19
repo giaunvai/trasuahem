@@ -13,8 +13,11 @@ import { initAnalytics, track, trackLinkClicks } from './analytics.js'
 import { renderFreeshipCalculator } from './modules/freeshipCalculator.js'
 import { renderQuickActions } from './modules/quickActions.js'
 import './heroCup.css'
-import cupBoba from './assets/tra_sua_hem_noPhone.webp'
-import cupSaltCream from './assets/Tra_Sua_Kem_Muoi.webp'
+import cupTraSuaHem from './assets/tra_sua_hem_noPhone.webp'
+import cupKemMuoi from './assets/Tra_Sua_Kem_Muoi.webp'
+import cupDuaLuoi from './assets/Tra_Dua_Luoi_Dua_Gion.webp'
+import cupChanhNho from './assets/Tra_Chanh_Nho.webp'
+import cupLaiSuiBot from './assets/Tra_Lai_Sui_Bot.webp'
 import { initHeroCup } from './modules/heroCup.js'
 
 const menuDownloadUrl = ASSET_PATHS.menuDownload
@@ -96,31 +99,32 @@ document.querySelector('#app').innerHTML = `
           </div>
         </div>
 
-        <div class="hero-stage" id="hero-stage" aria-label="Hình ảnh ly trà sữa Hẻm dessert">
+        <div class="hero-stage" id="hero-stage" aria-label="Bộ sưu tập thức uống Hẻm dessert">
           <div class="hero-glow-aura" aria-hidden="true"></div>
           <div class="hero-ring hero-ring-outer" aria-hidden="true"></div>
           <div class="hero-ring hero-ring-inner" aria-hidden="true"></div>
 
+          <button class="cup-nav-btn cup-nav-prev" type="button" aria-label="Món trước đó" title="Món trước đó">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+
           <div class="hero-cup-wrapper">
             <div class="hero-cup-3d" id="hero-cup-3d">
-              <img id="hero-cup-img" class="hero-cup-img" src="${cupBoba}" alt="Ly Trà Sữa Hẻm Trân Châu Hoàng Kim">
+              <img id="hero-cup-img" class="hero-cup-img" src="${cupTraSuaHem}" alt="Ly Trà Sữa Hẻm">
             </div>
           </div>
 
-          <div class="hero-particle particle-boba-1" aria-hidden="true"></div>
-          <div class="hero-particle particle-boba-2" aria-hidden="true"></div>
-          <div class="hero-particle particle-boba-3" aria-hidden="true"></div>
-          <div class="hero-particle particle-leaf-1" aria-hidden="true">🍃</div>
-          <div class="hero-particle particle-leaf-2" aria-hidden="true">🍃</div>
+          <button class="cup-nav-btn cup-nav-next" type="button" aria-label="Món tiếp theo" title="Món tiếp theo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
 
           <div class="hero-drink-card">
-            <div class="drink-card-badge">✨ BEST SELLER</div>
-            <h3 class="drink-card-name" id="hero-drink-title">Trà Sữa Hẻm Trân Châu</h3>
-            <p class="drink-card-tag">Đậm vị trà truyền thống, trân châu hoàng kim dai dẻo</p>
-            <div class="drink-card-actions">
-              <button class="drink-switch-btn active" data-drink="boba" type="button">Trân Châu</button>
-              <button class="drink-switch-btn" data-drink="saltcream" type="button">Kem Muối</button>
+            <div class="drink-card-header">
+              <span class="drink-card-badge">✨ MÓN NỔI BẬT</span>
+              <span class="drink-card-counter" id="hero-drink-counter">1 / 5</span>
             </div>
+            <h3 class="drink-card-name" id="hero-drink-title">Trà Sữa Hẻm</h3>
+            <div class="drink-dots-row" id="hero-drink-dots" role="tablist" aria-label="Chọn thức uống"></div>
           </div>
         </div>
       </div>
@@ -158,8 +162,43 @@ if (quickActionsMount) {
 }
 
 initHeroCup({
-  cupBoba,
-  cupSaltCream,
+  drinks: [
+    {
+      id: 'tra-sua-hem',
+      name: 'Trà Sữa Hẻm',
+      img: cupTraSuaHem,
+      alt: 'Ly Trà Sữa Hẻm',
+      glow: 'rgba(247, 197, 29, 0.38)',
+    },
+    {
+      id: 'tra-sua-hem-kem-muoi',
+      name: 'Trà Sữa Hẻm Kem Muối',
+      img: cupKemMuoi,
+      alt: 'Ly Trà Sữa Hẻm Kem Muối',
+      glow: 'rgba(250, 180, 80, 0.38)',
+    },
+    {
+      id: 'tra-dua-luoi-dua-gion',
+      name: 'Trà Dưa Lưới Dừa Giòn',
+      img: cupDuaLuoi,
+      alt: 'Ly Trà Dưa Lưới Dừa Giòn',
+      glow: 'rgba(74, 222, 128, 0.36)',
+    },
+    {
+      id: 'tra-chanh-nho',
+      name: 'Trà Chanh Nho',
+      img: cupChanhNho,
+      alt: 'Ly Trà Chanh Nho',
+      glow: 'rgba(225, 29, 72, 0.36)',
+    },
+    {
+      id: 'tra-lai-sui-bot',
+      name: 'Trà Lài Sủi Bọt',
+      img: cupLaiSuiBot,
+      alt: 'Ly Trà Lài Sủi Bọt',
+      glow: 'rgba(251, 191, 36, 0.38)',
+    },
+  ],
 })
 
 const siteHeader = document.querySelector('.site-header')

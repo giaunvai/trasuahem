@@ -198,18 +198,19 @@
 }
 
 /* ========================================================
-   RIGHT COLUMN: HERO CUP STAGE
+   RIGHT COLUMN: HERO CUP STAGE & CAROUSEL
    ======================================================== */
 
 .hero-stage {
   position: relative;
   width: 100%;
-  min-height: 540px;
+  min-height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 1200px;
   transform-style: preserve-3d;
+  user-select: none;
 }
 
 /* Ambient Glow behind cup */
@@ -218,10 +219,11 @@
   width: 440px;
   height: 440px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(247, 197, 29, 0.38) 0%, rgba(250, 81, 72, 0.18) 45%, rgba(0, 0, 0, 0) 70%);
-  filter: blur(36px);
+  background: radial-gradient(circle, rgba(247, 197, 29, 0.38) 0%, rgba(250, 81, 72, 0.16) 45%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(40px);
   pointer-events: none;
   z-index: 1;
+  transition: background 0.6s ease;
   animation: glow-breathe 6s ease-in-out infinite alternate;
 }
 
@@ -279,7 +281,7 @@
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-16px) rotate(1deg);
+    transform: translateY(-14px) rotate(1deg);
   }
 }
 
@@ -289,114 +291,133 @@
   height: auto;
   max-height: 530px;
   object-fit: contain;
-  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.7)) drop-shadow(0 6px 18px rgba(247, 197, 29, 0.3));
-  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.72)) drop-shadow(0 6px 18px rgba(247, 197, 29, 0.3));
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-.hero-cup-img.is-switching {
-  transform: scale(0.9) rotateY(20deg);
-  opacity: 0.2;
+/* Slide Transition Keyframes */
+.hero-cup-img.slide-out-left {
+  transform: translateX(-50px) scale(0.9) rotateY(18deg);
+  opacity: 0;
 }
 
-/* Floating Particles: Pearls (Trân Châu) & Tea Leaves */
-.hero-particle {
+.hero-cup-img.slide-out-right {
+  transform: translateX(50px) scale(0.9) rotateY(-18deg);
+  opacity: 0;
+}
+
+.hero-cup-img.slide-in-left {
+  animation: cup-slide-in-left 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.hero-cup-img.slide-in-right {
+  animation: cup-slide-in-right 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cup-slide-in-left {
+  from {
+    transform: translateX(-50px) scale(0.9) rotateY(18deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes cup-slide-in-right {
+  from {
+    transform: translateX(50px) scale(0.9) rotateY(-18deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* ========================================================
+   NAVIGATION ARROWS (Slide Previous / Next)
+   Auto-hidden when not hovering on desktop
+   ======================================================== */
+
+.cup-nav-btn {
   position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(0.92);
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(16, 34, 40, 0.82);
+  border: 1.5px solid rgba(247, 197, 29, 0.4);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1),
+              transform 0.25s ease,
+              background 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease;
+  opacity: 0;
   pointer-events: none;
-  z-index: 4;
 }
 
-.particle-boba-1 {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #924b17 0%, #2b1304 80%, #150901 100%);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6), inset -2px -2px 4px rgba(0, 0, 0, 0.8), inset 2px 2px 4px rgba(255, 200, 100, 0.6);
-  top: 14%;
-  left: 8%;
-  animation: particle-bob-1 4.5s ease-in-out infinite;
+.cup-nav-prev {
+  left: 12px;
 }
 
-.particle-boba-2 {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #b8621e 0%, #3a1a05 80%, #190a02 100%);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 2px 2px 3px rgba(255, 210, 120, 0.7);
-  bottom: 22%;
-  right: 6%;
-  animation: particle-bob-2 5.2s ease-in-out infinite;
+.cup-nav-next {
+  right: 12px;
 }
 
-.particle-boba-3 {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #924b17 0%, #2b1304 100%);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-  top: 68%;
-  left: 12%;
-  animation: particle-bob-3 3.8s ease-in-out infinite;
+/* Reveal arrows smoothly when hovering over hero section */
+.hero:hover .cup-nav-btn,
+.hero-stage:hover .cup-nav-btn,
+.hero-stage:focus-within .cup-nav-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) scale(1);
 }
 
-.particle-leaf-1 {
-  font-size: 26px;
-  top: 16%;
-  right: 14%;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
-  animation: leaf-sway 6s ease-in-out infinite;
+.cup-nav-btn:hover {
+  background: #f7c51d;
+  color: #102228;
+  border-color: #f7c51d;
+  transform: translateY(-50%) scale(1.12);
+  box-shadow: 0 10px 28px rgba(247, 197, 29, 0.55);
 }
 
-.particle-leaf-2 {
-  font-size: 20px;
-  bottom: 14%;
-  left: 10%;
-  opacity: 0.85;
-  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
-  animation: leaf-sway-rev 7s ease-in-out infinite;
+.cup-nav-btn:active {
+  transform: translateY(-50%) scale(0.96);
 }
 
-@keyframes particle-bob-1 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-14px) rotate(6deg); }
-}
+/* ========================================================
+   FLOATING DRINK CARD & DOT INDICATORS (No Description)
+   ======================================================== */
 
-@keyframes particle-bob-2 {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(16px) rotate(-8deg); }
-}
-
-@keyframes particle-bob-3 {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-10px) scale(1.1); }
-}
-
-@keyframes leaf-sway {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-12px) rotate(14deg); }
-}
-
-@keyframes leaf-sway-rev {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(10px) rotate(-12deg); }
-}
-
-/* Floating Drink Card Switcher */
 .hero-drink-card {
   position: absolute;
-  bottom: 15px;
-  right: 10px;
+  bottom: 12px;
   z-index: 5;
   background: rgba(16, 34, 40, 0.88);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(247, 197, 29, 0.35);
-  border-radius: 16px;
-  padding: 14px 18px;
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
-  max-width: 270px;
-  animation: card-float 4.8s ease-in-out infinite;
+  border-radius: 18px;
+  padding: 14px 22px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+  min-width: 250px;
+  max-width: 320px;
+  text-align: center;
+  animation: card-float 5s ease-in-out infinite;
 }
 
 @keyframes card-float {
@@ -404,57 +425,66 @@
   50% { transform: translateY(-6px); }
 }
 
+.drink-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
 .drink-card-badge {
   font-size: 11px;
   font-weight: 900;
   color: #f7c51d;
-  letter-spacing: 0.5px;
-  margin-bottom: 4px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+}
+
+.drink-card-counter {
+  font-size: 11px;
+  font-weight: 700;
+  color: #8da4ac;
 }
 
 .drink-card-name {
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 900;
   color: #ffffff;
-  margin: 0 0 2px;
-}
-
-.drink-card-tag {
-  font-size: 12px;
-  color: #a9bac0;
   margin: 0 0 10px;
-  line-height: 1.4;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
 }
 
-.drink-card-actions {
+/* Carousel Dots */
+.drink-dots-row {
   display: flex;
-  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
-.drink-switch-btn {
-  flex: 1;
-  padding: 7px 10px;
-  font-size: 12px;
-  font-weight: 800;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
-  color: #d5e0e2;
+.cup-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.28);
+  border: none;
+  padding: 0;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-.drink-switch-btn:hover {
-  background: rgba(255, 255, 255, 0.16);
-  color: #ffffff;
+.cup-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.2);
 }
 
-.drink-switch-btn.active {
+.cup-dot.active {
+  width: 26px;
   background: #f7c51d;
-  color: #102228;
-  border-color: #f7c51d;
-  box-shadow: 0 2px 8px rgba(247, 197, 29, 0.35);
+  box-shadow: 0 0 10px rgba(247, 197, 29, 0.65);
 }
 
 /* ========================================================
@@ -473,7 +503,7 @@
 }
 
 /* ========================================================
-   RESPONSIVE QUERIES FOR HERO CUP EXPERIENCE
+   RESPONSIVE QUERIES
    ======================================================== */
 
 @media (max-width: 990px) {
@@ -517,10 +547,25 @@
   .hero-drink-card {
     position: relative;
     bottom: auto;
-    right: auto;
-    margin: 20px auto 0;
-    max-width: 320px;
+    margin: 18px auto 0;
+    max-width: 300px;
     width: 90%;
+  }
+
+  /* On touch/tablets without precise mouse hover, keep arrows visible */
+  .cup-nav-btn {
+    opacity: 0.85;
+    pointer-events: auto;
+    width: 44px;
+    height: 44px;
+  }
+
+  .cup-nav-prev {
+    left: 4px;
+  }
+
+  .cup-nav-next {
+    right: 4px;
   }
 }
 
@@ -551,12 +596,12 @@
   }
 
   .hero-stage {
-    min-height: 380px;
+    min-height: 390px;
     flex-direction: column;
   }
 
   .hero-cup-img {
-    max-height: 290px;
+    max-height: 300px;
   }
 
   .hero-ring-outer {
@@ -572,6 +617,19 @@
   .hero-glow-aura {
     width: 280px;
     height: 280px;
+  }
+
+  .cup-nav-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .cup-nav-prev {
+    left: 0;
+  }
+
+  .cup-nav-next {
+    right: 0;
   }
 
   .hero-interactive .member-box {
