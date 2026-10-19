@@ -145,7 +145,7 @@ if (!config.active || prizes.length < 2) {
     historyModal.hidden = true
     historyButton.hidden = true
     updateAvailability()
-    historyButton.focus()
+    nameInput.focus()
   })
   updateAvailability()
   historyButton.hidden = !readRecords().length

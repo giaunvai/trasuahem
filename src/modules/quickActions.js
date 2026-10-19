@@ -14,7 +14,7 @@ export const renderQuickActions = (container, { orderUrl, promotionUrl, location
       </a>
       <a class="quick-btn btn-locations" href="#lien-he">
         <span class="quick-icon" aria-hidden="true">📍</span>
-        <span class="quick-text">Chi nhánh</span>
+        <span class="quick-text">Cửa hàng</span>
       </a>
       <a class="quick-btn btn-promo" href="${promotionUrl}">
         <span class="quick-icon" aria-hidden="true">🎁</span>

@@ -59,12 +59,12 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
 
       <div class="calc-controls">
         <div class="calc-branch-select">
-          <label for="calc-branch">Chọn chi nhánh gần bạn:</label>
+          <label for="calc-branch">Chọn cửa hàng gần bạn:</label>
           <select id="calc-branch" class="branch-dropdown">
             ${visibleLocations
               .map(
                 (loc, idx) => `
-              <option value="${idx}">${loc.name} (${loc.address})</option>
+              <option value="${idx}">${loc.name}</option>
             `
               )
               .join('')}
@@ -126,10 +126,13 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
     if (res.canStoreDeliver) {
       ctaBtn.textContent = 'Đặt đơn quán giao ngay ➔'
       ctaBtn.href = orderUrl
+      ctaBtn.target = '_blank'
+      ctaBtn.rel = 'noopener noreferrer'
     } else {
       ctaBtn.textContent = 'Xem link đặt trên ShopeeFood / Grab / Vill ➔'
       ctaBtn.href = '#food-app'
       ctaBtn.target = '_self'
+      ctaBtn.removeAttribute('rel')
     }
   }
 

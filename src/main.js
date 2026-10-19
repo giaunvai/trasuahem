@@ -1,7 +1,7 @@
 import './style.css'
 import './interactive.css'
 import './fonts.js'
-import { ArrowUp, Gift, Menu, Mouse, X } from 'lucide'
+import { ArrowUp, Gift, Menu, X } from 'lucide'
 import hemLogo from './assets/branding/hem-logo.png'
 import menuLogo from './assets/branding/logo.png'
 import zaloQr from './assets/Zalo_OA.jpg'
@@ -10,9 +10,7 @@ import menuImage from './assets/menu/menu.webp'
 import { ASSET_PATHS } from './assetsConfig.js'
 import { isCampaignPopupActive } from './countdown.js'
 import { initAnalytics, track, trackLinkClicks } from './analytics.js'
-import { renderDigitalMenu } from './modules/digitalMenu.js'
 import { renderFreeshipCalculator } from './modules/freeshipCalculator.js'
-import { renderTeaQuiz } from './modules/teaQuiz.js'
 import { renderQuickActions } from './modules/quickActions.js'
 
 const menuDownloadUrl = ASSET_PATHS.menuDownload
@@ -48,13 +46,11 @@ const safeAsset = (path) => {
 const icon = (item, size = 22) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${item.map(([tag, attributes]) => `<${tag} ${Object.entries(attributes).map(([key, value]) => `${key}="${value}"`).join(' ')} />`).join('')}</svg>`
 const navItems = [
   ['Trang chủ', '#trang-chu'],
-  ['Menu số', '#menu'],
-  ['Tính freeship', '#tra-cuu-ship'],
-  ['Tìm gu trà', '#gu-tra-quiz'],
+  ['Menu', '#menu'],
   ['Về chúng tôi', '#ve-chung-toi'],
   ['Giờ làm việc', '#gio-lam-viec'],
   ['App giao hàng', '#food-app'],
-  ['Chi nhánh', '#lien-he'],
+  ['Tuyển dụng', `${baseUrl}tuyen-dung.html`],
 ]
 const timeColumn = (items = []) => items.map((item) => { const [hour, minute] = String(item.time || '').split(':'); return `<b>${text(item.label)}</b><strong>${text(hour)} <i>:</i> ${text(minute)}</strong>` }).join('')
 const orderLink = safeUrl(orderUrl)
@@ -68,25 +64,12 @@ document.querySelector('#app').innerHTML = `
   </header>
   <nav id="mobile-navigation" class="mobile-nav" aria-label="Điều hướng trên điện thoại" hidden>${navItems.map(([label, target]) => `<a href="${target}">${label}</a>`).join('')}<a href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt món</a></nav>
   <main>
-    <section id="trang-chu" class="hero" style="background-image:linear-gradient(90deg,#0008,#fff1),url('${safeAsset(hero.image)}')"><div class="hero-content"><h1>${withBreaks(hero.title)}</h1><p>${text(hero.description)}</p><div class="hero-actions"><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a><a class="order-button coral" href="#food-app">${text(hero.appLabel)}</a></div><div class="member-box"><img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert"><div><b>${text(member.title)}</b><p>${withBreaks(member.description)}</p></div></div></div><button class="scroll-cue" type="button" aria-label="Cuộn xuống phần menu" title="Cuộn xuống">${icon(Mouse, 32)}</button></section>
+    <section id="trang-chu" class="hero" style="background-image:linear-gradient(90deg,#0008,#fff1),url('${safeAsset(hero.image)}')"><div class="hero-content"><h1>${withBreaks(hero.title)}</h1><p>${text(hero.description)}</p><div class="hero-actions"><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a><a class="order-button coral" href="#food-app">${text(hero.appLabel)}</a></div><div class="member-box"><img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert"><div><b>${text(member.title)}</b><p>${withBreaks(member.description)}</p></div></div></div></section>
     
-    <section id="menu" class="digital-menu-wrapper">
-      <div class="menu-intro-bar">
-        <h2>${text(menu.title || 'MENU HẺM DESSERT')}</h2>
-        <p>${withBreaks(menu.intro || 'Một gu trà đậm, một vị trà riêng. Khám phá các món trà sữa kem muối, trà tươi thanh mát và topping nấu mới mỗi ngày.')}</p>
-        <button type="button" class="menu-view-photo-btn menu-image-trigger" title="Xem ảnh menu chụp phóng to">
-          <span>🖼️</span> Xem bảng ảnh menu gốc
-        </button>
-      </div>
-      <div id="digital-menu-mount"></div>
-    </section>
+    <section id="menu" class="menu-section"><div class="menu-copy"><span class="accent-line"></span><h2>${text(menu.title)}</h2><p>${withBreaks(menu.intro)}</p>${menu.deliveryTiers?.length ? `<p>${withBreaks(menu.policy)}</p><ul class="delivery-tiers">${menu.deliveryTiers.map((tier) => `<li>${text(tier)}</li>`).join('')}</ul>` : `<p>${withBreaks(menu.policy)}</p>`}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(menu.buttonLabel)}</a></div><button class="menu-image-trigger" type="button" aria-label="Xem menu phóng to" title="Xem menu phóng to"><img class="menu-image" src="${menuImage}" alt="${text(menu.imageAlt)}" loading="lazy" decoding="async"></button></section>
 
     <section id="tra-cuu-ship" class="freeship-section">
       <div id="freeship-calc-mount"></div>
-    </section>
-
-    <section id="gu-tra-quiz" class="quiz-section">
-      <div id="tea-quiz-mount"></div>
     </section>
 
     <section id="ve-chung-toi" class="about panel"><div class="about-logo"><img src="${hemLogo}" alt="Hẻm dessert" loading="lazy" decoding="async"></div><div class="about-copy"><span class="accent-line"></span><p class="eyebrow">${text(about.eyebrow)}</p><h2>${withBreaks(about.title)}</h2>${(about.paragraphs || []).map((paragraph) => `<p>${text(paragraph)}</p>`).join('')}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(about.buttonLabel)}</a></div><div class="about-dots" aria-hidden="true"></div></section>
@@ -100,19 +83,9 @@ document.querySelector('#app').innerHTML = `
   <aside class="menu-lightbox" role="dialog" aria-modal="true" aria-labelledby="menu-lightbox-title" hidden><div class="menu-lightbox-panel"><div class="menu-lightbox-actions"><h2 id="menu-lightbox-title">${text(menu.title)}</h2><a class="menu-download" href="${menuDownloadUrl}" download="menu-hem-dessert.jpg" aria-label="Tải menu" title="Tải menu">Tải menu</a><button class="menu-lightbox-close" type="button" aria-label="Đóng ảnh menu" title="Đóng">×</button></div><img src="${menuImage}" alt="${text(menu.imageAlt)}"></div></aside>
 `
 
-const digitalMenuMount = document.querySelector('#digital-menu-mount')
-if (digitalMenuMount) {
-  renderDigitalMenu(digitalMenuMount, orderLink)
-}
-
 const freeshipMount = document.querySelector('#freeship-calc-mount')
 if (freeshipMount) {
   renderFreeshipCalculator(freeshipMount, locations, orderLink)
-}
-
-const quizMount = document.querySelector('#tea-quiz-mount')
-if (quizMount) {
-  renderTeaQuiz(quizMount, orderLink)
 }
 
 const quickActionsMount = document.querySelector('#quick-actions-mount')
@@ -131,12 +104,10 @@ toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expande
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !mobileNav.hidden) setMenu(false) })
 mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => toggle.click()))
 const backTop = document.querySelector('.back-top')
-const scrollCue = document.querySelector('.scroll-cue')
 const updateScrollControls = () => backTop.classList.toggle('is-visible', window.scrollY > 400)
 window.addEventListener('scroll', updateScrollControls, { passive: true })
 updateScrollControls()
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
-scrollCue.addEventListener('click', () => document.querySelector('#menu').scrollIntoView({ behavior: 'smooth' }))
 const trapDialogFocus = (dialog, event) => {
   if (event.key !== 'Tab') return
   const focusable = [...dialog.querySelectorAll('a[href], button:not([disabled])')]
@@ -190,9 +161,9 @@ const menuLightbox = document.querySelector('.menu-lightbox')
 const menuImageTrigger = document.querySelector('.menu-image-trigger')
 const menuLightboxClose = menuLightbox?.querySelector('.menu-lightbox-close')
 const menuDownloadButton = menuLightbox?.querySelector('.menu-download')
-const menuPreviousFocus = document.activeElement
+let menuPreviousFocus = null
 const closeMenuLightbox = () => { if (!menuLightbox) return; menuLightbox.hidden = true; document.body.classList.remove('menu-lightbox-open'); menuPreviousFocus?.focus?.() }
-const openMenuLightbox = () => { if (!menuLightbox) return; menuLightbox.hidden = false; document.body.classList.add('menu-lightbox-open'); menuLightboxClose?.focus() }
+const openMenuLightbox = () => { if (!menuLightbox) return; menuPreviousFocus = document.activeElement; menuLightbox.hidden = false; document.body.classList.add('menu-lightbox-open'); menuLightboxClose?.focus() }
 const downloadMenuImage = (event) => {
   if (event) event.preventDefault()
   const link = document.createElement('a')
