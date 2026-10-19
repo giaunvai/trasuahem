@@ -12,6 +12,10 @@ import { isCampaignPopupActive } from './countdown.js'
 import { initAnalytics, track, trackLinkClicks } from './analytics.js'
 import { renderFreeshipCalculator } from './modules/freeshipCalculator.js'
 import { renderQuickActions } from './modules/quickActions.js'
+import './heroCup.css'
+import cupBoba from './assets/tra_sua_hem_noPhone.webp'
+import cupSaltCream from './assets/Tra_Sua_Kem_Muoi.webp'
+import { initHeroCup } from './modules/heroCup.js'
 
 const menuDownloadUrl = ASSET_PATHS.menuDownload
 
@@ -64,7 +68,63 @@ document.querySelector('#app').innerHTML = `
   </header>
   <nav id="mobile-navigation" class="mobile-nav" aria-label="Điều hướng trên điện thoại" hidden>${navItems.map(([label, target]) => `<a href="${target}">${label}</a>`).join('')}<a href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt món</a></nav>
   <main>
-    <section id="trang-chu" class="hero" style="background-image:linear-gradient(90deg,#0008,#fff1),url('${safeAsset(hero.image)}')"><div class="hero-content"><h1>${withBreaks(hero.title)}</h1><p>${text(hero.description)}</p><div class="hero-actions"><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a><a class="order-button coral" href="#food-app">${text(hero.appLabel)}</a></div><div class="member-box"><img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert"><div><b>${text(member.title)}</b><p>${withBreaks(member.description)}</p></div></div></div></section>
+    <section id="trang-chu" class="hero hero-interactive">
+      <div class="hero-backdrop-glow" aria-hidden="true"></div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            Hẻm dessert • Trà đậm vị riêng
+          </div>
+          <h1>${withBreaks(hero.title)}</h1>
+          <p class="hero-description">${text(hero.description)}</p>
+          <div class="hero-props-row">
+            <span class="hero-prop-pill">🍃 Lá trà nguyên bản</span>
+            <span class="hero-prop-pill">🍯 Vị ít ngọt thanh nhẹ</span>
+            <span class="hero-prop-pill">⚡ Nấu mới mỗi ngày</span>
+          </div>
+          <div class="hero-actions">
+            <a class="hero-btn-order" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a>
+            <a class="hero-btn-menu" href="#menu">Xem Menu Hẻm</a>
+          </div>
+          <div class="member-box">
+            <img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert">
+            <div>
+              <b>${text(member.title)}</b>
+              <p>${withBreaks(member.description)}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-stage" id="hero-stage" aria-label="Hình ảnh ly trà sữa Hẻm dessert">
+          <div class="hero-glow-aura" aria-hidden="true"></div>
+          <div class="hero-ring hero-ring-outer" aria-hidden="true"></div>
+          <div class="hero-ring hero-ring-inner" aria-hidden="true"></div>
+
+          <div class="hero-cup-wrapper">
+            <div class="hero-cup-3d" id="hero-cup-3d">
+              <img id="hero-cup-img" class="hero-cup-img" src="${cupBoba}" alt="Ly Trà Sữa Hẻm Trân Châu Hoàng Kim">
+            </div>
+          </div>
+
+          <div class="hero-particle particle-boba-1" aria-hidden="true"></div>
+          <div class="hero-particle particle-boba-2" aria-hidden="true"></div>
+          <div class="hero-particle particle-boba-3" aria-hidden="true"></div>
+          <div class="hero-particle particle-leaf-1" aria-hidden="true">🍃</div>
+          <div class="hero-particle particle-leaf-2" aria-hidden="true">🍃</div>
+
+          <div class="hero-drink-card">
+            <div class="drink-card-badge">✨ BEST SELLER</div>
+            <h3 class="drink-card-name" id="hero-drink-title">Trà Sữa Hẻm Trân Châu</h3>
+            <p class="drink-card-tag">Đậm vị trà truyền thống, trân châu hoàng kim dai dẻo</p>
+            <div class="drink-card-actions">
+              <button class="drink-switch-btn active" data-drink="boba" type="button">Trân Châu</button>
+              <button class="drink-switch-btn" data-drink="saltcream" type="button">Kem Muối</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     
     <section id="menu" class="menu-section"><div class="menu-copy"><span class="accent-line"></span><h2>${text(menu.title)}</h2><p>${withBreaks(menu.intro)}</p>${menu.deliveryTiers?.length ? `<p>${withBreaks(menu.policy)}</p><ul class="delivery-tiers">${menu.deliveryTiers.map((tier) => `<li>${text(tier)}</li>`).join('')}</ul>` : `<p>${withBreaks(menu.policy)}</p>`}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(menu.buttonLabel)}</a></div><button class="menu-image-trigger" type="button" aria-label="Xem menu phóng to" title="Xem menu phóng to"><img class="menu-image" src="${menuImage}" alt="${text(menu.imageAlt)}" loading="lazy" decoding="async"></button></section>
 
@@ -97,6 +157,12 @@ if (quickActionsMount) {
   })
 }
 
+initHeroCup({
+  cupBoba,
+  cupSaltCream,
+})
+
+const siteHeader = document.querySelector('.site-header')
 const toggle = document.querySelector('.menu-toggle')
 const mobileNav = document.querySelector('.mobile-nav')
 const setMenu = (open) => { toggle.setAttribute('aria-expanded', String(open)); toggle.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu'); toggle.innerHTML = icon(open ? X : Menu, 24); mobileNav.hidden = !open }
@@ -104,7 +170,10 @@ toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expande
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !mobileNav.hidden) setMenu(false) })
 mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => toggle.click()))
 const backTop = document.querySelector('.back-top')
-const updateScrollControls = () => backTop.classList.toggle('is-visible', window.scrollY > 400)
+const updateScrollControls = () => {
+  backTop.classList.toggle('is-visible', window.scrollY > 400)
+  siteHeader?.classList.toggle('is-scrolled', window.scrollY > 30)
+}
 window.addEventListener('scroll', updateScrollControls, { passive: true })
 updateScrollControls()
 backTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))

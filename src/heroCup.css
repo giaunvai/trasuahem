@@ -1,0 +1,581 @@
+/* ========================================================
+   HERO INTERACTIVE CUP EXPERIENCE - HẺM DESSERT
+   ======================================================== */
+
+.hero.hero-interactive {
+  position: relative;
+  min-height: clamp(660px, 86vh, 860px);
+  padding: 130px max(24px, calc((100vw - 1200px) / 2)) 70px;
+  background: radial-gradient(circle at 75% 45%, rgba(247, 197, 29, 0.14) 0%, transparent 60%),
+              radial-gradient(circle at 10% 20%, rgba(250, 81, 72, 0.09) 0%, transparent 50%),
+              linear-gradient(135deg, #091316 0%, #101e22 55%, #0c1719 100%);
+  overflow: hidden;
+  color: #ffffff;
+}
+
+.hero-backdrop-glow {
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(247, 197, 29, 0.18) 0%, rgba(0,0,0,0) 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.95fr);
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Left Content Column */
+.hero-content {
+  max-width: 580px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(247, 197, 29, 0.15);
+  border: 1px solid rgba(247, 197, 29, 0.35);
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 900;
+  color: #f7c51d;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0aba5d;
+  box-shadow: 0 0 10px #0aba5d;
+  animation: dot-pulse 2s infinite ease-in-out;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.hero-interactive h1 {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: clamp(38px, 5.2vw, 62px);
+  font-weight: 900;
+  line-height: 1.16;
+  margin: 0 0 18px;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+}
+
+.hero-description {
+  font-size: clamp(15px, 1.8vw, 17px);
+  line-height: 1.6;
+  color: #cfdcdf;
+  margin: 0 0 24px;
+}
+
+.hero-props-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.hero-prop-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #eaf1f2;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+
+.hero-btn-order {
+  background: #f7c51d;
+  color: #101010;
+  font-size: 15px;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(247, 197, 29, 0.4);
+  transition: all 0.25s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-btn-order:hover {
+  background: #f5bc0a;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(247, 197, 29, 0.55);
+}
+
+.hero-btn-menu {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  padding: 15px 26px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-btn-menu:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Member Box inside hero */
+.hero-interactive .member-box {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 14px;
+  padding: 12px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 460px;
+}
+
+.hero-interactive .member-box img {
+  width: 74px;
+  height: 74px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.hero-interactive .member-box b {
+  display: inline-block;
+  background: #0aba5d;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.hero-interactive .member-box p {
+  font-size: 12px;
+  line-height: 1.45;
+  color: #ccd8da;
+  margin: 0;
+}
+
+/* ========================================================
+   RIGHT COLUMN: HERO CUP STAGE
+   ======================================================== */
+
+.hero-stage {
+  position: relative;
+  width: 100%;
+  min-height: 540px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+/* Ambient Glow behind cup */
+.hero-glow-aura {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(247, 197, 29, 0.38) 0%, rgba(250, 81, 72, 0.18) 45%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(36px);
+  pointer-events: none;
+  z-index: 1;
+  animation: glow-breathe 6s ease-in-out infinite alternate;
+}
+
+@keyframes glow-breathe {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+/* Concentric Rings */
+.hero-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.hero-ring-outer {
+  width: 460px;
+  height: 460px;
+  border: 1px dashed rgba(247, 197, 29, 0.22);
+  z-index: 1;
+  animation: ring-spin-slow 50s linear infinite;
+}
+
+.hero-ring-inner {
+  width: 360px;
+  height: 360px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1;
+}
+
+@keyframes ring-spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 3D Perspective Cup Wrapper */
+.hero-cup-wrapper {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.hero-cup-3d {
+  position: relative;
+  will-change: transform;
+  transform-style: preserve-3d;
+  animation: cup-floating 5s ease-in-out infinite;
+}
+
+@keyframes cup-floating {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(1deg);
+  }
+}
+
+.hero-cup-img {
+  display: block;
+  width: clamp(240px, 25vw, 330px);
+  height: auto;
+  max-height: 530px;
+  object-fit: contain;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.7)) drop-shadow(0 6px 18px rgba(247, 197, 29, 0.3));
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.35s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.hero-cup-img.is-switching {
+  transform: scale(0.9) rotateY(20deg);
+  opacity: 0.2;
+}
+
+/* Floating Particles: Pearls (Trân Châu) & Tea Leaves */
+.hero-particle {
+  position: absolute;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.particle-boba-1 {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #924b17 0%, #2b1304 80%, #150901 100%);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6), inset -2px -2px 4px rgba(0, 0, 0, 0.8), inset 2px 2px 4px rgba(255, 200, 100, 0.6);
+  top: 14%;
+  left: 8%;
+  animation: particle-bob-1 4.5s ease-in-out infinite;
+}
+
+.particle-boba-2 {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #b8621e 0%, #3a1a05 80%, #190a02 100%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 2px 2px 3px rgba(255, 210, 120, 0.7);
+  bottom: 22%;
+  right: 6%;
+  animation: particle-bob-2 5.2s ease-in-out infinite;
+}
+
+.particle-boba-3 {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #924b17 0%, #2b1304 100%);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+  top: 68%;
+  left: 12%;
+  animation: particle-bob-3 3.8s ease-in-out infinite;
+}
+
+.particle-leaf-1 {
+  font-size: 26px;
+  top: 16%;
+  right: 14%;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  animation: leaf-sway 6s ease-in-out infinite;
+}
+
+.particle-leaf-2 {
+  font-size: 20px;
+  bottom: 14%;
+  left: 10%;
+  opacity: 0.85;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.4));
+  animation: leaf-sway-rev 7s ease-in-out infinite;
+}
+
+@keyframes particle-bob-1 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(6deg); }
+}
+
+@keyframes particle-bob-2 {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(16px) rotate(-8deg); }
+}
+
+@keyframes particle-bob-3 {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-10px) scale(1.1); }
+}
+
+@keyframes leaf-sway {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(14deg); }
+}
+
+@keyframes leaf-sway-rev {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(10px) rotate(-12deg); }
+}
+
+/* Floating Drink Card Switcher */
+.hero-drink-card {
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  z-index: 5;
+  background: rgba(16, 34, 40, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(247, 197, 29, 0.35);
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  max-width: 270px;
+  animation: card-float 4.8s ease-in-out infinite;
+}
+
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.drink-card-badge {
+  font-size: 11px;
+  font-weight: 900;
+  color: #f7c51d;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.drink-card-name {
+  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 900;
+  color: #ffffff;
+  margin: 0 0 2px;
+}
+
+.drink-card-tag {
+  font-size: 12px;
+  color: #a9bac0;
+  margin: 0 0 10px;
+  line-height: 1.4;
+}
+
+.drink-card-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.drink-switch-btn {
+  flex: 1;
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+  color: #d5e0e2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.drink-switch-btn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+}
+
+.drink-switch-btn.active {
+  background: #f7c51d;
+  color: #102228;
+  border-color: #f7c51d;
+  box-shadow: 0 2px 8px rgba(247, 197, 29, 0.35);
+}
+
+/* ========================================================
+   HEADER GLASSMORPHISM UPON SCROLL
+   ======================================================== */
+
+.site-header {
+  transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease !important;
+}
+
+.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.94) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* ========================================================
+   RESPONSIVE QUERIES FOR HERO CUP EXPERIENCE
+   ======================================================== */
+
+@media (max-width: 990px) {
+  .hero.hero-interactive {
+    min-height: auto;
+    padding: 100px 20px 60px;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-props-row {
+    justify-content: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-stage {
+    min-height: 480px;
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .hero-cup-img {
+    max-height: 380px;
+  }
+
+  .hero-drink-card {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin: 20px auto 0;
+    max-width: 320px;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero.hero-interactive {
+    padding-top: 85px;
+    padding-bottom: 40px;
+  }
+
+  .hero-props-row {
+    gap: 6px;
+  }
+
+  .hero-prop-pill {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-btn-order,
+  .hero-btn-menu {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .hero-stage {
+    min-height: 380px;
+    flex-direction: column;
+  }
+
+  .hero-cup-img {
+    max-height: 290px;
+  }
+
+  .hero-ring-outer {
+    width: 310px;
+    height: 310px;
+  }
+
+  .hero-ring-inner {
+    width: 250px;
+    height: 250px;
+  }
+
+  .hero-glow-aura {
+    width: 280px;
+    height: 280px;
+  }
+
+  .hero-interactive .member-box {
+    flex-direction: column;
+    text-align: center;
+  }
+}
