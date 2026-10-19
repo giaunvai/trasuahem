@@ -110,7 +110,11 @@ document.querySelector('#app').innerHTML = `
 
           <div class="hero-cup-wrapper">
             <div class="hero-cup-3d" id="hero-cup-3d">
-              <img id="hero-cup-img" class="hero-cup-img" src="${cupTraSuaHem}" alt="Ly Trà Sữa Hẻm">
+              <img class="hero-cup-img active" src="${cupTraSuaHem}" alt="Ly Trà Sữa Hẻm" data-index="0" fetchpriority="high">
+              <img class="hero-cup-img" src="${cupKemMuoi}" alt="Ly Trà Sữa Hẻm Kem Muối" data-index="1" loading="eager">
+              <img class="hero-cup-img" src="${cupDuaLuoi}" alt="Ly Trà Dưa Lưới Dừa Giòn" data-index="2" loading="eager">
+              <img class="hero-cup-img" src="${cupChanhNho}" alt="Ly Trà Chanh Nho" data-index="3" loading="eager">
+              <img class="hero-cup-img" src="${cupLaiSuiBot}" alt="Ly Trà Lài Sủi Bọt" data-index="4" loading="eager">
             </div>
           </div>
 

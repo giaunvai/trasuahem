@@ -9,7 +9,6 @@ import {
   Menu,
   Phone,
   Send,
-  Sparkles,
   X,
 } from 'lucide'
 import menuLogo from './assets/branding/logo.png'
@@ -59,12 +58,6 @@ app.innerHTML = `
   </nav>
 
   <main class="job-main">
-    <section class="job-hero">
-      <div class="job-badge">${icon(Sparkles, 16)} Gia nhập gia đình Hẻm dessert</div>
-      <h1>Cơ Hội Việc Làm & Tuyển Dụng</h1>
-      <p>Hẻm dessert tìm kiếm những bạn trẻ nhiệt huyết, yêu thích trà sữa và mong muốn làm việc trong môi trường năng động, vui vẻ, xoay ca linh hoạt theo lịch học.</p>
-    </section>
-
     <div class="job-stack">
       <!-- Card 1: Vị trí & Thu nhập -->
       <article class="job-card">

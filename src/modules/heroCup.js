@@ -1,5 +1,5 @@
 /**
- * HERO CUP 3D PARALLAX & AUTO-SLIDING DRINK CAROUSEL
+ * HERO CUP 3D PARALLAX & HIGH-PERFORMANCE MULTI-IMAGE CAROUSEL
  * Hẻm dessert - Modern F&B Experience
  */
 
@@ -9,7 +9,7 @@ export const initHeroCup = (options = {}) => {
   const heroSection = document.querySelector('#trang-chu')
   const heroStage = document.querySelector('#hero-stage')
   const cup3D = document.querySelector('#hero-cup-3d')
-  const cupImg = document.querySelector('#hero-cup-img')
+  const cupImages = Array.from(document.querySelectorAll('.hero-cup-img'))
   const glowAura = document.querySelector('.hero-glow-aura')
   const drinkTitle = document.querySelector('#hero-drink-title')
   const drinkCounter = document.querySelector('#hero-drink-counter')
@@ -17,7 +17,16 @@ export const initHeroCup = (options = {}) => {
   const prevBtn = document.querySelector('.cup-nav-prev')
   const nextBtn = document.querySelector('.cup-nav-next')
 
-  if (!heroSection || !cup3D || !cupImg || !drinks.length) return
+  if (!heroSection || !cup3D || !cupImages.length || !drinks.length) return
+
+  // Pre-cache and pre-decode all drink images in GPU memory
+  drinks.forEach((d) => {
+    if (d.img) {
+      const preload = new Image()
+      preload.src = d.img
+      preload.decode?.().catch(() => {})
+    }
+  })
 
   let currentIndex = 0
   let autoSlideTimer = null
@@ -43,23 +52,32 @@ export const initHeroCup = (options = {}) => {
   const dotButtons = dotsContainer ? dotsContainer.querySelectorAll('.cup-dot') : []
 
   // ----------------------------------------------------
-  // 2. SWITCH DRINK FUNCTION
+  // 2. INSTANT ZERO-LATENCY SWITCH FUNCTION (GPU ACCELERATED)
   // ----------------------------------------------------
-  let isTransitioning = false
-
   const setDrink = (targetIndex, direction = 1) => {
-    if (isTransitioning) return
-    isTransitioning = true
-
-    // Normalize target index (cyclic)
+    // Cyclic wrapping
     if (targetIndex < 0) {
       targetIndex = drinks.length - 1
     } else if (targetIndex >= drinks.length) {
       targetIndex = 0
     }
 
+    if (targetIndex === currentIndex) return
+
+    const prevIndex = currentIndex
     currentIndex = targetIndex
     const drink = drinks[currentIndex]
+
+    // Instant hardware-accelerated class transitions
+    cupImages.forEach((img, idx) => {
+      if (idx === currentIndex) {
+        img.className = 'hero-cup-img active'
+      } else if (idx === prevIndex) {
+        img.className = direction >= 0 ? 'hero-cup-img prev-slide' : 'hero-cup-img next-slide'
+      } else {
+        img.className = 'hero-cup-img'
+      }
+    })
 
     // Update dots
     dotButtons.forEach((dot, idx) => {
@@ -73,34 +91,15 @@ export const initHeroCup = (options = {}) => {
       drinkCounter.textContent = `${currentIndex + 1} / ${drinks.length}`
     }
 
-    // Slide animation on cup
-    const slideOutClass = direction >= 0 ? 'slide-out-left' : 'slide-out-right'
-    const slideInClass = direction >= 0 ? 'slide-in-right' : 'slide-in-left'
+    // Update title
+    if (drinkTitle) {
+      drinkTitle.textContent = drink.name
+    }
 
-    cupImg.classList.add(slideOutClass)
-
-    setTimeout(() => {
-      cupImg.src = drink.img
-      cupImg.alt = drink.alt || drink.name
-      if (drinkTitle) {
-        drinkTitle.textContent = drink.name
-      }
-
-      // Update glow aura color if provided
-      if (glowAura && drink.glow) {
-        glowAura.style.background = `radial-gradient(circle, ${drink.glow} 0%, rgba(0, 0, 0, 0) 70%)`
-      }
-
-      cupImg.classList.remove(slideOutClass)
-      cupImg.classList.add(slideInClass)
-
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          cupImg.classList.remove(slideInClass)
-          isTransitioning = false
-        }, 280)
-      })
-    }, 220)
+    // Update glow aura color smoothly
+    if (glowAura && drink.glow) {
+      glowAura.style.background = `radial-gradient(circle, ${drink.glow} 0%, rgba(0, 0, 0, 0) 70%)`
+    }
   }
 
   const nextDrink = () => setDrink(currentIndex + 1, 1)
@@ -198,7 +197,6 @@ export const initHeroCup = (options = {}) => {
       }
       resetAutoSlide()
     }
-    // Resume autoplay after 3 seconds
     setTimeout(() => {
       isHovered = false
     }, 3000)

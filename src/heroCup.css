@@ -4,8 +4,8 @@
 
 .hero.hero-interactive {
   position: relative;
-  min-height: clamp(660px, 86vh, 860px);
-  padding: 130px max(24px, calc((100vw - 1200px) / 2)) 70px;
+  min-height: clamp(680px, 88vh, 880px);
+  padding: 165px max(24px, calc((100vw - 1200px) / 2)) 110px;
   background: radial-gradient(circle at 75% 45%, rgba(247, 197, 29, 0.14) 0%, transparent 60%),
               radial-gradient(circle at 10% 20%, rgba(250, 81, 72, 0.09) 0%, transparent 50%),
               linear-gradient(135deg, #091316 0%, #101e22 55%, #0c1719 100%);
@@ -271,6 +271,8 @@
 
 .hero-cup-3d {
   position: relative;
+  width: clamp(240px, 25vw, 330px);
+  height: clamp(380px, 42vw, 530px);
   will-change: transform;
   transform-style: preserve-3d;
   animation: cup-floating 5s ease-in-out infinite;
@@ -286,56 +288,40 @@
 }
 
 .hero-cup-img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
   display: block;
-  width: clamp(240px, 25vw, 330px);
-  height: auto;
+  width: 100%;
+  height: 100%;
   max-height: 530px;
   object-fit: contain;
   filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.72)) drop-shadow(0 6px 18px rgba(247, 197, 29, 0.3));
-  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(50px) scale(0.92) rotateY(-12deg);
+  transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.28s ease;
+  will-change: transform, opacity;
   user-select: none;
   -webkit-user-drag: none;
 }
 
-/* Slide Transition Keyframes */
-.hero-cup-img.slide-out-left {
-  transform: translateX(-50px) scale(0.9) rotateY(18deg);
+.hero-cup-img.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1) rotateY(0deg);
+  z-index: 2;
+}
+
+.hero-cup-img.prev-slide {
+  transform: translateX(-50px) scale(0.92) rotateY(12deg);
   opacity: 0;
 }
 
-.hero-cup-img.slide-out-right {
-  transform: translateX(50px) scale(0.9) rotateY(-18deg);
+.hero-cup-img.next-slide {
+  transform: translateX(50px) scale(0.92) rotateY(-12deg);
   opacity: 0;
-}
-
-.hero-cup-img.slide-in-left {
-  animation: cup-slide-in-left 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.hero-cup-img.slide-in-right {
-  animation: cup-slide-in-right 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes cup-slide-in-left {
-  from {
-    transform: translateX(-50px) scale(0.9) rotateY(18deg);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0) scale(1) rotateY(0deg);
-    opacity: 1;
-  }
-}
-
-@keyframes cup-slide-in-right {
-  from {
-    transform: translateX(50px) scale(0.9) rotateY(-18deg);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0) scale(1) rotateY(0deg);
-    opacity: 1;
-  }
 }
 
 /* ========================================================
@@ -540,6 +526,11 @@
     overflow: visible;
   }
 
+  .hero-cup-3d {
+    width: clamp(220px, 45vw, 290px);
+    height: clamp(330px, 50vw, 420px);
+  }
+
   .hero-cup-img {
     max-height: 380px;
   }
@@ -598,6 +589,11 @@
   .hero-stage {
     min-height: 390px;
     flex-direction: column;
+  }
+
+  .hero-cup-3d {
+    width: 210px;
+    height: 310px;
   }
 
   .hero-cup-img {
