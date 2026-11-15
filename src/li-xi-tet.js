@@ -1,8 +1,10 @@
 import './lucky-wheel.css'
 import './fonts.js'
+import './shared-light.css'
 import menuLogo from './assets/branding/logo.png'
 import hemLogo from './assets/branding/hem-logo.png'
 import { initAnalytics, track } from './analytics.js'
+import { initSubpageHeader, renderSubpageHeader } from './modules/siteHeader.js'
 
 const baseUrl = import.meta.env.BASE_URL
 const fallback = { active: false, title: 'Lì xì Tết', description: 'Hẻm đang cập nhật chương trình.', prizes: [] }
@@ -64,8 +66,8 @@ if (!config.active || prizes.length < 2) {
   const confetti = Array.from({ length: 32 }, (_, index) => `<i style="--i:${index};--x:${(index % 8) - 3.5};--y:${Math.floor(index / 8) - 1.5}"></i>`).join('')
 
   app.innerHTML = `
+    ${renderSubpageHeader({ baseUrl, logoSrc: menuLogo, active: 'promotion' })}
     <main class="wheel-page li-xi-page">
-      <header class="wheel-header"><a class="wheel-brand" href="${escapeHtml(baseUrl)}" aria-label="Về trang chủ Hẻm dessert"><img src="${menuLogo}" alt="Hẻm dessert"></a><a class="wheel-home" href="${escapeHtml(baseUrl)}">Trang chủ</a></header>
       <section class="wheel-stage">
         <div class="wheel-board" aria-live="polite"><div class="wheel-pointer" aria-hidden="true"></div><div class="wheel" style="--wheel-gradient:conic-gradient(${gradient})">${labels}</div><div class="wheel-center" aria-hidden="true"><img src="${hemLogo}" alt=""></div></div>
         <div class="wheel-copy">
@@ -84,6 +86,7 @@ if (!config.active || prizes.length < 2) {
       <section class="pin-modal" role="dialog" aria-modal="true" aria-labelledby="pin-title" hidden><div class="pin-card"><h2 id="pin-title">Xóa lịch sử</h2><p>Nhập mã PIN để xác nhận.</p><input class="pin-input" type="password" inputmode="numeric" autocomplete="off" maxlength="6" aria-label="Mã PIN"><p class="pin-message" aria-live="polite"></p><div><button class="pin-cancel" type="button">Hủy</button><button class="pin-confirm" type="button">Xóa</button></div></div></section>
     </main>`
 
+  initSubpageHeader()
   const wheel = app.querySelector('.wheel')
   const nameInput = app.querySelector('.spinner-name')
   const spinButton = app.querySelector('.spin-button')

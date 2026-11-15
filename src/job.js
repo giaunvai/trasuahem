@@ -2,16 +2,18 @@ import './style.css'
 import './interactive.css'
 import './fonts.js'
 import './job.css'
+import './shared-light.css'
 import {
   Briefcase,
   CheckCircle,
   Heart,
-  Menu,
+  MapPin,
   Phone,
+  RefreshCw,
   Send,
-  X,
 } from 'lucide'
 import menuLogo from './assets/branding/logo.png'
+import { initSubpageHeader, renderSubpageHeader } from './modules/siteHeader.js'
 
 const baseUrl = import.meta.env.BASE_URL
 
@@ -46,16 +48,7 @@ const navLinks = [
 const app = document.querySelector('#job-app')
 
 app.innerHTML = `
-  <header class="site-header">
-    <a class="logo-box" href="${baseUrl}" aria-label="Hẻm dessert"><img src="${menuLogo}" alt="Hẻm dessert"></a>
-    <nav aria-label="Điều hướng chính">${navLinks.map(([label, href]) => `<a href="${href}" class="${label === 'Tuyển dụng' ? 'is-active' : ''}">${label}</a>`).join('')}</nav>
-    <a class="order-button header-order" href="${orderUrl}" target="_blank" rel="noopener noreferrer">Đặt món</a>
-    <button class="menu-toggle" type="button" aria-label="Mở menu" aria-expanded="false" aria-controls="mobile-navigation">${icon(Menu, 24)}</button>
-  </header>
-  <nav id="mobile-navigation" class="mobile-nav" aria-label="Điều hướng trên điện thoại" hidden>
-    ${navLinks.map(([label, href]) => `<a href="${href}">${label}</a>`).join('')}
-    <a href="${orderUrl}" target="_blank" rel="noopener noreferrer">Đặt món</a>
-  </nav>
+  ${renderSubpageHeader({ baseUrl, logoSrc: menuLogo, orderUrl, active: 'job' })}
 
   <main class="job-main">
     <div class="job-stack">
@@ -82,18 +75,18 @@ app.innerHTML = `
         <div class="shifts-grid">
           <div class="shift-pill">
             <span class="shift-name">Ca 1 (Sáng)</span>
-            <span class="shift-time">08:30 – 15:30</span>
+            <span class="shift-time">08:30 – 15:00</span>
           </div>
           <div class="shift-pill">
             <span class="shift-name">Ca 2 (Chiều tối)</span>
-            <span class="shift-time">15:30 – 22:00</span>
+            <span class="shift-time">15:00 – 22:00</span>
           </div>
           <div class="shift-pill">
             <span class="shift-name">Ca Gãy / Linh hoạt</span>
             <span class="shift-time">Thỏa thuận</span>
           </div>
         </div>
-        <p class="shifts-note">🔄 <em>Hẻm hỗ trợ xoay ca linh hoạt hàng tuần theo lịch học hoặc lịch cá nhân của các bạn sinh viên.</em></p>
+        <p class="shifts-note"><span class="contact-line">${icon(RefreshCw, 15)} <em>Hẻm hỗ trợ xoay ca linh hoạt hàng tuần theo lịch học hoặc lịch cá nhân của các bạn sinh viên.</em></span></p>
       </article>
 
       <!-- Card 2: Chế độ & Quyền lợi -->
@@ -146,26 +139,13 @@ app.innerHTML = `
       <div>
         <h2>${escapeHtml(l.name)}</h2>
         <p>
-          ${l.oldAddress ? `🏠 ${escapeHtml(l.oldAddress)} (cũ)<br>` : ''}
-          🏠 ${escapeHtml(l.address)} (mới)<br>
-          📱 Hotline Zalo: <a href="tel:${escapeHtml(l.phoneLink)}">${escapeHtml(l.phone)}</a>
+          ${l.oldAddress ? `<span class="contact-line">${icon(MapPin, 15)} <span>${escapeHtml(l.oldAddress)} (cũ)</span></span><br>` : ''}
+          <span class="contact-line">${icon(MapPin, 15)} <span>${escapeHtml(l.address)} (mới)</span></span><br>
+          <span class="contact-line">${icon(Phone, 15)} <span>Hotline Zalo: <a href="tel:${escapeHtml(l.phoneLink)}">${escapeHtml(l.phone)}</a></span></span>
         </p>
       </div>
     `).join('')}
   </footer>
 `
 
-// Navigation toggle
-const toggle = document.querySelector('.menu-toggle')
-const mobileNav = document.querySelector('.mobile-nav')
-const setMenu = (open) => {
-  toggle.setAttribute('aria-expanded', String(open))
-  toggle.setAttribute('aria-label', open ? 'Đóng menu' : 'Mở menu')
-  toggle.innerHTML = icon(open ? X : Menu, 24)
-  mobileNav.hidden = !open
-}
-toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'))
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !mobileNav.hidden) setMenu(false)
-})
-mobileNav.querySelectorAll('a').forEach((l) => l.addEventListener('click', () => toggle.click()))
+initSubpageHeader()

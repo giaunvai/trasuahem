@@ -3,7 +3,7 @@
    ======================================================== */
 
 .job-page {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   background-color: #f6f8f8;
   color: #1a2a2e;
   margin: 0;
@@ -62,7 +62,7 @@
 }
 
 .job-card-header h2 {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   font-size: 22px;
   font-weight: 900;
   color: #102228;
@@ -213,7 +213,7 @@
 }
 
 .contact-callout-header h2 {
-  font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
   font-size: 24px;
   color: #f7c51d;
   margin: 0 0 8px;

@@ -1,9 +1,11 @@
 import './birthday.css'
 import './fonts.js'
+import './shared-light.css'
 import { ArrowRight } from 'lucide'
 import menuLogo from './assets/branding/logo.png'
 import { getCampaignSchedule, getCampaignState, mountCountdown } from './countdown.js'
 import { initAnalytics, track, trackLinkClicks } from './analytics.js'
+import { initSubpageHeader, renderSubpageHeader } from './modules/siteHeader.js'
 
 // Chỉ nhận ảnh WebP đã nén; URL chỉ là chuỗi nên trình duyệt chỉ tải ảnh thực sự hiển thị
 const campaignImages = import.meta.glob('./assets/*.webp', { eager: true, query: '?url', import: 'default' })
@@ -69,7 +71,8 @@ const renderPromotionDirectory = async () => {
   const timed = available.sort((a, b) => campaignTarget(a.item).date - campaignTarget(b.item).date)
   document.body.classList.add('promotion-directory-page')
   updateSocialImage()
-  app.innerHTML = `<header class="birthday-header"><a class="birthday-brand" href="${escapeHtml(baseUrl)}" aria-label="Về trang chủ Hẻm dessert"><img src="${menuLogo}" alt="Hẻm dessert"></a><a class="birthday-home" href="${escapeHtml(baseUrl)}">Trang chủ</a></header><main class="promotion-directory"><section class="promotion-directory-visual"><img src="${dealBanner}" alt="Gom đơn siêu tiệc, đầy đủ vị và đủ niềm vui cùng Hẻm dessert" fetchpriority="high"></section><section class="promotion-directory-intro"><div><p class="campaign-kicker">HẺM DESSERT / ƯU ĐÃI</p><h1>Chọn niềm vui gần nhất với bạn.</h1></div><p>Những chương trình đang và sắp diễn ra tại Hẻm. Ưu đãi gần nhất luôn được đặt ở vị trí đầu tiên.</p></section><section class="promotion-featured" aria-labelledby="promotion-featured-title"><div class="directory-heading"><span class="section-label">Đáng chú ý</span><h2 id="promotion-featured-title">Ưu đãi sắp đến</h2></div><div class="promotion-card-grid">${timed.map(({ item, file }, index) => campaignCard(item, file, index === 0)).join('')}</div></section>${recurring.length ? `<section class="promotion-recurring" aria-labelledby="promotion-recurring-title"><div class="directory-heading"><span class="section-label">Dành cho nhóm bạn</span><h2 id="promotion-recurring-title">Gom đơn, nhận quà</h2></div><div class="promotion-card-grid">${recurring.map(({ item, file }) => campaignCard(item, file)).join('')}</div></section>` : ''}</main><footer class="birthday-footer"><span>Hẻm dessert</span><a class="birthday-cta" href="${escapeHtml(baseUrl)}">Về trang chủ ${icon(ArrowRight, 18)}</a></footer>`
+  app.innerHTML = `${renderSubpageHeader({ baseUrl, logoSrc: menuLogo, active: 'promotion' })}<main class="promotion-directory"><section class="promotion-directory-visual"><img src="${dealBanner}" alt="Gom đơn siêu tiệc, đầy đủ vị và đủ niềm vui cùng Hẻm dessert" fetchpriority="high"></section><section class="promotion-directory-intro"><div><p class="campaign-kicker">HẺM DESSERT / ƯU ĐÃI</p><h1>Chọn niềm vui gần nhất với bạn.</h1></div><p>Những chương trình đang và sắp diễn ra tại Hẻm. Ưu đãi gần nhất luôn được đặt ở vị trí đầu tiên.</p></section><section class="promotion-featured" aria-labelledby="promotion-featured-title"><div class="directory-heading"><span class="section-label">Đáng chú ý</span><h2 id="promotion-featured-title">Ưu đãi sắp đến</h2></div><div class="promotion-card-grid">${timed.map(({ item, file }, index) => campaignCard(item, file, index === 0)).join('')}</div></section>${recurring.length ? `<section class="promotion-recurring" aria-labelledby="promotion-recurring-title"><div class="directory-heading"><span class="section-label">Dành cho nhóm bạn</span><h2 id="promotion-recurring-title">Gom đơn, nhận quà</h2></div><div class="promotion-card-grid">${recurring.map(({ item, file }) => campaignCard(item, file)).join('')}</div></section>` : ''}</main><footer class="birthday-footer"><span>Hẻm dessert</span><a class="birthday-cta" href="${escapeHtml(baseUrl)}">Về trang chủ ${icon(ArrowRight, 18)}</a></footer>`
+  initSubpageHeader()
   const campaignByFile = new Map(campaigns.map(({ item, file }) => [file, item]))
   const stopCountdowns = [...app.querySelectorAll('[data-promotion-countdown]')].map((element) => mountCountdown(element, campaignByFile.get(element.closest('[data-promotion-campaign]')?.dataset.promotionCampaign))).filter(Boolean)
   window.addEventListener('pagehide', () => stopCountdowns.forEach((stop) => stop?.()))

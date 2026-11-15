@@ -1,4 +1,28 @@
-const getUtmParameters = () => Object.fromEntries([...new URLSearchParams(window.location.search)].filter(([key]) => key.startsWith('utm_')))
+const AD_UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
+
+const getUtmParameters = () => Object.fromEntries(
+  [...new URLSearchParams(window.location.search)].filter(([key]) => key.startsWith('utm_'))
+)
+
+const hasAdClickParams = () => {
+  const params = new URLSearchParams(window.location.search)
+  return [...params.keys()].some((key) => key.startsWith('utm_') || ['fbclid', 'gclid', 'ttclid'].includes(key))
+}
+
+export const appendUtmToUrl = (rawUrl) => {
+  try {
+    const currentParams = new URLSearchParams(window.location.search)
+    const target = new URL(rawUrl, window.location.origin)
+    if (target.protocol !== 'http:' && target.protocol !== 'https:') return rawUrl
+    AD_UTM_KEYS.forEach((key) => {
+      const value = currentParams.get(key)
+      if (value && !target.searchParams.has(key)) target.searchParams.set(key, value)
+    })
+    return target.href
+  } catch {
+    return rawUrl
+  }
+}
 
 export const track = (name, parameters = {}) => {
   const event = { event: name, ...getUtmParameters(), ...parameters }
@@ -6,6 +30,13 @@ export const track = (name, parameters = {}) => {
   window.dataLayer.push(event)
   window.gtag?.('event', name, event)
   window.fbq?.('trackCustom', name, event)
+  window.ttq?.track?.(name, event)
+}
+
+export const trackStandardConversion = (standardEvent, parameters = {}) => {
+  const event = { ...getUtmParameters(), ...parameters }
+  window.fbq?.('track', standardEvent, event)
+  window.ttq?.track?.(standardEvent, event)
 }
 
 export const initAnalytics = (analytics = {}) => {
@@ -25,6 +56,12 @@ export const initAnalytics = (analytics = {}) => {
     window.fbq('track', 'PageView')
     scripts.push('https://connect.facebook.net/en_US/fbevents.js')
   }
+  if (analytics.tiktokPixelId) {
+    window.ttq = window.ttq || []
+    window.ttq.push(['init', analytics.tiktokPixelId])
+    window.ttq.push(['page'])
+    scripts.push(`https://analytics.tiktok.com/i18n/pixel/events.js?sdkid=${encodeURIComponent(analytics.tiktokPixelId)}&lib=ttq`)
+  }
   // Microsoft Clarity: heatmap và session replay miễn phí, giúp thấy khách cuộn/bấm tới đâu
   if (/^[a-z0-9]+$/i.test(analytics.clarityProjectId || '')) {
     window.clarity = window.clarity || ((...args) => (window.clarity.q = window.clarity.q || []).push(args))
@@ -38,8 +75,10 @@ export const initAnalytics = (analytics = {}) => {
     document.head.append(script)
   })
   if (!scripts.length) return
-  if ('requestIdleCallback' in window) window.requestIdleCallback(loadScripts, { timeout: 4000 })
-  else window.setTimeout(loadScripts, 2000)
+  // Nạp ngay nếu khách đến từ link quảng cáo (UTM/fbclid/gclid/ttclid) để không lỡ chuyển đổi sớm
+  if (hasAdClickParams()) loadScripts()
+  else if ('requestIdleCallback' in window) window.requestIdleCallback(loadScripts, { timeout: 2500 })
+  else window.setTimeout(loadScripts, 1500)
 }
 
 const linkType = (url) => {
@@ -55,5 +94,13 @@ export const trackLinkClicks = (eventName) => document.addEventListener('click',
   if (link.getAttribute('href').startsWith('#')) return
   let url
   try { url = new URL(link.href) } catch { return }
-  track(eventName, { cta_text: link.textContent.trim() || link.getAttribute('aria-label') || '', cta_url: link.href, link_type: linkType(url) })
+  const type = linkType(url)
+  const payload = {
+    cta_text: link.textContent.trim() || link.getAttribute('aria-label') || '',
+    cta_url: link.href,
+    link_type: type,
+  }
+  track(eventName, payload)
+  if (type === 'phone') trackStandardConversion('Contact', payload)
+  else if (type === 'outbound') trackStandardConversion('InitiateCheckout', payload)
 })

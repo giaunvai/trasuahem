@@ -1,0 +1,330 @@
+/* ========================================================
+   HẺM DESSERT - UNIFIED LIGHT-FIRST DESIGN SYSTEM FOR SUBPAGES
+   Palette: #f7c51d (Gold) | #14110e (Ink) | #fffdf7 (Cream)
+   ======================================================== */
+
+:root {
+  --hem-primary: #f7c51d;
+  --hem-gold: #f7c51d;
+  --hem-gold-light: #fef3c7;
+  --hem-amber: #b45309;
+  --hem-dark: #14110e;
+  --hem-paper: #fffdf7;
+  --hem-text-muted: #52483e;
+  --hem-border: rgba(20, 17, 14, 0.09);
+  --hem-border-gold: rgba(247, 197, 29, 0.45);
+  --hem-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Unify Promotion page tokens (birthday.css) */
+  --b-ink: #14110e;
+  --b-cream: #fffdf7;
+  --b-pink: #b45309;
+  --b-yellow: #f7c51d;
+  --b-green: #14110e;
+  --b-line: rgba(20, 17, 14, 0.11);
+
+  /* Unify Wheel page tokens (lucky-wheel.css) */
+  --ink: #14110e;
+  --cream: #fffdf7;
+  --gold: #f7c51d;
+  --line: rgba(247, 197, 29, 0.4);
+}
+
+html,
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--hem-dark);
+}
+
+body {
+  background-color: #fffdf7;
+  background-image:
+    radial-gradient(circle at 85% 8%, rgba(247, 197, 29, 0.16) 0%, transparent 42%),
+    linear-gradient(180deg, #fffdf7 0%, #fef8e1 55%, #fffdf7 100%);
+}
+
+a,
+button,
+[role="button"] {
+  cursor: pointer;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--hem-dark);
+  outline-offset: 2px;
+}
+
+/* ========================================================
+   SHARED HEADER & MOBILE NAV (IDENTICAL TO HOME)
+   ======================================================== */
+.hem-shared-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  max-width: 1170px;
+  height: 68px;
+  margin: 0 auto;
+  padding: 0 12px 0 17px;
+  border-radius: 0 0 12px 12px;
+  background: rgba(255, 253, 247, 0.94);
+  border: 1px solid rgba(247, 197, 29, 0.32);
+  border-top: 0;
+  box-shadow: 0 8px 28px rgba(20, 17, 14, 0.08);
+  display: flex;
+  align-items: center;
+  transition: background 0.25s var(--hem-ease), box-shadow 0.25s var(--hem-ease);
+}
+
+.hem-shared-header.is-scrolled {
+  background: rgba(255, 253, 247, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 12px 32px rgba(20, 17, 14, 0.12);
+}
+
+.hem-shared-header .logo-box {
+  width: 82px;
+  height: 62px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hem-shared-header .logo-box img {
+  width: auto;
+  height: 48px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.hem-shared-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+}
+
+.hem-shared-header nav a {
+  padding: 7px 11px;
+  border-radius: 8px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--hem-dark);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.hem-shared-header nav a:hover,
+.hem-shared-header nav a.is-active {
+  background: var(--hem-gold-light);
+  color: var(--hem-dark);
+}
+
+.hem-shared-header .header-order {
+  margin-left: 20px;
+  display: inline-block;
+  padding: 13px 24px;
+  border-radius: 10px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13.5px;
+  font-weight: 800;
+  background: var(--hem-gold);
+  color: var(--hem-dark);
+  box-shadow: 0 4px 14px rgba(247, 197, 29, 0.38);
+  transition: transform 0.2s var(--hem-ease), background-color 0.2s ease, color 0.2s ease;
+}
+
+.hem-shared-header .header-order:hover {
+  background: var(--hem-dark);
+  color: var(--hem-gold);
+  transform: translateY(-1px);
+}
+
+.hem-shared-header .menu-toggle {
+  display: none;
+  margin-left: auto;
+  border: 0;
+  background: transparent;
+  color: var(--hem-dark);
+  padding: 8px;
+}
+
+.mobile-nav:not([hidden]) {
+  position: fixed;
+  z-index: 29;
+  top: 60px;
+  left: 0;
+  right: 0;
+  display: block;
+  background: #fffdf7;
+  padding: 10px 20px 18px;
+  box-shadow: 0 8px 24px rgba(20, 17, 14, 0.14);
+}
+
+.mobile-nav a {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(20, 17, 14, 0.08);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--hem-dark);
+}
+
+.mobile-nav a.is-active {
+  color: var(--hem-amber);
+}
+
+.mobile-nav a:last-child {
+  border-bottom: 0;
+  color: var(--hem-amber);
+}
+
+@media (max-width: 900px) {
+  .hem-shared-header {
+    height: 60px;
+    border-radius: 0;
+    padding: 0 16px;
+  }
+
+  .hem-shared-header .logo-box {
+    width: 70px;
+    height: 54px;
+  }
+
+  .hem-shared-header .logo-box img {
+    height: 43px;
+  }
+
+  .hem-shared-header > nav,
+  .hem-shared-header .header-order {
+    display: none;
+  }
+
+  .hem-shared-header .menu-toggle {
+    display: grid;
+    place-items: center;
+  }
+}
+
+/* ========================================================
+   PROMOTION PAGE UNIFICATION
+   ======================================================== */
+.promotion-directory-page {
+  background-color: #fffdf7 !important;
+  color: var(--hem-dark);
+}
+
+.promotion-directory-intro h1,
+.directory-heading h2,
+.promotion-card-body h3,
+.birthday-hero h1,
+.offer-section h2,
+.steps-section h2,
+.contact-section h2,
+.terms-section h2,
+.campaign-status h1,
+.birthday-footer {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  letter-spacing: -0.025em;
+}
+
+.promotion-directory-visual {
+  border-radius: 20px;
+  box-shadow: 0 18px 42px rgba(20, 17, 14, 0.1);
+}
+
+.promotion-card,
+.promotion-card-featured,
+.offer-section,
+.step-card,
+.contact-item,
+.campaign-status {
+  border-radius: 18px !important;
+}
+
+.promotion-card:not(.promotion-card-featured) {
+  border: 1px solid var(--hem-border) !important;
+  box-shadow: 0 8px 24px rgba(20, 17, 14, 0.06) !important;
+}
+
+.promotion-directory-page .promotion-card-featured {
+  background: linear-gradient(135deg, #1e1914 0%, #14110e 100%) !important;
+  border: 1px solid var(--hem-border-gold);
+}
+
+.promotion-card-state {
+  border-radius: 8px;
+  background: var(--hem-gold) !important;
+  color: var(--hem-dark) !important;
+  font-weight: 800;
+}
+
+.birthday-cta {
+  border-radius: 10px !important;
+}
+
+/* ========================================================
+   LUCKY WHEEL & LI XI PAGE UNIFICATION
+   ======================================================== */
+.wheel-page {
+  height: auto;
+  min-height: calc(100svh - 68px);
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.wheel-stage {
+  padding-top: clamp(32px, 5vh, 56px) !important;
+  padding-bottom: clamp(28px, 4vh, 44px) !important;
+}
+
+.wheel-copy h1,
+.wheel-result h2 {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  letter-spacing: -0.025em;
+}
+
+body:has(.wheel-page) {
+  overflow-y: auto !important;
+  background:
+    radial-gradient(circle at 82% 14%, rgba(247, 197, 29, 0.25) 0%, transparent 48%),
+    radial-gradient(circle at 12% 80%, rgba(247, 197, 29, 0.14) 0%, transparent 44%),
+    linear-gradient(135deg, #fffdf7 0%, #fef7dc 100%) !important;
+}
+
+.spin-button {
+  background: var(--hem-gold) !important;
+  color: var(--hem-dark) !important;
+  border-radius: 12px !important;
+  font-weight: 800 !important;
+}
+
+/* ========================================================
+   JOB PAGE UNIFICATION
+   ======================================================== */
+.job-page {
+  background-color: #fffdf7 !important;
+  background-image:
+    radial-gradient(circle at 85% 8%, rgba(247, 197, 29, 0.16) 0%, transparent 42%),
+    linear-gradient(180deg, #fffdf7 0%, #fef8e1 55%, #fffdf7 100%) !important;
+  color: var(--hem-dark) !important;
+}
+
+.job-card {
+  border: 1px solid var(--hem-border) !important;
+  box-shadow: 0 12px 32px rgba(20, 17, 14, 0.06) !important;
+}
+
+.job-card-icon {
+  background: var(--hem-gold-light) !important;
+  color: var(--hem-amber) !important;
+}

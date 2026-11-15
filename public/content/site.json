@@ -1,6 +1,6 @@
 {
   "orderUrl": "https://trasuahem.sapofnb.vn/",
-  "analytics": { "ga4MeasurementId": "", "metaPixelId": "", "clarityProjectId": "" },
+  "analytics": { "ga4MeasurementId": "", "metaPixelId": "", "tiktokPixelId": "", "clarityProjectId": "" },
   "hero": {
     "title": "Một Gu Trà Đậm\nMột Vị Trà Riêng",
     "description": "Trải nghiệm một gu trà rất riêng mang phong cách Hẻm dessert",

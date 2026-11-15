@@ -1,7 +1,7 @@
 import './style.css'
 import './interactive.css'
 import './fonts.js'
-import { ArrowUp, Gift, Menu, X } from 'lucide'
+import { ArrowUp, Briefcase, Clock, Gift, Leaf, MapPin, Menu, Phone, Sparkles, Ticket, Truck, X, Zap } from 'lucide'
 import hemLogo from './assets/branding/hem-logo.png'
 import menuLogo from './assets/branding/logo.png'
 import zaloQr from './assets/Zalo_OA.jpg'
@@ -9,10 +9,11 @@ import hoursBackground from './assets/backgrounds/nen.webp'
 import menuImage from './assets/menu/menu.webp'
 import { ASSET_PATHS } from './assetsConfig.js'
 import { isCampaignPopupActive } from './countdown.js'
-import { initAnalytics, track, trackLinkClicks } from './analytics.js'
+import { appendUtmToUrl, initAnalytics, track, trackLinkClicks, trackStandardConversion } from './analytics.js'
 import { renderFreeshipCalculator } from './modules/freeshipCalculator.js'
 import { renderQuickActions } from './modules/quickActions.js'
 import './heroCup.css'
+import './theme.css'
 import cupTraSuaHem from './assets/tra_sua_hem_noPhone.webp'
 import cupKemMuoi from './assets/Tra_Sua_Kem_Muoi.webp'
 import cupDuaLuoi from './assets/Tra_Dua_Luoi_Dua_Gion.webp'
@@ -60,7 +61,7 @@ const navItems = [
   ['Tuyển dụng', `${baseUrl}job.html`],
 ]
 const timeColumn = (items = []) => items.map((item) => { const [hour, minute] = String(item.time || '').split(':'); return `<b>${text(item.label)}</b><strong>${text(hour)} <i>:</i> ${text(minute)}</strong>` }).join('')
-const orderLink = safeUrl(orderUrl)
+const orderLink = appendUtmToUrl(safeUrl(orderUrl))
 
 document.querySelector('#app').innerHTML = `
   <header class="site-header">
@@ -82,16 +83,21 @@ document.querySelector('#app').innerHTML = `
           <h1>${withBreaks(hero.title)}</h1>
           <p class="hero-description">${text(hero.description)}</p>
           <div class="hero-props-row">
-            <span class="hero-prop-pill">🍃 Lá trà nguyên bản</span>
-            <span class="hero-prop-pill">🍯 Vị ít ngọt thanh nhẹ</span>
-            <span class="hero-prop-pill">⚡ Nấu mới mỗi ngày</span>
+            <span class="hero-prop-pill">${icon(Leaf, 15)} Lá trà nguyên bản</span>
+            <span class="hero-prop-pill">${icon(Sparkles, 15)} Vị ít ngọt thanh nhẹ</span>
+            <span class="hero-prop-pill">${icon(Zap, 15)} Nấu mới mỗi ngày</span>
           </div>
           <div class="hero-actions">
             <a class="hero-btn-order" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hero.orderLabel)}</a>
             <a class="hero-btn-menu" href="#menu">Xem Menu Hẻm</a>
           </div>
+          <div class="hero-trust-strip" aria-label="Thông tin nhanh">
+            <span class="hero-trust-item">${icon(MapPin, 15)} Tân An &amp; Mỹ Tho</span>
+            <span class="hero-trust-item">${icon(Clock, 15)} 08:30 – 22:00 mỗi ngày</span>
+            <span class="hero-trust-item">${icon(Truck, 15)} Một ly cũng giao</span>
+          </div>
           <div class="member-box">
-            <img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert">
+            <img src="${zaloQr}" alt="Mã QR Zalo Hẻm dessert" width="152" height="152" loading="lazy" decoding="async">
             <div>
               <b>${text(member.title)}</b>
               <p>${withBreaks(member.description)}</p>
@@ -110,11 +116,11 @@ document.querySelector('#app').innerHTML = `
 
           <div class="hero-cup-wrapper">
             <div class="hero-cup-3d" id="hero-cup-3d">
-              <img class="hero-cup-img active" src="${cupTraSuaHem}" alt="Ly Trà Sữa Hẻm" data-index="0" fetchpriority="high">
-              <img class="hero-cup-img" src="${cupKemMuoi}" alt="Ly Trà Sữa Hẻm Kem Muối" data-index="1" loading="eager">
-              <img class="hero-cup-img" src="${cupDuaLuoi}" alt="Ly Trà Dưa Lưới Dừa Giòn" data-index="2" loading="eager">
-              <img class="hero-cup-img" src="${cupChanhNho}" alt="Ly Trà Chanh Nho" data-index="3" loading="eager">
-              <img class="hero-cup-img" src="${cupLaiSuiBot}" alt="Ly Trà Lài Sủi Bọt" data-index="4" loading="eager">
+              <img class="hero-cup-img active" src="${cupTraSuaHem}" alt="Ly Trà Sữa Hẻm" data-index="0" fetchpriority="high" decoding="async">
+              <img class="hero-cup-img" src="${cupKemMuoi}" alt="Ly Trà Sữa Hẻm Kem Muối" data-index="1" loading="lazy" decoding="async">
+              <img class="hero-cup-img" src="${cupDuaLuoi}" alt="Ly Trà Dưa Lưới Dừa Giòn" data-index="2" loading="lazy" decoding="async">
+              <img class="hero-cup-img" src="${cupChanhNho}" alt="Ly Trà Chanh Nho" data-index="3" loading="lazy" decoding="async">
+              <img class="hero-cup-img" src="${cupLaiSuiBot}" alt="Ly Trà Lài Sủi Bọt" data-index="4" loading="lazy" decoding="async">
             </div>
           </div>
 
@@ -124,7 +130,7 @@ document.querySelector('#app').innerHTML = `
 
           <div class="hero-drink-card">
             <div class="drink-card-header">
-              <span class="drink-card-badge">✨ MÓN NỔI BẬT</span>
+              <span class="drink-card-badge">${icon(Sparkles, 13)} MÓN NỔI BẬT</span>
               <span class="drink-card-counter" id="hero-drink-counter">1 / 5</span>
             </div>
             <h3 class="drink-card-name" id="hero-drink-title">Trà Sữa Hẻm</h3>
@@ -133,7 +139,105 @@ document.querySelector('#app').innerHTML = `
         </div>
       </div>
     </section>
-    
+
+    <section id="uu-dai-noi-bat" class="campaigns-hub" aria-label="Ưu đãi và sự kiện Hẻm dessert">
+      <div class="campaigns-hub-inner">
+        <div class="campaigns-hub-head">
+          <h2>Ưu đãi &amp; Sự kiện tại Hẻm</h2>
+          <span>Cập nhật liên tục</span>
+        </div>
+        <div class="campaigns-grid">
+          <a class="campaign-link-card" href="${baseUrl}promotion.html">
+            <div class="campaign-card-top">
+              <span class="campaign-icon-box">${icon(Gift, 18)}</span>
+              <span class="campaign-tag">Hot Deal</span>
+            </div>
+            <div>
+              <strong>Khuyến mãi &amp; Sự kiện</strong>
+              <p>Tổng hợp deal nhóm, combo tiệc và ưu đãi đang diễn ra.</p>
+            </div>
+          </a>
+          <a class="campaign-link-card" href="${baseUrl}lucky-wheel.html">
+            <div class="campaign-card-top">
+              <span class="campaign-icon-box">${icon(Sparkles, 18)}</span>
+              <span class="campaign-tag">Mini Game</span>
+            </div>
+            <div>
+              <strong>Vòng quay may mắn</strong>
+              <p>Quay nhận voucher giảm giá đến 100% cho đơn tiếp theo.</p>
+            </div>
+          </a>
+          <a class="campaign-link-card" href="${baseUrl}li-xi-tet.html">
+            <div class="campaign-card-top">
+              <span class="campaign-icon-box">${icon(Ticket, 18)}</span>
+              <span class="campaign-tag">Theo mùa</span>
+            </div>
+            <div>
+              <strong>Lì xì &amp; Sự kiện Tết</strong>
+              <p>Săn bao lì xì may mắn và ưu đãi dịp lễ hội đặc biệt.</p>
+            </div>
+          </a>
+          <a class="campaign-link-card" href="${baseUrl}job.html">
+            <div class="campaign-card-top">
+              <span class="campaign-icon-box">${icon(Briefcase, 18)}</span>
+              <span class="campaign-tag">Gia nhập Hẻm</span>
+            </div>
+            <div>
+              <strong>Tuyển dụng</strong>
+              <p>Cơ hội làm việc năng động tại chi nhánh Tân An &amp; Mỹ Tho.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="mon-noi-bat" class="bestsellers-section" aria-label="Món bán chạy nhất">
+      <div class="bestsellers-head">
+        <div>
+          <span class="accent-line"></span>
+          <h2>Best Seller nhà Hẻm</h2>
+        </div>
+        <p>Trà đậm vị nguyên bản, ít ngọt thanh nhẹ — chọn nhanh và đặt ngay.</p>
+      </div>
+      <div class="bestsellers-grid">
+        <article class="bestseller-card">
+          <div class="bestseller-thumb"><img src="${cupTraSuaHem}" alt="Trà Sữa Hẻm" loading="lazy" decoding="async"></div>
+          <span class="bestseller-tag">Signature</span>
+          <h3>Trà Sữa Hẻm</h3>
+          <p>Trà đen ủ đậm quyện sữa béo thanh, ít ngọt chuẩn gu.</p>
+          <a class="bestseller-cta" href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt ngay</a>
+        </article>
+        <article class="bestseller-card">
+          <div class="bestseller-thumb"><img src="${cupKemMuoi}" alt="Trà Sữa Hẻm Kem Muối" loading="lazy" decoding="async"></div>
+          <span class="bestseller-tag">Bán chạy</span>
+          <h3>Trà Sữa Kem Muối</h3>
+          <p>Lớp kem muối mặn nhẹ béo mịn hòa cùng cốt trà đậm.</p>
+          <a class="bestseller-cta" href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt ngay</a>
+        </article>
+        <article class="bestseller-card">
+          <div class="bestseller-thumb"><img src="${cupDuaLuoi}" alt="Trà Dưa Lưới Dừa Giòn" loading="lazy" decoding="async"></div>
+          <span class="bestseller-tag">Thanh mát</span>
+          <h3>Trà Dưa Lưới Dừa Giòn</h3>
+          <p>Vị dưa lưới thơm dịu kết hợp thạch dừa giòn sần sật.</p>
+          <a class="bestseller-cta" href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt ngay</a>
+        </article>
+        <article class="bestseller-card">
+          <div class="bestseller-thumb"><img src="${cupChanhNho}" alt="Trà Chanh Nho" loading="lazy" decoding="async"></div>
+          <span class="bestseller-tag">Giải nhiệt</span>
+          <h3>Trà Chanh Nho</h3>
+          <p>Chua ngọt hài hòa từ nho tươi và chanh, sảng khoái tức thì.</p>
+          <a class="bestseller-cta" href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt ngay</a>
+        </article>
+        <article class="bestseller-card">
+          <div class="bestseller-thumb"><img src="${cupLaiSuiBot}" alt="Trà Lài Sủi Bọt" loading="lazy" decoding="async"></div>
+          <span class="bestseller-tag">Hương hoa</span>
+          <h3>Trà Lài Sủi Bọt</h3>
+          <p>Trà lài ướp hương tự nhiên lắc bọt mịn, hậu vị thanh tao.</p>
+          <a class="bestseller-cta" href="${orderLink}" target="_blank" rel="noopener noreferrer">Đặt ngay</a>
+        </article>
+      </div>
+    </section>
+
     <section id="menu" class="menu-section"><div class="menu-copy"><span class="accent-line"></span><h2>${text(menu.title)}</h2><p>${withBreaks(menu.intro)}</p>${menu.deliveryTiers?.length ? `<p>${withBreaks(menu.policy)}</p><ul class="delivery-tiers">${menu.deliveryTiers.map((tier) => `<li>${text(tier)}</li>`).join('')}</ul>` : `<p>${withBreaks(menu.policy)}</p>`}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(menu.buttonLabel)}</a></div><button class="menu-image-trigger" type="button" aria-label="Xem menu phóng to" title="Xem menu phóng to"><img class="menu-image" src="${menuImage}" alt="${text(menu.imageAlt)}" loading="lazy" decoding="async"></button></section>
 
     <section id="tra-cuu-ship" class="freeship-section">
@@ -143,7 +247,7 @@ document.querySelector('#app').innerHTML = `
     <section id="ve-chung-toi" class="about panel"><div class="about-logo"><img src="${hemLogo}" alt="Hẻm dessert" loading="lazy" decoding="async"></div><div class="about-copy"><span class="accent-line"></span><p class="eyebrow">${text(about.eyebrow)}</p><h2>${withBreaks(about.title)}</h2>${(about.paragraphs || []).map((paragraph) => `<p>${text(paragraph)}</p>`).join('')}<a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(about.buttonLabel)}</a></div><div class="about-dots" aria-hidden="true"></div></section>
     <section id="gio-lam-viec" class="hours panel" style="background-image:linear-gradient(90deg,rgba(0,0,0,.44),rgba(0,0,0,.08)),url('${escapeHtml(hours.image ? assetUrl(hours.image) : hoursBackground)}')"><div class="hours-copy"><span class="accent-line"></span><h2>${text(hours.title)}</h2><p>${text(hours.description)}</p><a class="order-button yellow" href="${orderLink}" target="_blank" rel="noopener noreferrer">${text(hours.buttonLabel)}</a></div><div class="time-card"><div class="time-group">${timeColumn((hours.items || []).slice(0, 2))}</div><div class="time-group">${timeColumn((hours.items || []).slice(2))}</div></div></section>
     <section id="food-app" class="apps panel"><span class="accent-line"></span><p class="eyebrow">${text(foodApps.eyebrow)}</p><h2>${text(foodApps.title)}</h2><p>${withBreaks(foodApps.description)}</p><div class="app-grid">${(foodApps.branches || []).map((branch) => `<article><b>${text(branch.name)}</b><div><a class="vill" href="${safeUrl(branch.vill)}" target="_blank" rel="noopener noreferrer">VILL</a><a class="shopee" href="${safeUrl(branch.shopee)}" target="_blank" rel="noopener noreferrer">Shopee<br>Food</a><a class="grab" href="${safeUrl(branch.grab)}" target="_blank" rel="noopener noreferrer">Grab<br>Food</a></div></article>`).join('')}</div></section>
-    <section id="lien-he" class="contact">${(locations || []).filter((location) => location.visible !== false).map((location) => `<div><h2>${text(location.name)}</h2><p>${location.oldAddress ? `🏠 ${text(location.oldAddress)} (cũ)<br>` : ''}🏠 ${text(location.address)} (mới)<br>📱 Hotline Zalo: <a href="${safeUrl(`tel:${location.phoneLink}`)}">${text(location.phone)}</a></p>${location.tagline ? `<h3>${text(location.tagline)}</h3>` : ''}</div>`).join('')}</section>
+    <section id="lien-he" class="contact">${(locations || []).filter((location) => location.visible !== false).map((location) => `<div><h2>${text(location.name)}</h2><p class="contact-details">${location.oldAddress ? `<span class="contact-line">${icon(MapPin, 16)} <span>${text(location.oldAddress)} (cũ)</span></span>` : ''}<span class="contact-line">${icon(MapPin, 16)} <span>${text(location.address)} (mới)</span></span><span class="contact-line">${icon(Phone, 16)} <span>Hotline Zalo: <a href="${safeUrl(`tel:${location.phoneLink}`)}">${text(location.phone)}</a></span></span></p>${location.tagline ? `<h3>${text(location.tagline)}</h3>` : ''}</div>`).join('')}</section>
   </main>
   <div id="quick-actions-mount"></div>
   <a class="promotion-cue" href="${baseUrl}promotion.html" aria-label="Xem các chương trình ưu đãi" title="Xem ưu đãi">${icon(Gift, 23)}</a>
@@ -275,7 +379,7 @@ const menuLightboxClose = menuLightbox?.querySelector('.menu-lightbox-close')
 const menuDownloadButton = menuLightbox?.querySelector('.menu-download')
 let menuPreviousFocus = null
 const closeMenuLightbox = () => { if (!menuLightbox) return; menuLightbox.hidden = true; document.body.classList.remove('menu-lightbox-open'); menuPreviousFocus?.focus?.() }
-const openMenuLightbox = () => { if (!menuLightbox) return; menuPreviousFocus = document.activeElement; menuLightbox.hidden = false; document.body.classList.add('menu-lightbox-open'); menuLightboxClose?.focus() }
+const openMenuLightbox = () => { if (!menuLightbox) return; menuPreviousFocus = document.activeElement; menuLightbox.hidden = false; document.body.classList.add('menu-lightbox-open'); menuLightboxClose?.focus(); trackStandardConversion('ViewContent', { content_name: 'Menu Hẻm dessert' }) }
 const downloadMenuImage = (event) => {
   if (event) event.preventDefault()
   const link = document.createElement('a')
@@ -297,3 +401,19 @@ initAnalytics(analytics)
 track('landing_page_view', { page_location: window.location.href })
 trackLinkClicks('cta_click')
 showCampaignPopup()
+
+// Scroll-reveal nhẹ bằng IntersectionObserver (GPU opacity + transform, không tốn bundle)
+const revealTargets = document.querySelectorAll('.campaigns-hub, .bestsellers-section, .menu-section, .freeship-section, .panel, .contact')
+if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return
+      entry.target.classList.add('is-revealed')
+      observer.unobserve(entry.target)
+    })
+  }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 })
+  revealTargets.forEach((el) => {
+    el.classList.add('reveal')
+    revealObserver.observe(el)
+  })
+}

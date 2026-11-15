@@ -1,3 +1,7 @@
+import { Bike, Check, Info, MapPin, Sparkles } from 'lucide'
+
+const renderIcon = (item, size = 18) => `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${item.map(([tag, attributes]) => `<${tag} ${Object.entries(attributes).map(([key, value]) => `${key}="${value}"`).join(' ')} />`).join('')}</svg>`
+
 export const renderFreeshipCalculator = (container, locations = [], orderUrl = '#') => {
   const visibleLocations = locations.filter((loc) => loc.visible !== false)
   let selectedLocationIndex = 0
@@ -13,7 +17,8 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
     if (dist <= 0.5) {
       return {
         status: 'freeship',
-        title: '🎉 Miễn Phí Giao Hàng Cho Đơn Từ 55.000đ',
+        icon: renderIcon(Sparkles, 20),
+        title: 'Miễn Phí Giao Hàng Cho Đơn Từ 55.000đ',
         desc: 'Khoảng cách rất gần (< 0.5km)! Chỉ cần từ 2 ly trà là bạn đã được Hẻm tự giao miễn phí tận tay.',
         fallbackFee: 'Đơn dưới 55.000đ: phí ship đồng giá 10.000đ.',
         highlight: 'Chỉ cần đơn từ 55.000đ',
@@ -22,7 +27,8 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
     } else if (dist <= 1.0) {
       return {
         status: 'freeship',
-        title: '🎉 Miễn Phí Giao Hàng Cho Đơn Từ 105.000đ',
+        icon: renderIcon(Sparkles, 20),
+        title: 'Miễn Phí Giao Hàng Cho Đơn Từ 105.000đ',
         desc: 'Khoảng cách từ 0.5km đến 1km: Đơn từ 3–4 ly là được quán giao miễn phí ngay tức thì.',
         fallbackFee: 'Đơn dưới 105.000đ: phí ship đồng giá 10.000đ.',
         highlight: 'Chỉ cần đơn từ 105.000đ',
@@ -31,7 +37,8 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
     } else if (dist <= 1.5) {
       return {
         status: 'freeship',
-        title: '🎉 Miễn Phí Giao Hàng Cho Đơn Từ 155.000đ',
+        icon: renderIcon(Sparkles, 20),
+        title: 'Miễn Phí Giao Hàng Cho Đơn Từ 155.000đ',
         desc: 'Khoảng cách từ 1km đến 1.5km: Gom đơn cùng bạn bè hoặc đồng nghiệp để được miễn phí ship.',
         fallbackFee: 'Đơn dưới 155.000đ: phí ship đồng giá 10.000đ.',
         highlight: 'Chỉ cần đơn từ 155.000đ',
@@ -40,7 +47,8 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
     } else {
       return {
         status: 'app-delivery',
-        title: '🛵 Đặt Qua Food App Để Được Giao Nhanh Nhất',
+        icon: renderIcon(Bike, 20),
+        title: 'Đặt Qua Food App Để Được Giao Nhanh Nhất',
         desc: 'Quán trực tiếp giao trong bán kính 1.5km. Với khoảng cách trên 1.5km, Hẻm kết nối đối tác ShopeeFood, GrabFood & VILL để giao nhanh, bảo quản đá lạnh sâu và áp mã giảm giá từ app!',
         fallbackFee: 'Phí ship tính theo biểu phí của ứng dụng.',
         highlight: 'Giao hàng qua Food App',
@@ -90,7 +98,7 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
               aria-labelledby="calc-branch-label custom-select-val"
             >
               <div class="select-trigger-left">
-                <span class="select-store-icon" aria-hidden="true">📍</span>
+                <span class="select-store-icon select-ping-location" aria-hidden="true">${renderIcon(MapPin, 18)}</span>
                 <div class="select-text-group">
                   <span class="custom-select-value" id="custom-select-val">${initialDisplayName}</span>
                   <span class="custom-select-sub" id="custom-select-sub">${initialArea}</span>
@@ -119,7 +127,7 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
                     <span class="option-title">${displayName}</span>
                     <span class="option-desc">${area} • Hotline: ${loc.phone || ''}</span>
                   </div>
-                  <span class="option-check" aria-hidden="true">${isSelected ? '✓' : ''}</span>
+                  <span class="option-check" aria-hidden="true">${isSelected ? renderIcon(Check, 16) : ''}</span>
                 </div>
               `
                 })
@@ -200,9 +208,9 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
     resultBox.className = `calc-result result-${res.status}`
     resultBox.innerHTML = `
       <div class="res-badge">${res.highlight}</div>
-      <h4 class="res-title">${res.title}</h4>
+      <h4 class="res-title">${res.icon} <span>${res.title}</span></h4>
       <p class="res-desc">${res.desc}</p>
-      <div class="res-fee-note">ℹ️ ${res.fallbackFee}</div>
+      <div class="res-fee-note">${renderIcon(Info, 15)} <span>${res.fallbackFee}</span></div>
     `
 
     const ctaBtn = container.querySelector('#calc-cta-btn')
@@ -292,7 +300,7 @@ export const renderFreeshipCalculator = (container, locations = [], orderUrl = '
       o.classList.toggle('selected', isSelected)
       o.setAttribute('aria-selected', isSelected ? 'true' : 'false')
       const checkSpan = o.querySelector('.option-check')
-      if (checkSpan) checkSpan.textContent = isSelected ? '✓' : ''
+      if (checkSpan) checkSpan.innerHTML = isSelected ? renderIcon(Check, 16) : ''
     })
 
     if (branchSelect) {
